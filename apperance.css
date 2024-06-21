@@ -1,0 +1,53 @@
+nav {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    font-size: 70%;
+    align-items: center; 
+    justify-content: space-evenly; /* Changed to space-evenly for equal spacing */
+    padding: 1.5rem 3.5rem;
+    box-shadow: 0px 3px 5px rgba(120, 105, 105, 0.427);
+}
+
+h1{
+font-size: 500%;
+color:#00000096;
+font-weight: lighter;
+font-family: "Lucida Console", "Courier New", monospace;
+text-align: center;
+
+}
+
+body{
+    background-color: papayawhip;
+   @keyframes colorshift {
+        from {background-color: red;}
+        to {background-color: green;}
+   }
+}
+
+.intro, .intropt2{
+font-size: 120%;
+font-weight: lighter;
+color:#00000096;
+font-family: "Lucida Console", "Courier New", monospace;
+text-align: center;
+}
+
+.aboutMe, .things, .projects, .contact, .guest {
+    color: #d4c3f2; /* Adjust color for each class as necessary */
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: lighter;
+    font-size: 250%;
+    text-decoration: underline;
+    flex: 1; /* Add flex property for equal spacing */
+    text-align: center; /* Center align text within each flex item */
+}
+
+.aboutMe { color: #ccc3f2; }
+.things { color: #d09b9b; }
+.projects { color: #cbcda4; }
+.contact { color: #ffd592; }
+.guest { color: #ced5ff; }
