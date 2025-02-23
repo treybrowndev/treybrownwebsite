@@ -27,7 +27,7 @@ function getZodiacSign(month, day) {
 function displayMessage(username, age, zodiacSign) {
     const messages = [
         `Keep shining, ${username}!`,
-        `Remember, age is just a number, but yours looks good! 😉`,
+        `Remember, age is just a number, but yours looks good! :3`,
         `As a ${zodiacSign}, you're destined for greatness!`,
         `Every day is a chance to grow. Keep thriving, ${username}!`
     ];
