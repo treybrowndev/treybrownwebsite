@@ -19,6 +19,15 @@ font-family: "Lucida Console", "Courier New", monospace;
 text-align: center;
 }
 
+
+h3{
+    font-size: 200%;
+    color:#00000096;
+    font-weight: lighter;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+}
+
 p{
 font-size:160%;
 color:#00000096;
