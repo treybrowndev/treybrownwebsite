@@ -4,18 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guestbook</title>
-    <link rel="stylesheet" href="apperance.css">
+    <link rel="stylesheet" href="guest.css">
+    
 </head>
+<h3>Sign the guestbook, and leave a message</h3>
 <body>
     <nav>
-        <a href="main.html">Home</a>
-        <a href="things.html">Things</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contacts</a>
+        <div class ="things">
+            <a href="things.html"><h2>The Things I Do</h2></a>
+        </div>
+       
+        <div class ="projects">
+            <a href="projects.html"><h2>Projects</h2></a>
+        </div>
+
+        <div class ="contact">
+            <a href="contacts.html"><h2>Contact</h2></a>
+        </div>
+
+        <div class ="aboutMe">
+            <a href="index.html"><h2>Home</h2></a>
+        </div>
+
     </nav>
     
-    <h1>sign my guestbook!</h1>
+    <h3>sign my guestbook!</h3>
     <p>cmon. you know you want too.</p>
-    <script src="script.js"></script>
+
+    <div class="container">
+        <form id="guestForm">
+            <div class="form-input">
+                <label for="username">Username:</label>
+                <input type="text" 
+                       id="username" name="username" 
+                       required>
+            </div>
+            <div class="form-input">
+                <label for="entryDate">Entry Date:</label>
+                <input type="text" id="entryDate" name="entryDate" required>
+            </div>
+
+            <div class="form-input">
+                <label for="comment">Comments:</label>
+                <input type="text" 
+                       id="comment" name="comment" 
+                       required>
+            </div>
+            <div class="form-input">
+                <label for="zodiacSign">Birthday (YYYY-MM-DD):</label>
+                <input type="date" id="zodiacSign" name="zodiacSign" required>
+            </div>
+            <div class="btn"><button type="submit">
+                    Add Entry
+                </button></div>
+        </form>
+        <div id="guestList"></div>
+    </div>
+    <script src="guestbook.js"></script>
+  
 </body>
 </html>
