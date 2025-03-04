@@ -9,7 +9,8 @@ function processUserInput(input) {
     } else {
         response = "Unknown command. Try 'bounce', 'single-file', 'scatter', etc.";
     }
-
+    
+    //the switch case takes a few different words and then outputs a different message based on the word. I'm going to try to make it so that the cubes will move in a different way based on the word.
     switch (input) {
         case "bounce":
             console.log("Cubes will bounce!");
