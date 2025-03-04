@@ -8,6 +8,7 @@ function calculateAge(birthdate) {
     const months = (today.getMonth() - birthDate.getMonth()) + (age * 12);
     return { age, months };
 }
+//calculates the age of the user based on the birthdate they input. 
 
 function getZodiacSign(month, day) {
     if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return 'Aquarius';
@@ -22,6 +23,7 @@ function getZodiacSign(month, day) {
     if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return 'Scorpio';
     if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return 'Sagittarius';
     return 'Capricorn';
+    //takes the birthdate of the user and then outputs it as a zodiac sign based on the month and day. 
 }
 
 function displayMessage(username, age, zodiacSign) {
@@ -33,6 +35,7 @@ function displayMessage(username, age, zodiacSign) {
     ];
     return messages[Math.floor(Math.random() * messages.length)];
 }
+//displays a message to the user based on their zodiac sign and age.
 
 guestForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -47,6 +50,7 @@ guestForm.addEventListener('submit', function (e) {
         alert('All fields are required!');
         return;
     }
+    //if the user does not fill out all the fields, it will alert them to fill out all the fields.
 
     const [year, month, day] = birthdate.split('-').map(Number);
     const { age, months } = calculateAge(birthdate);
@@ -68,7 +72,7 @@ guestForm.addEventListener('submit', function (e) {
         <p><strong>Comment:</strong> ${comment}</p>
         <p><strong>Message:</strong> ${message}</p>
     `;
-
+//creates a card for the user to input their information and then displays it on the page.
     guestList.appendChild(guestCard);
     guestForm.reset();
 });
