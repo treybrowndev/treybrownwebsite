@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Page</title>
     <link rel="stylesheet" href="projects.css">
-    
 </head>
 <body>
     <nav>
@@ -14,10 +13,21 @@
         <a href="contact.html" class="contact">Contact</a>
         <a href="guest.html" class="guestbook">Guestbook</a>
     </nav>
-    
-    
+
     <h1>Current Projects</h1>
-    <p>Please input the following words; bounce", "single-file", "scatter", "spin", "pulse", "wave".</p>
-    <script src="project3.js"> </script>
+    <p>Please input one of the following words: "bounce", "single-file", "scatter", "spin", "pulse", "wave".</p>
+
+    <div class="form-input">
+        <label for="user-command">Enter Command:</label>
+        <input type="text" id="user-command" placeholder="Type a command...">
+    </div>
+
+    <div class="btn">
+        <button onclick="handleInput()">Submit</button>
+    </div>
+
+    <p id="output"></p>
+
+    <script src="project3.js"></script>
 </body>
 </html>
