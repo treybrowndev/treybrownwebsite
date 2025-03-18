@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Registration</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>User Registration</h1>
+  <form name="registrationForm" onsubmit="return validateForm()">
+    <label for="fullName">Full Name:</label>
+    <input type="text" name="fullName" id="fullName"><span id="fullNameError" class="error"></span><br><br>
+
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username"><span id="usernameError" class="error"></span><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email"><span id="emailError" class="error"></span><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password"><span id="passwordError" class="error"></span><br><br>
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" name="confirmPassword" id="confirmPassword"><span id="confirmPasswordError" class="error"></span><br><br>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="tel" name="phoneNumber" id="phoneNumber"><span id="phoneNumberError" class="error"></span><br><br>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" name="dob" id="dob"><span id="dobError" class="error"></span><br><br>
+
+    <label for="agreeTerms">Agree to Terms:</label>
+    <input type="checkbox" name="agreeTerms" id="agreeTerms"><span id="agreeTermsError" class="error"></span><br><br>
+
+    <input type="submit" value="Register">
+  </form>
+
+  <script src="registration.js"></script>
+</body>
+</html>
