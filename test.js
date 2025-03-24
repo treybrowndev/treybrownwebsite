@@ -38,3 +38,7 @@ sayHero() {
 
 const Supes = new Hero("Clark Kent", "Superman", "flight, super strength, heat vision", "Metropolis");
 console.log(Supes.sayHero());
+const Bats = new Hero ("Bruce Wayne", "Batman", "martial arts, detective skills, gadgets", "Gotham City");
+console.log(Bats.sayHero());                    
+const green = new Hero ("Hal Jordan", "Green Lantern", "flight, energy constructs, power ring", "Coast City");
+console.log(green.sayHero());
