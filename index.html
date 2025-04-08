@@ -5,72 +5,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trey Brown-Contacts and More</title>
-    <script src="objects.js"></script>
+    <script src="objects.js" type="module"></script>
     <link rel="icon" href="images/treycavelogo.png">
-
     <link rel="stylesheet" href="main.css">
-
+</head>
+<body></body>
     <h1>The Treycave</h1>
     <h3>Welcome to the personal portfolio of Trey Brown.</h3>
     <nav>
-        <div class ="things">
+        <div class="things"></div>
             <a href="things.html"><h2>The Things I Do</h2></a>
         </div>
-        <div class ="projects">
+        <div class="projects"></div>
             <a href="projects.html"><h2>Personal Projects</h2></a>
         </div>
-        <div class ="contact">
+        <div class="contact"></div>
             <a href="contact.html"><h2>Contact</h2></a>
         </div>
-        <div class ="guest">
+        <div class="guest"></div>
             <a href="guest.html"><h2>Guestbook</h2></a>
         </div>
     </nav>
-//the nav bar. 
-<div class = "projects"> 
-    a href="projectpage.html"><h2>js projects here</h2></a>
-</div>
-</head>
-<body>
-    <div class ="aboutMe">
+    <div class="aboutMe">
         <h2>short bio</h2>
     </div>
-<div class ="intro">
+    <div class="intro">
         <h2>std::cout << "Hello World" << std::endl; </h2>
-</div>
+    </div>
+    <div class="intropt2"></div>
+        <h2>Hi! I'm a Junior at Liberty University studying Software Engineering. This is my website, welcome! Currently, I enjoy working on games, shaders, and mods to existing titles! I also study Japanese, and am at an N4 Level.</h2>
+    </div>
+    <div class="todo-list">
+        <h2>My To-Do List</h2>
+        <ul id="todoItems">
+            <!-- To-Do items will be dynamically added here -->
+        </ul>
+    </div>
+    <script type="module">
+        import { Task } from './objects.js';
 
-<div class ="intropt2">
-    <h2>Hi! I'm a Junior at Liberty University studying Software Engineering. This is my website, welcome! Currently, I enjoy working on games, shaders, and mods to exisiting titles! I also study Japanese, and am at an N4 Level.</h2>
-</div>
-<div class="todo-list">
-    <h2>My To-Do List</h2>
-    <ul id="todoItems">
-        <!-- To-Do items will be dynamically added here -->
-    </ul>
-</div>
-<script>
-    // Import the Task class from objects.js
-    import { Task } from './objects.js';
+        let task1 = new Task("Complete portfolio website", "Finish the HTML, CSS, and JavaScript for the portfolio website", false);
+        let task2 = new Task("Create the models for website", "Design and implement models for the website", false);
+        let task3 = new Task("Tidy up the rest of the website", "Clean up and organize the remaining parts of the website", false);
 
-    // Create instances of the Task class
-    let task1 = new Task("Complete portfolio website", "Finish the HTML, CSS, and JavaScript for the portfolio website", false);
-    let task2 = new Task("Create the models for website", "Design and implement models for the website", false);
-    let task3 = new Task("Tidy up the rest of the website", "Clean up and organize the remaining parts of the website", false);
+        const todoList = document.getElementById("todoItems");
 
-    // Add the tasks to the to-do list dynamically
-    const todoList = document.getElementById("todoItems");
+        const tasks = [task1, task2, task3];
+        tasks.forEach(task => {
+            const taskItem = document.createElement("li");
+            taskItem.textContent = `${task.title} - ${task.description}`;
+            todoList.appendChild(taskItem);
+        });
 
-    const tasks = [task1, task2, task3];
-    tasks.forEach(task => {
-        const taskItem = document.createElement("li");
-        taskItem.textContent = `${task.title} - ${task.description}`;
-        todoList.appendChild(taskItem);
-    });
+        task1.markAsCompleted();
+        console.log(`Task "${task1.title}" completed: ${task1.completed}`);
+    </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            margin: 0;
+        }
 
-    // Example: Mark the first task as completed
-    task1.markAsCompleted();
-    console.log(`Task "${task1.title}" completed: ${task1.completed}`);
-</script>
-</script>
+        .todo-list {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #todoItems {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #todoItems li {
+            margin: 5px 0;
+        }
+    </style>
 </body>
 </html>
