@@ -13,18 +13,10 @@
     <h1>The Treycave</h1>
     <h3>Welcome to the personal portfolio of Trey Brown.</h3>
     <nav>
-        <div class="things"></div>
-            <a href="things.html"><h2>The Things I Do</h2></a>
-        </div>
-        <div class="projects"></div>
-            <a href="projects.html"><h2>Personal Projects</h2></a>
-        </div>
-        <div class="contact"></div>
-            <a href="contact.html"><h2>Contact</h2></a>
-        </div>
-        <div class="guest"></div>
-            <a href="guest.html"><h2>Guestbook</h2></a>
-        </div>
+        <div class="things"><a href="things.html">The Things I Do</a></div>
+        <div class="projects"><a href="projects.html">Personal Projects</a></div>
+        <div class="contact"><a href="contact.html">Contact</a></div>
+        <div class="guest"><a href="guest.html">Guestbook</a></div>
     </nav>
     <div class="aboutMe">
         <h2>short bio</h2>
@@ -51,6 +43,10 @@
 
         // Create a TaskManager instance
         const taskManager = TaskManager();
+
+        // Add a constant task item
+        const newTask = new Task("NEW", "create blender models for this site.");
+        taskManager.addTask(newTask);
 
         // Reference to the form and task list
         const taskForm = document.getElementById('taskForm');
@@ -87,6 +83,9 @@
                 todoList.appendChild(taskItem);
             });
         }
+
+        // Initial update to display the constant task
+        updateTaskList();
     </script>
     <style>
         body {
