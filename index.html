@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trey Brown-Contacts and More</title>
-    <script src="redstone.js"></script>
+    <script src="objects.js"></script>
     <link rel="icon" href="images/treycavelogo.png">
 
     <link rel="stylesheet" href="main.css">
@@ -42,6 +42,35 @@
 <div class ="intropt2">
     <h2>Hi! I'm a Junior at Liberty University studying Software Engineering. This is my website, welcome! Currently, I enjoy working on games, shaders, and mods to exisiting titles! I also study Japanese, and am at an N4 Level.</h2>
 </div>
+<div class="todo-list">
+    <h2>My To-Do List</h2>
+    <ul id="todoItems">
+        <!-- To-Do items will be dynamically added here -->
+    </ul>
+</div>
+<script>
+    // Import the Task class from objects.js
+    import { Task } from './objects.js';
 
+    // Create instances of the Task class
+    let task1 = new Task("Complete portfolio website", "Finish the HTML, CSS, and JavaScript for the portfolio website", false);
+    let task2 = new Task("Create the models for website", "Design and implement models for the website", false);
+    let task3 = new Task("Tidy up the rest of the website", "Clean up and organize the remaining parts of the website", false);
+
+    // Add the tasks to the to-do list dynamically
+    const todoList = document.getElementById("todoItems");
+
+    const tasks = [task1, task2, task3];
+    tasks.forEach(task => {
+        const taskItem = document.createElement("li");
+        taskItem.textContent = `${task.title} - ${task.description}`;
+        todoList.appendChild(taskItem);
+    });
+
+    // Example: Mark the first task as completed
+    task1.markAsCompleted();
+    console.log(`Task "${task1.title}" completed: ${task1.completed}`);
+</script>
+</script>
 </body>
 </html>
