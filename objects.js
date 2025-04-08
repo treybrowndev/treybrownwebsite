@@ -40,18 +40,42 @@ class Task {
     }
 }
 
-// Example usage of the Task class
-// Create an instance of the Task class
-let task1 = new Task("Buy groceries", "Purchase milk, eggs, and bread.");
-console.log(task1.toString()); // Display the task details
+/**
+ * TaskManager function to manage a list of tasks.
+ * @returns {object} - An object with methods to manage tasks.
+ */
+function TaskManager() {
+    const tasks = []; // Array to store tasks
 
-// Mark the task as completed
-task1.markAsCompleted();
-console.log(task1.toString()); // Display the updated task details
+    return {
+        /**
+         * Adds a new task to the task manager.
+         * @param {Task} task - The task to add.
+         */
+        addTask(task) {
+            tasks.push(task);
+        },
 
-// Update the task details
-task1.updateTaskDetails("Buy groceries and snacks", "Purchase milk, eggs, bread, and chips.");
-console.log(task1.toString()); // Display the updated task details
+        /**
+         * Removes a task from the task manager by title.
+         * @param {string} title - The title of the task to remove.
+         */
+        removeTask(title) {
+            const index = tasks.findIndex(task => task.title === title);
+            if (index !== -1) {
+                tasks.splice(index, 1);
+            }
+        },
 
-// Export the Task class for use in other files
-export default Task;
+        /**
+         * Returns all tasks in the task manager.
+         * @returns {Task[]} - Array of tasks.
+         */
+        getTasks() {
+            return tasks;
+        }
+    };
+}
+
+// Export the Task class and TaskManager function for use in other files
+export { Task, TaskManager };
