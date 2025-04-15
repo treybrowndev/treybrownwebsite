@@ -16,17 +16,19 @@
         <div class="contact"><a href="contact.html">Contact</a></div>
         <div class="guest"><a href="guestbook.html">Guestbook</a></div>
     </nav>
-    <h1>Current Projects</h1>
+    <h3>Project 3-commands</h3>
     <p>Please input one of the following words: "bounce", "single-file", "scatter", "spin", "pulse", "wave".</p>
     <div class="form-input">
         <label for="user-command">Enter Command:</label>
         <input type="text" id="user-command" placeholder="Type a command...">
     </div>
+
+    <h3>project 9-customize page</h3>
     <div class="btn">
         <button onclick="handleInput()">Submit</button>
     </div>
     <p id="output"></p>
-    <h2>Customize Page</h2>
+    
     <form id="customization-form">
         <label for="bg-color">Background Color:</label>
         <input type="color" id="bg-color" name="bg-color"><br><br>
@@ -37,5 +39,43 @@
         <button type="submit">Apply Customization</button>
     </form>
     <div id="currentPreferences"></div>
+
+    <h3>project 10-game</h3>
+    <link rel="stylesheet" href="css/projects.css">
+    <script src="js/proj10.js" defer></script>
+    <h3>Project 10 - Drag-and-Drop Puzzle Game</h3>
+    <div id="game-container">
+        <div id="timer">Time: 0s</div>
+        <button id="reset-button">Reset</button>
+        <div id="game-layout">
+            
+ <div id="game-layout">
+    <!-- Pieces Grid -->
+    <div id="pieces-container">
+        <div id="piece1" class="piece" draggable="true">
+            <img src="images/piece1.png" alt="Piece 1">
+        </div>
+        <div id="piece2" class="piece" draggable="true">
+            <img src="images/piece2.png" alt="Piece 2">
+        </div>
+        <div id="piece3" class="piece" draggable="true">
+            <img src="images/piece3.png" alt="Piece 3">
+        </div>
+        <div id="piece4" class="piece" draggable="true">
+            <img src="images/piece4.png" alt="Piece 4">
+        </div>
+    </div>
+    <!-- Slots Grid -->
+    <div id="slots-container">
+        <div id="slot1" class="slot"></div>
+        <div id="slot2" class="slot"></div>
+        <div id="slot3" class="slot"></div>
+        <div id="slot4" class="slot"></div>
+    </div>
+</div>
+    <div id="scoreboard">
+        <h3>Best Time: <span id="best-time">--</span></h3>
+    </div>
 </body>
 </html>
+    
