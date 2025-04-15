@@ -52,16 +52,19 @@ function resetGame() {
 // Drag-and-drop event handlers
 function handleDragStart(event) {
     const piece = event.target.closest(".piece");
-    event.dataTransfer.setData("text/plain", piece.id);
+    if (piece) {
+        event.dataTransfer.setData("text/plain", piece.id); // Set the piece ID
+        console.log(`Dragging piece: ${piece.id}`); // Debugging
+    }
 }
 
 function handleDragOver(event) {
-    event.preventDefault();
-    event.target.classList.add("highlight");
+    event.preventDefault(); // Allow dropping
+    event.target.classList.add("highlight"); // Add visual highlight
 }
 
 function handleDragLeave(event) {
-    event.target.classList.remove("highlight");
+    event.target.classList.remove("highlight"); // Remove visual highlight
 }
 
 function handleDrop(event) {
@@ -128,14 +131,22 @@ function getCookie(name) {
 
 // Initialize the game
 function initGame() {
+    const pieces = document.querySelectorAll(".piece");
     const slots = document.querySelectorAll(".slot");
 
+    // Add dragstart event to pieces
+    pieces.forEach((piece) => {
+        piece.addEventListener("dragstart", handleDragStart);
+    });
+
+    // Add dragover, dragleave, and drop events to slots
     slots.forEach((slot) => {
         slot.addEventListener("dragover", handleDragOver);
         slot.addEventListener("dragleave", handleDragLeave);
         slot.addEventListener("drop", handleDrop);
     });
 
+    // Add reset button functionality
     document.getElementById("reset-button").addEventListener("click", resetGame);
 
     shufflePieces();
