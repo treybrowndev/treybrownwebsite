@@ -2,7 +2,7 @@ function applyPreferences() {
     const params = new URLSearchParams(window.location.search);
 
     // Get preferences from query string or cookies
-    const bgColor = params.get('bgColor') || getCookie('bgColor') || '#ffffff';
+    const bgColor = params.get('bgColor') || getCookie('bgColor') || '#ffddb3';
     const textColor = params.get('textColor') || getCookie('textColor') || '#000000';
     const fontSize = params.get('fontSize') || getCookie('fontSize') || '16px';
 
@@ -50,6 +50,13 @@ function setCookie(name, value, days) {
     document.cookie = `${name}=${value}; ${expires}; path=/`;
 }
 
+// Helper function to clear cookies
+function clearPreferences() {
+    setCookie('bgColor', '', -1);
+    setCookie('textColor', '', -1);
+    setCookie('fontSize', '', -1);
+    window.location.href = window.location.pathname; // Reload without query string
+}
 
 // Attach event listener to the customization form
 document.addEventListener('DOMContentLoaded', () => {
@@ -70,4 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = window.location.pathname + queryString;
         });
     }
+
+ // Attach event listener to the reset colors button
+
+const resetColorsButton = document.getElementById('reset-colors-button');
+if (resetColorsButton) {
+    resetColorsButton.addEventListener('click', () => {
+        clearPreferences(); // Clear preferences and reload the page
+    });
+}
 });

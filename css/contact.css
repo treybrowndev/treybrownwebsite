@@ -72,21 +72,23 @@ body {
     
 }
 
+
 .things {
     color: #d09b9b; 
 }
 
 .projects {
-    color: #cbcda4; 
+    color: #bfc281; 
 }
 
 .contact {
-    color: #ffd592; 
+    color: #ffcf83; 
 }
 
 .guest {
-    color: #ced5ff; 
+    color: #9fadff; 
 }
+
 
 a {
     color: inherit; 
