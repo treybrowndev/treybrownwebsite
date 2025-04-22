@@ -5,20 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Things I Do</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/settings.css">
 </head>
 <body>
     
     <h1><a href="index.html">The Treycave</a></h1>
     <h3>The Things I do</h3>
     <nav>
-        <div class="things"><a href="things.html">The Things I Do</a></div>
-        <div class="projects"><a href="projects.html">Personal Projects</a></div>
+        
+        <div class="projects"><a href="projects.html">Personal Projects</a></div>  
         <div class="contact"><a href="contacts.html">Contact</a></div>
+        <div class="things"><a href="settings.html">System Settings</a></div>
         <div class="guest"><a href="guestbook.html">Guestbook</a></div>
     </nav>
   
-    <p>This is the content of the things page.</p>
-    <script src="js/proj9.js" defer></script>
+    <p>This is the content of the Settings page.</p>
+
+    <h3>Color Settings</h3>
+    <div class="btn">
+        <button onclick="handleInput()">Submit</button>
+    </div>
+    <p id="output"></p>
+    
+    <form id="customization-form">
+        <label for="bg-color">Background Color:</label>
+        <input type="color" id="bg-color" name="bg-color"><br><br>
+        <label for="text-color">Text Color:</label>
+        <input type="color" id="text-color" name="text-color"><br><br>
+        <label for="font-size">Font Size:</label>
+        <input type="number" id="font-size" name="font-size" min="10" max="50" step="1"><br><br>
+        <button type="submit">Apply Customization</button>
+    </form>
     <div id="currentPreferences"></div>
+
+    <!-- Reset Colors Section -->
+    <div class="reset-colors">
+        <button id="reset-colors-button">Reset to Default Colors</button>
+    </div>
+
+    <!-- Music Settings Section -->
+    <h3>Music Settings</h3>
+    <p>Configure your music preferences below:</p>
+    <form id="music-settings-form">
+        <label for="volume">Volume:</label>
+        <input type="range" id="volume" name="volume" min="0" max="100"><br><br>
+        <label for="playback-mode">Playback Mode:</label>
+        <select id="playback-mode" name="playback-mode">
+            <option value="shuffle">Shuffle</option>
+            <option value="repeat">Repeat</option>
+            <option value="normal">Normal</option>
+        </select><br><br>
+        <button type="submit">Save Music Settings</button>
+    </form>
+    <div id="spotify-integration">
+        <h3>Spotify Playlist</h3>
+        <div id="playlist-container">
+            <!-- Playlist will be dynamically added here -->
+        </div>
+    </div>
+</div>
+    <script src="js/final4.js"></script>
+    <script src="js/proj9.js" defer></script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
 </body>
 </html>
