@@ -3,76 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Settings - The Treycave</title>
+    <title>Projects</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="js/proj9.js" defer></script>
-    <link rel="stylesheet" href="css/projects.css">
 </head>
 <body>
     <h1><a href="index.html">The Treycave</a></h1>
     <h3>Welcome to the personal portfolio of Trey Brown.</h3>
     <nav>
-        <div class="projects"><a href="projects.html">Personal Projects</a></div>
+        
+        <div class="projects"><a href="projects.html">Personal Projects</a></div>  
         <div class="contact"><a href="contacts.html">Contact</a></div>
         <div class="things"><a href="settings.html">System Settings</a></div>
         <div class="guest"><a href="guestbook.html">Guestbook</a></div>
     </nav>
 
-    <hr> <h2>Spotify Player Settings</h2>
-
-    <div id="spotify-controls" style="margin-top: 20px; padding: 15px; border: 1px solid #ccc;">
-        <h3>Music Controls</h3>
-        <div id="current-track" style="margin-bottom: 10px; font-style: italic;">
-            Loading player...
-        </div>
-
-        <div>
-            <button id="previous" disabled>Previous</button>
-            <button id="play-pause" disabled>Play</button>
-            <button id="next" disabled>Next</button>
-        </div>
-
-        <div style="margin-top: 10px;">
-            <label for="volume">Volume:</label>
-            <input type="range" id="volume" name="volume" min="0" max="100" value="50" disabled>
-        </div>
-
-        <div style="margin-top: 10px;">
-            <label for="playback-mode">Mode:</label>
-            <select id="playback-mode" name="playback-mode" disabled>
-                <option value="normal">Normal</option>
-                <option value="shuffle">Shuffle</option>
-                <option value="repeat_context">Repeat Playlist</option>
-                <option value="repeat_track">Repeat Track</option>
-            </select>
-        </div>
-         <p style="font-size: 0.8em; margin-top: 15px;">Note: Requires Spotify Premium. Playback occurs on the 'TreyCave Web Player' device.</p>
-    </div>
-
-    <hr> <h3>project 10-game</h3>
+   
+    <h3>project 10-game</h3>
+    <link rel="stylesheet" href="css/projects.css">
+    <script src="js/proj10.js" defer></script>
     <h3>Project 10 - Drag-and-Drop Puzzle Game</h3>
     <div id="game-container">
         <div id="timer">Time: 0s</div>
         <button id="reset-button">Reset</button>
         <div id="game-layout">
-            <div id="pieces-container">
-                <div id="piece1" class="piece" draggable="true"><img src="images/piece1.png" alt="Piece 1"></div>
-                <div id="piece2" class="piece" draggable="true"><img src="images/piece2.png" alt="Piece 2"></div>
-                <div id="piece3" class="piece" draggable="true"><img src="images/piece3.png" alt="Piece 3"></div>
-                <div id="piece4" class="piece" draggable="true"><img src="images/piece4.png" alt="Piece 4"></div>
-            </div>
-            <div id="slots-container">
-                <div id="slot1" class="slot"></div>
-                <div id="slot2" class="slot"></div>
-                <div id="slot3" class="slot"></div>
-                <div id="slot4" class="slot"></div>
-            </div>
-        </div>
-        <div id="scoreboard">
-            <h3>Best Time: <span id="best-time">--</span></h3>
-        </div>
+            
+ <div id="game-layout">
+    <!-- Pieces Grid -->
+  <div id="pieces-container">
+    <div id="piece1" class="piece" draggable="true">
+        <img src="images/piece1.png" alt="Piece 1">
     </div>
-     <script src="js/proj10.js" defer></script>
-
+    <div id="piece2" class="piece" draggable="true">
+        <img src="images/piece2.png" alt="Piece 2">
+    </div>
+    <div id="piece3" class="piece" draggable="true">
+        <img src="images/piece3.png" alt="Piece 3">
+    </div>
+    <div id="piece4" class="piece" draggable="true">
+        <img src="images/piece4.png" alt="Piece 4">
+    </div>
+</div>
+<div id="slots-container">
+    <div id="slot1" class="slot"></div>
+    <div id="slot2" class="slot"></div>
+    <div id="slot3" class="slot"></div>
+    <div id="slot4" class="slot"></div>
+</div>
+</div>
+    <div id="scoreboard">
+        <h3>Best Time: <span id="best-time">--</span></h3>
+    </div>
 </body>
+<script>
+    function resetColors() {
+        document.body.style.backgroundColor = "";
+        document.body.style.color = "";
+        document.body.style.fontSize = "";
+    }
+</script>
 </html>
