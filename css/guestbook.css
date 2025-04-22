@@ -11,34 +11,27 @@ nav {
     box-shadow: 3px 3px 8px rgba(120, 105, 105, 0.427);
 }
 
-h1 {
-    font-size: 500%;
-    color: #00000096;
+h1, h2, h3, p {
     font-weight: lighter;
     font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
+    color: inherit;
+}
+
+h1 {
+    font-size: 500%;
 }
 
 h2 {
     font-size: 300%;
-    color: #00000096;
-    font-weight: lighter;
-    font-family: "Lucida Console", "Courier New", monospace;
-    text-align: center;
 }
 
 h3 {
     font-size: 200%;
-    font-weight: lighter;
-    font-family: "Lucida Console", "Courier New", monospace;
-    text-align: center;
 }
 
 p {
     font-size: 160%;
-    font-weight: lighter;
-    font-family: "Lucida Console", "Courier New", monospace;
-    text-align: center;
 }
 
 body {
@@ -51,7 +44,8 @@ body {
     max-width: 600px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(167, 137, 98, 0.836);
+    font-family: "Lucida Console", "Courier New", monospace;
 }
 
 form {
@@ -69,13 +63,13 @@ input, button {
 }
 
 button {
-    background-color: #ffd592;
+    background-color: #e6c898;
     color: #000;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #ffcc80;
+    background-color: #ffb13d;
 }
 
 a {
@@ -85,4 +79,24 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+a:visited, a:hover, a:active {
+    color: inherit;
+}
+
+.things {
+    color: #d09b9b;
+}
+
+.projects {
+    color: #cbcda4;
+}
+
+.contact {
+    color: #ffd592;
+}
+
+.guest {
+    color: #ced5ff;
 }

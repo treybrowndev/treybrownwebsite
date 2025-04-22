@@ -13,7 +13,7 @@ nav {
 
 h1 {
     font-size: 500%;
-    color: #00000096;
+    color:#00000096; 
     font-weight: lighter;
     font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
@@ -47,7 +47,7 @@ body {
 }
 
 .intro, .intropt2 {
-    font-size: 120%;
+    font-size: 80%;
     font-weight: lighter;
     color: #00000096;
     font-family: "Lucida Console", "Courier New", monospace;
@@ -77,15 +77,15 @@ body {
 }
 
 .projects {
-    color: #cbcda4; 
+    color: #bfc281; 
 }
 
 .contact {
-    color: #ffd592; 
+    color: #ffcf83; 
 }
 
 .guest {
-    color: #ced5ff; 
+    color: #9fadff; 
 }
 
 a {
