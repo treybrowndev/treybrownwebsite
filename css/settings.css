@@ -23,3 +23,33 @@
     margin-right: 10px;
     border-radius: 5px;
 }
+
+#playback-controls {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(167, 137, 98, 0.5);
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#other-controls {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(167, 137, 98, 0.836);
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#current-track {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(167, 137, 98, 0.836);
+    font-family: "Lucida Console", "Courier New", monospace;
+}
