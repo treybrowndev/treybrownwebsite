@@ -1,10 +1,9 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Settings - The Treycave</title>
-    <link rel="stylesheet" href="css/main.css">
+   
     <link rel="stylesheet" href="css/settings.css">
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
@@ -34,39 +33,45 @@
     <div class="reset-colors">
         <button id="reset-colors-button">Reset to Default Colors</button>
     </div>
-    <hr> <h3>Music Settings & Controls</h3>
-    <p>Control Spotify playback below (Requires Spotify Premium).</p>
+    <div id="music-settings">
+        <hr> 
+        <h3>Music Settings & Controls</h3>
+        <p>Control Spotify playback below (Requires Spotify Premium).</p>
 
-    <div id="current-track" style="margin-bottom: 15px; font-weight: bold; min-height: 1.2em; color: #555;">
-        Initializing... </div>
+        <div id="current-track" style="margin-bottom: 15px; font-weight: bold; min-height: 1.2em; color: #555;">
+            Initializing...
+        </div>
 
-    <div id="playback-controls" style="margin-bottom: 15px;">
-        <button id="previous" disabled>Previous</button>
-        <button id="play-pause" style="min-width: 80px;" disabled>Play</button>
-        <button id="next" disabled>Next</button>
-    </div>
+        <div id="playback-controls" style="margin-bottom: 15px;">
+            <button id="previous" disabled>Previous</button>
+            <button id="play-pause" style="min-width: 80px;" disabled>Play</button>
+            <button id="next" disabled>Next</button>
+        </div>
 
-    <div id="other-controls">
-        <label for="volume">Volume:</label>
-        <input type="range" id="volume" name="volume" min="0" max="100" value="50" disabled><br><br>
-        <label for="playback-mode">Playback Mode:</label>
-        <select id="playback-mode" name="playback-mode" disabled>
-            <option value="normal">Normal</option>
-            <option value="shuffle">Shuffle</option>
-            <option value="repeat_context">Repeat Playlist</option>
-            <option value="repeat_track">Repeat Track</option>
-        </select><br><br>
-    </div>
+        <div id="other-controls">
+            <label for="volume">Volume:</label>
+            <input type="range" id="volume" name="volume" min="0" max="100" value="50" disabled><br><br>
+            <label for="playback-mode">Playback Mode:</label>
+            <select id="playback-mode" name="playback-mode" disabled>
+                <option value="normal">Normal</option>
+                <option value="shuffle">Shuffle</option>
+                <option value="repeat_context">Repeat Playlist</option>
+                <option value="repeat_track">Repeat Track</option>
+            </select><br><br>
+        </div>
 
-    <p style="font-size: 0.8em; margin-top: 15px;">Playback occurs on the 'TreyCave Web Player' device created by this page.</p>
+        <p style="font-size: 0.8em; margin-top: 15px;">This webplayer was made using Spotify's Web API. </p>
 
-    <hr> <div id="spotify-integration">
-        <h3>Spotify Playlist Content (Display Area)</h3>
-        <div id="playlist-container" style="border: 1px dashed #ccc; padding: 10px; min-height: 50px;">
-            Playlist track list display not implemented in this example.
+        <hr> 
+        <div id="spotify-integration">
+            <h3>Spotify Playlist Content (Display Area)</h3>
+            <div id="playlist-container" style="border: 1px dashed #ccc; padding: 10px; min-height: 50px;">
+                Playlist track list display not implemented in this example.
+            </div>
         </div>
     </div>
-    <script src="js/final4.js" defer></script>
+    </div>
+    <script src="js/proj11.js" defer></script>
 
 </body>
 </html>
