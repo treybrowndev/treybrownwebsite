@@ -8,11 +8,9 @@
     <link rel="stylesheet" href="css/settings.css">
 </head>
 <body>
-    
     <h1><a href="index.html">The Treycave</a></h1>
-    <h3>The Things I do</h3>
+    <h3>The Things I Do</h3>
     <nav>
-        
         <div class="projects"><a href="projects.html">Personal Projects</a></div>  
         <div class="contact"><a href="contacts.html">Contact</a></div>
         <div class="things"><a href="settings.html">System Settings</a></div>
@@ -21,12 +19,8 @@
   
     <p>This is the content of the Settings page.</p>
 
+    <!-- Color Settings Section -->
     <h3>Color Settings</h3>
-    <div class="btn">
-        <button onclick="handleInput()">Submit</button>
-    </div>
-    <p id="output"></p>
-    
     <form id="customization-form">
         <label for="bg-color">Background Color:</label>
         <input type="color" id="bg-color" name="bg-color"><br><br>
@@ -55,17 +49,19 @@
             <option value="repeat">Repeat</option>
             <option value="normal">Normal</option>
         </select><br><br>
-        <button type="submit">Save Music Settings</button>
+        <button type="button" id="save-music-settings">Save Music Settings</button>
     </form>
+
+    <!-- Spotify Playlist Section -->
     <div id="spotify-integration">
         <h3>Spotify Playlist</h3>
         <div id="playlist-container">
             <!-- Playlist will be dynamically added here -->
         </div>
     </div>
-</div>
-    <script src="js/final4.js"></script>
-    <script src="js/proj9.js" defer></script>
+
+    <!-- Scripts -->
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="js/final4.js"></script>
 </body>
 </html>
