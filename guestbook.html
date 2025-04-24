@@ -6,17 +6,18 @@
     <title>Guestbook</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/guestbook.css">
+    <script src="js/final2.js" defer></script> 
 </head>
 <body>
     <h1><a href="index.html">The Treycave</a></h1>
     <h3>Welcome to the personal portfolio of Trey Brown.</h3>
     <nav>
-        <div class="projects"><a href="projects.html">Personal Projects</a></div>  
+        <div class="projects"><a href="projects.html">Projects & Skills</a></div>  
         <div class="contact"><a href="contacts.html">Contact</a></div>
         <div class="things"><a href="settings.html">System Settings</a></div>
         <div class="guest"><a href="guestbook.html">Guestbook</a></div>
     </nav>
-    
+
     <h3>Sign my guestbook!</h3>
     <p>Come on, you know you want to.</p>
 
@@ -24,34 +25,34 @@
         <form id="guestForm">
             <div class="form-input">
                 <label for="username">Username:</label>
-                <input type="text" 
-                       id="username" 
-                       name="username" 
-                       required 
+                <input type="text"
+                       id="username"
+                       name="username"
+                       required
                        aria-label="Enter your username">
             </div>
             <div class="form-input">
                 <label for="entryDate">Entry Date:</label>
-                <input type="date" 
-                       id="entryDate" 
-                       name="entryDate" 
-                       required 
+                <input type="date"
+                       id="entryDate"
+                       name="entryDate"
+                       required
                        aria-label="Select the entry date">
             </div>
 
             <div class="form-input">
                 <label for="comment">Comments:</label>
-                <textarea id="comment" 
-                          name="comment" 
-                          required 
+                <textarea id="comment"
+                          name="comment"
+                          required
                           aria-label="Enter your comments"></textarea>
             </div>
             <div class="form-input">
                 <label for="zodiacSign">Birthday (YYYY-MM-DD):</label>
-                <input type="date" 
+                <input type="date"
                        id="zodiacSign" 
-                       name="zodiacSign" 
-                       required 
+                       name="zodiacSign"
+                       required
                        aria-label="Enter your birthday">
             </div>
             <div class="btn">
@@ -63,15 +64,14 @@
         <div id="guestList"></div>
     </div>
 
-    <script src="js/final2.js"></script>
     <div id="currentPreferences"></div>
     <div id="floating-player" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 166px; z-index: 1000; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-        <iframe id="youtube-iframe" 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed?listType=playlist&list=PL3tRBEVW0hiA8SaR1o_IqK6AGp5FJt8d2&loop=1&modestbranding=1&rel=0" 
-                frameborder="0" 
-                allow="encrypted-media" 
+        <iframe id="youtube-iframe"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed?listType=playlist&list=PL3tRBEVW0hiA8SaR1o_IqK6AGp5FJt8d2&loop=1&modestbranding=1&rel=0"
+                frameborder="0"
+                allow="encrypted-media"
                 allowfullscreen>
         </iframe>
         <button id="close-player" style="position: absolute; top: 5px; right: 5px; background: #ff4d4d; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; cursor: pointer;" aria-label="Close Player">×</button>
