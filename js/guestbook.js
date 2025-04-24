@@ -1,14 +1,17 @@
-const guestForm = document.getElementById('guestForm');
-const guestList = document.getElementById('guestList');
-
-function calculateAge(birthdate) {
-    const today = new Date();
-    const birthDate = new Date(birthdate);
-    const age = today.getFullYear() - birthDate.getFullYear();
-    const months = (today.getMonth() - birthDate.getMonth()) + (age * 12);
-    return { age, months };
-}
-//calculates the age of the user based on the birthdate they input. 
+const zodiacSigns = {
+    Aquarius: { dates: "Jan 20 – Feb 18", traits: "Innovative, independent, humanitarian" },
+    Pisces: { dates: "Feb 19 – Mar 20", traits: "Empathetic, artistic, intuitive" },
+    Aries: { dates: "Mar 21 – Apr 19", traits: "Bold, ambitious, energetic" },
+    Taurus: { dates: "Apr 20 – May 20", traits: "Reliable, patient, practical" },
+    Gemini: { dates: "May 21 – Jun 20", traits: "Curious, adaptable, witty" },
+    Cancer: { dates: "Jun 21 – Jul 22", traits: "Emotional, nurturing, intuitive" },
+    Leo: { dates: "Jul 23 – Aug 22", traits: "Confident, charismatic, creative" },
+    Virgo: { dates: "Aug 23 – Sep 22", traits: "Analytical, modest, responsible" },
+    Libra: { dates: "Sep 23 – Oct 22", traits: "Diplomatic, fair, charming" },
+    Scorpio: { dates: "Oct 23 – Nov 21", traits: "Intense, strategic, passionate" },
+    Sagittarius: { dates: "Nov 22 – Dec 21", traits: "Optimistic, adventurous, honest" },
+    Capricorn: { dates: "Dec 22 – Jan 19", traits: "Disciplined, determined, wise" }
+};
 
 function getZodiacSign(month, day) {
     if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return 'Aquarius';
@@ -23,56 +26,110 @@ function getZodiacSign(month, day) {
     if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return 'Scorpio';
     if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return 'Sagittarius';
     return 'Capricorn';
-    //takes the birthdate of the user and then outputs it as a zodiac sign based on the month and day. 
 }
 
-function displayMessage(username, age, zodiacSign) {
-    const messages = [
-        `Keep shining, ${username}!`,
-        `Remember, age is just a number, but yours looks good! :3`,
-        `As a ${zodiacSign}, you're destined for greatness!`,
-        `Every day is a chance to grow. Keep thriving, ${username}!`
-    ];
-    return messages[Math.floor(Math.random() * messages.length)];
+function getZodiacSignByDate(month, day) {
+    return getZodiacSign(month, day);
 }
-//displays a message to the user based on their zodiac sign and age.
 
-guestForm.addEventListener('submit', function (e) {
-    e.preventDefault();
+function displayZodiacInfo(signName) {
+    const info = zodiacSigns[signName];
+    const $infoDiv = $('#zodiacInfo');
 
-    const username = document.getElementById('username').value;
-    const date = document.getElementById('entryDate').value;
-    const comment = document.getElementById('comment').value;
-    const birthdate = document.getElementById('zodiacSign').value;
-
-    if (!username || !date || !comment || !birthdate) {
-        console.warn('Please fill out all fields.');
-        alert('All fields are required!');
-        return;
+    if (info) {
+        $infoDiv.fadeOut(300, function () {
+            $infoDiv.html(`
+                <div class="zodiac-card">
+                    <h4>${signName}</h4>
+                    <p><strong>Dates:</strong> ${info.dates}</p>
+                    <p><strong>Traits:</strong> ${info.traits}</p>
+                </div>
+            `).slideDown(400);
+        });
+    } else {
+        $infoDiv.fadeOut(300, function () {
+            $infoDiv.html(`<p>No info found for "${signName}".</p>`).slideDown(400);
+        });
     }
-    //if the user does not fill out all the fields, it will alert them to fill out all the fields.
+}
 
-    const [year, month, day] = birthdate.split('-').map(Number);
-    const { age, months } = calculateAge(birthdate);
-    const zodiacSign = getZodiacSign(month, day);
-    const message = displayMessage(username, age, zodiacSign);
+function fuzzyMatch(input, candidates) {
+    input = input.toLowerCase();
+    return candidates.find(sign => {
+        const signLower = sign.toLowerCase();
+        return signLower.includes(input) || input.includes(signLower) || signLower.startsWith(input);
+    });
+}
 
-    console.log('User Input:', { username, date, comment, birthdate });
-    console.log('Calculated Age:', age, 'years or', months, 'months');
-    console.log('Zodiac Sign:', zodiacSign);
-    console.log('Personalized Message:', message);
+const $zodiacSearchInput = $('#zodiacSearch');
+const $zodiacInfoDiv = $('#zodiacInfo');
 
-    const guestCard = document.createElement('div');
-    guestCard.classList.add('guest-card');
-    guestCard.innerHTML = `
-        <p><strong>Written By:</strong> ${username}</p>
-        <p><strong>Entry Date:</strong> ${date}</p>
-        <p><strong>Age:</strong> ${age} years (${months} months)</p>
-        <p><strong>Zodiac Sign:</strong> ${zodiacSign}</p>
-        <p><strong>Comment:</strong> ${comment}</p>
-        <p><strong>Message:</strong> ${message}</p>
-    `;
-//creates a card for the user to input their information and then displays it on the page.
-    guestList.appendChild(guestCard);
-    guestForm.reset();
+$zodiacSearchInput.autocomplete({
+    source: function (request, response) {
+        const term = request.term.toLowerCase();
+        let results = [];
+
+        for (const sign in zodiacSigns) {
+            if (sign.toLowerCase().includes(term)) {
+                results.push(sign);
+            }
+        }
+
+        const dateMatch = term.match(/^(\d{1,2})[/-](\d{1,2})$/);
+        if (dateMatch) {
+            const month = parseInt(dateMatch[1], 10);
+            const day = parseInt(dateMatch[2], 10);
+            if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+                const signByDate = getZodiacSignByDate(month, day);
+                if (signByDate && !results.includes(signByDate)) {
+                    results.push(signByDate);
+                }
+            }
+        }
+
+        // Fuzzy match fallback
+        if (results.length === 0) {
+            const fuzzy = fuzzyMatch(term, Object.keys(zodiacSigns));
+            if (fuzzy) results.push(fuzzy);
+        }
+
+        response(results);
+    },
+    minLength: 2,
+    select: function (event, ui) {
+        displayZodiacInfo(ui.item.value);
+    }
+});
+
+$zodiacSearchInput.on('keypress', function (e) {
+    if (e.which === 13) {
+        e.preventDefault();
+        const input = $(this).val().trim().toLowerCase();
+        if (!input) return;
+
+        let matched = Object.keys(zodiacSigns).find(sign => sign.toLowerCase() === input);
+
+        if (!matched) {
+            const match = input.match(/^(\d{1,2})[/-](\d{1,2})$/);
+            if (match) {
+                const month = parseInt(match[1], 10);
+                const day = parseInt(match[2], 10);
+                if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+                    matched = getZodiacSignByDate(month, day);
+                }
+            }
+        }
+
+        if (!matched) {
+            matched = fuzzyMatch(input, Object.keys(zodiacSigns));
+        }
+
+        if (matched) {
+            displayZodiacInfo(matched);
+        } else {
+            $zodiacInfoDiv.fadeOut(300, function () {
+                $(this).html(`<p>No match for "${input}".</p>`).slideDown(400);
+            });
+        }
+    }
 });

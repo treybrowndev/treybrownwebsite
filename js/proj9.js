@@ -78,12 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
- // Attach event listener to the reset colors button
-
-const resetColorsButton = document.getElementById('reset-colors-button');
-if (resetColorsButton) {
-    resetColorsButton.addEventListener('click', () => {
-        clearPreferences(); // Clear preferences and reload the page
-    });
-}
+    // Attach event listener to the reset colors button
+    const resetColorsButton = document.getElementById('reset-colors-button');
+    if (resetColorsButton) {
+        resetColorsButton.addEventListener('click', () => {
+            clearPreferences(); // Clear preferences and reload the page
+        });
+    }
 });
