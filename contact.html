@@ -44,8 +44,16 @@
     </form>
     
 
-    <div id="floating-player">
-        <button id="close-player" class="no-drag">&times;</button>
-        <div id="youtube-iframe"></div> </div>
+    <div id="floating-player" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 166px; z-index: 1000; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <iframe id="youtube-iframe" 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed?listType=playlist&list=PL3tRBEVW0hiA8SaR1o_IqK6AGp5FJt8d2&loop=1&modestbranding=1&rel=0" 
+                frameborder="0" 
+                allow="encrypted-media" 
+                allowfullscreen>
+        </iframe>
+        <button id="close-player" style="position: absolute; top: 5px; right: 5px; background: #ff4d4d; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; cursor: pointer;" aria-label="Close Player">×</button>
+    </div>
 </body>
 </html>
