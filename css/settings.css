@@ -1,0 +1,25 @@
+
+#playlist-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffe5c8;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#playlist-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#playlist-container li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#playlist-container img {
+    margin-right: 10px;
+    border-radius: 5px;
+}

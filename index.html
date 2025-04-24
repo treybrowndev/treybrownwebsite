@@ -6,16 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trey Brown-Contacts and More</title>
     <script src="js/objects.js" type="module"></script>
+
     <link rel="icon" href="images/treycavelogo.png">
     <link rel="stylesheet" href= "css/main.css">
+    
+    <!-- Three JS dependencies -->
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@v0.163.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@v0.163.0/examples/jsm/"
+        }
+      }
+    </script>
+
 </head>
 <body>
     <h1><a href="index.html">The Treycave</a></h1>
     <h3>Welcome to the personal portfolio of Trey Brown.</h3>
     <nav>
         
-        <div class="projects"><a href="projects.html">Personal Projects</a></div>
-        <div class="contact"><a href="contact.html">Contact</a></div>
+        <div class="projects"><a href="projects.html">Projects & Skills</a></div>
+        <div class="contact"><a href="contact.html">Contact Me!</a></div>
         <div class="things"><a href="settings.html">System Settings</a></div>
         <div class="guest"><a href="guest.html">Guestbook</a></div>
     </nav>
@@ -121,6 +134,7 @@
         }
     </style>
     <script src="js/proj9.js" defer></script>
+    <script src="js/final.js" type="module"></script>
     <div id="currentPreferences"></div>
 </body>
 </html>
