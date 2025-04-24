@@ -4,42 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trey Brown - Contacts and More</title>
+    <title>Trey Brown-Contacts and More</title>
     <script src="js/objects.js" type="module"></script>
 
     <link rel="icon" href="images/treycavelogo.png">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/final1.js" defer></script> 
-    <script src="js/final2.js" defer></script> 
+    <link rel="stylesheet" href= "css/main.css">
+    
+    <!-- Three JS dependencies -->
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@v0.163.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@v0.163.0/examples/jsm/"
+        }
+      }
+    </script>
+
 </head>
 <body>
     <h1><a href="index.html">The Treycave</a></h1>
     <h3>Welcome to the personal portfolio of Trey Brown.</h3>
     <nav>
+        
         <div class="projects"><a href="projects.html">Projects & Skills</a></div>
-        <div class="contact"><a href="contacts.html">Contact Me!</a></div>
+        <div class="contact"><a href="contact.html">Contact Me!</a></div>
         <div class="things"><a href="settings.html">System Settings</a></div>
-        <div class="guest"><a href="guestbook.html">Guestbook</a></div>
+        <div class="guest"><a href="guest.html">Guestbook</a></div>
     </nav>
-
-    <div id="weather" style="margin-top: 20px; text-align: center;">
-        <p>Loading weather...</p>
-    </div>
-
-    <div id="time" style="margin-top: 10px; text-align: center; font-size: 18px; font-weight: bold;">
-        <p>Loading time...</p>
-    </div>
-
     <div class="aboutMe">
-        <h2>Short Bio</h2>
+        <h2>short bio</h2>
     </div>
     <div class="intro">
-        <h2>std::cout << "Hello World" << std::endl;</h2>
+        <h2>std::cout << "Hello World" << std::endl; </h2>
     </div>
-    <div class="intropt2">
+    <div class="intropt2"></div>
         <h2>Hi! I'm a Junior at Liberty University studying Software Engineering. This is my website, welcome! Currently, I enjoy working on games, shaders, and mods to existing titles! I also study Japanese, and am at an N4 Level.</h2>
     </div>
-
     <div class="todo-list">
         <h2>My To-Do List</h2>
         <form id="taskForm">
@@ -48,17 +49,14 @@
             <button type="submit">Add Task</button>
         </form>
         <ul id="todoItems">
-            </ul>
+            <!-- To-Do items will be dynamically added here -->
+        </ul>
     </div>
-
     <script type="module">
         import { Task, TaskManager } from './objects.js';
 
         // Create a TaskManager instance
-        // This factory function approach might need adjustment depending on how TaskManager is defined in objects.js
-        // If TaskManager is a class, you'd do: const taskManager = new TaskManager();
-        // If it's a function that returns an object, this is correct.
-        const taskManager = TaskManager(); 
+        const taskManager = TaskManager();
 
         // Add a constant task item
         const newTask = new Task("NEW", "create blender models for this site.");
@@ -69,26 +67,23 @@
         const todoList = document.getElementById('todoItems');
 
         // Handle form submission to add a new task
-        if (taskForm && todoList) { // Add check to ensure elements exist
-             taskForm.addEventListener('submit', (event) => {
-                 event.preventDefault();
+        taskForm.addEventListener('submit', (event) => {
+            event.preventDefault();
 
-                 // Get task details from the form
-                 const title = document.getElementById('taskTitle').value;
-                 const description = document.getElementById('taskDescription').value;
+            // Get task details from the form
+            const title = document.getElementById('taskTitle').value;
+            const description = document.getElementById('taskDescription').value;
 
-                 // Create a new Task instance and add it to the TaskManager
-                 const newTask = new Task(title, description);
-                 taskManager.addTask(newTask);
+            // Create a new Task instance and add it to the TaskManager
+            const newTask = new Task(title, description);
+            taskManager.addTask(newTask);
 
-                 // Update the task list in the UI
-                 updateTaskList();
+            // Update the task list in the UI
+            updateTaskList();
 
-                 // Clear the form
-                 taskForm.reset();
-             });
-        }
-
+            // Clear the form
+            taskForm.reset();
+        });
 
         // Function to update the task list in the UI
         function updateTaskList() {
@@ -104,27 +99,42 @@
         }
 
         // Initial update to display the constant task
-        if (todoList) { // Add check to ensure element exists before updating
-            updateTaskList();
-        }
+        updateTaskList();
     </script>
-
     <style>
-        /* Keep your styles here */
-    </style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            margin: 0;
+        }
 
+        .todo-list {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #todoItems {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #todoItems li {
+            margin: 5px 0;
+        }
+
+        form {
+            margin-bottom: 10px;
+        }
+
+        input {
+            margin-right: 5px;
+        }
+    </style>
     <script src="js/proj9.js" defer></script>
     <script src="js/final.js" type="module"></script>
-    <div id="floating-player" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 166px; z-index: 1000; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-        <iframe id="youtube-iframe"
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed?listType=playlist&list=PL3tRBEVW0hiA8SaR1o_IqK6AGp5FJt8d2&loop=1&modestbranding=1&rel=0"
-                frameborder="0"
-                allow="encrypted-media"
-                allowfullscreen>
-        </iframe>
-        <button id="close-player" style="position: absolute; top: 5px; right: 5px; background: #ff4d4d; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; cursor: pointer;" aria-label="Close Player">×</button>
-    </div>
+    <div id="currentPreferences"></div>
 </body>
 </html>
