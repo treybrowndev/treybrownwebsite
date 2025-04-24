@@ -1,0 +1,168 @@
+
+/* Color Settings Form */
+#customization-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#customization-form label {
+    font-weight: lighter;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 160%;
+}
+
+#customization-form input[type="color"],
+#customization-form input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#customization-form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#customization-form button:hover {
+    background-color: #0056b3;
+}
+/* GuestBook Form */
+
+.guestbookCONT {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(167, 137, 98, 0.836);
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#guestForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#guestForm input, button {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#guestForm button:hover {
+    background-color: #ffb13d;
+}
+
+/* Contact Form */ 
+
+#contactForm {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(167, 137, 98, 0.836);
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+/* Weather Widgets */ 
+
+#time {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(167, 137, 98, 0.836);
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#weather {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(167, 137, 98, 0.836);
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+/*youtube player*/
+#floating-player {
+    position: fixed; /* Use fixed position to float */
+    bottom: 20px; /* Example position */
+    right: 20px; /* Example position */
+    width: 320px; /* Example size */
+    height: 240px; /* Example size */
+    background-color: #000;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it's above other content */
+    cursor: grab; /* Indicate it's draggable */
+    display: none; /* Initially hidden */
+    overflow: hidden; /* Hide overflow */
+    border-radius: 8px; /* Rounded corners */
+    resize: both; /* Allow resizing */
+    min-width: 200px; /* Minimum size */
+    min-height: 150px;
+}
+
+ #floating-player.is-dragging {
+    cursor: grabbing; /* Indicate currently dragging */
+ }
+
+#floating-player iframe {
+    width: 100%;
+    height: calc(100% - 20px); /* Adjust height to make space for close button */
+    display: block; /* Remove extra space below iframe */
+}
+
+#close-player {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1001; /* Ensure close button is above iframe */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#close-player:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Add some margin to the body for demonstration */
+body {
+    margin-bottom: 300px; /* Make sure there's space for the player at the bottom */
+    font-family: sans-serif;
+}
