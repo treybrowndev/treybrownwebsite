@@ -23,17 +23,17 @@
     <h3>Color Settings</h3>
     <form id="customization-form">
         <label for="bg-color">Background Color:</label>
-        <input type="color" id="bg-color" name="bg-color"><br><br>
+        <input type="color" id="bg-color" name="bg-color" aria-label="Background Color"><br><br>
         <label for="text-color">Text Color:</label>
-        <input type="color" id="text-color" name="text-color"><br><br>
+        <input type="color" id="text-color" name="text-color" aria-label="Text Color"><br><br>
         <label for="font-size">Font Size:</label>
-        <input type="number" id="font-size" name="font-size" min="10" max="50" step="1"><br><br>
-        <button type="submit">Apply Customization</button>
+        <input type="number" id="font-size" name="font-size" min="10" max="50" step="1" aria-label="Font Size"><br><br>
+        <button type="submit" aria-label="Apply Customization">Apply Customization</button>
     </form>
     <div id="currentPreferences"></div>
 
     <div class="reset-colors">
-        <button id="reset-colors-button">Reset to Default Colors</button>
+        <button id="reset-colors-button" aria-label="Reset to Default Colors">Reset to Default Colors</button>
     </div>
 
     <hr> 
@@ -49,14 +49,14 @@
     </div>
 
     <div id="playback-controls" class="playback-controls" style="text-align: center; margin-top: 20px;">
-        <button id="previous" disabled>Previous</button>
-        <button id="play-pause" class="play-pause" disabled>Play</button> 
-        <button id="next" disabled>Next</button>
+        <button id="previous" disabled aria-label="Previous Track">Previous</button>
+        <button id="play-pause" class="play-pause" disabled aria-label="Play or Pause">Play</button> 
+        <button id="next" disabled aria-label="Next Track">Next</button>
     </div>
 
     <div id="other-controls" style="text-align: center; margin-top: 20px;">
         <label for="volume">Volume:</label>
-        <input type="range" id="volume" name="volume" min="0" max="100" value="50" disabled>
+        <input type="range" id="volume" name="volume" min="0" max="100" value="50" disabled aria-label="Volume Control">
     </div>
 
     <p class="playback-note" style="text-align: center; margin-top: 20px;">

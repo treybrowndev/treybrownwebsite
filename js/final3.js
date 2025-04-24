@@ -5,7 +5,8 @@ const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=
 const youtubeIframeSrc = `https://www.youtube.com/embed?listType=playlist&list=${youtubePlaylistId}&loop=1&modestbranding=1&rel=0`; // Removed autoplay
 
 // --- State Variables ---
-let player; // YouTube Player instance
+let isDragging = false;
+let offsetX, offsetY;
 
 // --- Utility Function to Update Status ---
 function updateStatus(message, isError = false) {
@@ -66,9 +67,6 @@ function getCurrentTimeFromIframe(iframe) {
 
 // --- Helper Function: Make Player Draggable ---
 function makePlayerDraggable(element) {
-    let isDragging = false;
-    let offsetX, offsetY;
-
     element.addEventListener('mousedown', (e) => {
         isDragging = true;
         offsetX = e.clientX - element.getBoundingClientRect().left;

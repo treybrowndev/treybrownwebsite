@@ -3,114 +3,122 @@ document.addEventListener('DOMContentLoaded', () => {
     emailjs.init('5EiLR_KxRE779EoD3'); // Replace with your public key
 
     // --- Email Form Functionality ---
-    document.getElementById('submitBtn').addEventListener('click', async () => {
-        const selectedReason = document.querySelector('input[name="reason"]:checked');
-        const emailInput = document.getElementById('emailInput');
-        const messageInput = document.getElementById('messageInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const contactForm = document.getElementById('contactForm');
 
-        const reason = selectedReason ? selectedReason.value : '';
-        const email = emailInput ? emailInput.value : '';
-        const message = messageInput ? messageInput.value : '';
+    if (submitBtn && contactForm) {
+        submitBtn.addEventListener('click', async () => {
+            const selectedReason = document.querySelector('input[name="reason"]:checked');
+            const emailInput = document.getElementById('emailInput');
+            const messageInput = document.getElementById('messageInput');
 
-        if (reason && email && message) {
-            try {
-                // Send email using EmailJS
-                const response = await emailjs.send('service_lpz45m9', 'template_kqz281p', {
-                    reason,
-                    email,
-                    message,
-                    to_email: 'trey.brown256@gmail.com' // Replace with the recipient email
-                });
+            const reason = selectedReason ? selectedReason.value : '';
+            const email = emailInput ? emailInput.value : '';
+            const message = messageInput ? messageInput.value : '';
 
-                if (response.status === 200) {
-                    alert('Your message has been submitted. We will review it and respond if necessary.');
-                    document.getElementById('contactForm').reset();
-                } else {
-                    alert('Failed to send your message. Please try again later.');
+            if (reason && email && message) {
+                try {
+                    // Send email using EmailJS
+                    const response = await emailjs.send('service_lpz45m9', 'template_kqz281p', {
+                        reason,
+                        email,
+                        message,
+                        to_email: 'trey.brown256@gmail.com' // Replace with the recipient email
+                    });
+
+                    if (response.status === 200) {
+                        alert('Your message has been submitted. We will review it and respond if necessary.');
+                        contactForm.reset();
+                    } else {
+                        alert('Failed to send your message. Please try again later.');
+                    }
+                } catch (error) {
+                    alert('An error occurred while sending your message.');
+                    console.error(error);
                 }
-            } catch (error) {
-                alert('An error occurred while sending your message.');
-                console.error(error);
+            } else {
+                alert('Please select a reason, enter your email, and provide a message.');
             }
-        } else {
-            alert('Please select a reason, enter your email, and provide a message.');
-        }
-    });
+        });
 
-    document.getElementById('clearBtn').addEventListener('click', () => {
-        document.getElementById('contactForm').reset();
-    });
+        clearBtn?.addEventListener('click', () => {
+            contactForm.reset();
+        });
+    }
 
     // --- Guest Form Functionality ---
     const guestForm = document.getElementById('guestForm');
     const guestList = document.getElementById('guestList');
 
-    function calculateAge(birthdate) {
-        const today = new Date();
-        const birthDate = new Date(birthdate);
-        const age = today.getFullYear() - birthDate.getFullYear();
-        const months = (today.getMonth() - birthDate.getMonth()) + (age * 12);
-        return { age, months };
-    }
-
-    function getZodiacSign(month, day) {
-        if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return 'Aquarius';
-        if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) return 'Pisces';
-        if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return 'Aries';
-        if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return 'Taurus';
-        if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) return 'Gemini';
-        if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) return 'Cancer';
-        if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return 'Leo';
-        if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return 'Virgo';
-        if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) return 'Libra';
-        if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return 'Scorpio';
-        if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return 'Sagittarius';
-        return 'Capricorn';
-    }
-
-    function displayMessage(username, age, zodiacSign) {
-        const messages = [
-            `Keep shining, ${username}!`,
-            `Remember, age is just a number, but yours looks good! :3`,
-            `As a ${zodiacSign}, you're destined for greatness!`,
-            `Every day is a chance to grow. Keep thriving, ${username}!`
-        ];
-        return messages[Math.floor(Math.random() * messages.length)];
-    }
-
-    guestForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const username = document.getElementById('username').value;
-        const date = document.getElementById('entryDate').value;
-        const comment = document.getElementById('comment').value;
-        const birthdate = document.getElementById('zodiacSign').value;
-
-        if (!username || !date || !comment || !birthdate) {
-            console.warn('Please fill out all fields.');
-            alert('All fields are required!');
-            return;
+    if (guestForm && guestList) {
+        function calculateAge(birthdate) {
+            const today = new Date();
+            const birthDate = new Date(birthdate);
+            const age = today.getFullYear() - birthDate.getFullYear();
+            const months = (today.getMonth() - birthDate.getMonth()) + (age * 12);
+            return { age, months };
         }
 
-        const [year, month, day] = birthdate.split('-').map(Number);
-        const { age, months } = calculateAge(birthdate);
-        const zodiacSign = getZodiacSign(month, day);
-        const message = displayMessage(username, age, zodiacSign);
+        function getZodiacSign(month, day) {
+            if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return 'Aquarius';
+            if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) return 'Pisces';
+            if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return 'Aries';
+            if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return 'Taurus';
+            if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) return 'Gemini';
+            if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) return 'Cancer';
+            if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return 'Leo';
+            if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return 'Virgo';
+            if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) return 'Libra';
+            if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return 'Scorpio';
+            if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return 'Sagittarius';
+            return 'Capricorn';
+        }
 
-        const guestCard = document.createElement('div');
-        guestCard.classList.add('guest-card');
-        guestCard.innerHTML = `
-            <p><strong>Written By:</strong> ${username}</p>
-            <p><strong>Entry Date:</strong> ${date}</p>
-            <p><strong>Age:</strong> ${age} years (${months} months)</p>
-            <p><strong>Zodiac Sign:</strong> ${zodiacSign}</p>
-            <p><strong>Comment:</strong> ${comment}</p>
-            <p><strong>Message:</strong> ${message}</p>
-        `;
+        function displayMessage(username, age, zodiacSign) {
+            const messages = [
+                `Keep shining, ${username}!`,
+                `Remember, age is just a number, but yours looks good! :3`,
+                `As a ${zodiacSign}, you're destined for greatness!`,
+                `Every day is a chance to grow. Keep thriving, ${username}!`
+            ];
+            return messages[Math.floor(Math.random() * messages.length)];
+        }
 
-        guestList.appendChild(guestCard);
-        guestForm.reset();
-    });
+        guestForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const date = document.getElementById('entryDate').value;
+            const comment = document.getElementById('comment').value;
+            const birthdate = document.getElementById('zodiacSign').value;
+
+            if (!username || !date || !comment || !birthdate) {
+                console.warn('Please fill out all fields.');
+                alert('All fields are required!');
+                return;
+            }
+
+            const [year, month, day] = birthdate.split('-').map(Number);
+            const { age, months } = calculateAge(birthdate);
+            const zodiacSign = getZodiacSign(month, day);
+            const message = displayMessage(username, age, zodiacSign);
+
+            const guestCard = document.createElement('div');
+            guestCard.classList.add('guest-card');
+            guestCard.innerHTML = `
+                <p><strong>Written By:</strong> ${username}</p>
+                <p><strong>Entry Date:</strong> ${date}</p>
+                <p><strong>Age:</strong> ${age} years (${months} months)</p>
+                <p><strong>Zodiac Sign:</strong> ${zodiacSign}</p>
+                <p><strong>Comment:</strong> ${comment}</p>
+                <p><strong>Message:</strong> ${message}</p>
+            `;
+
+            guestList.appendChild(guestCard);
+            guestForm.reset();
+        });
+    }
 
     // --- Preferences Functionality ---
     function applyPreferences() {
@@ -188,4 +196,35 @@ document.addEventListener('DOMContentLoaded', () => {
             clearPreferences();
         });
     }
+
+    // --- Weather and Time APIs ---
+    async function fetchWeather() {
+        const apiKey = 'YOUR_WEATHER_API_KEY'; // Replace with your API key
+        const city = 'New York'; // Replace with your desired city
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            const weatherElement = document.getElementById('weather');
+            if (weatherElement) {
+                weatherElement.innerHTML = `
+                    <p><strong>Weather in ${city}:</strong> ${data.weather[0].description}, ${data.main.temp}°C</p>
+                `;
+            }
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
+    }
+
+    function displayTime() {
+        const timeElement = document.getElementById('time');
+        if (timeElement) {
+            const now = new Date();
+            timeElement.textContent = `Current Time: ${now.toLocaleTimeString()}`;
+        }
+    }
+
+    fetchWeather();
+    setInterval(displayTime, 1000); // Update time every second
 });
