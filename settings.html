@@ -3,69 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Settings - The Treycave</title>
-  
-    <link rel="stylesheet" href="css/settings.css"> 
-    <link rel="stylesheet" href="css/main.css"> 
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <title>The Things I Do</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    
     <h1><a href="index.html">The Treycave</a></h1>
-    <h3>System Settings</h3>
+    <h3>The Things I do</h3>
     <nav>
+        <div class="things"><a href="things.html">The Things I Do</a></div>
         <div class="projects"><a href="projects.html">Personal Projects</a></div>
         <div class="contact"><a href="contacts.html">Contact</a></div>
-        <div class="things"><a href="settings.html">System Settings</a></div>
         <div class="guest"><a href="guestbook.html">Guestbook</a></div>
     </nav>
-
-    <p>This is the content of the Settings page. Customize site appearance and control music playback.</p>
-
-    <h3>Color Settings</h3>
-    <form id="customization-form">
-        <label for="bg-color">Background Color:</label>
-        <input type="color" id="bg-color" name="bg-color"><br><br>
-        <label for="text-color">Text Color:</label>
-        <input type="color" id="text-color" name="text-color"><br><br>
-        <label for="font-size">Font Size:</label>
-        <input type="number" id="font-size" name="font-size" min="10" max="50" step="1"><br><br>
-        <button type="submit">Apply Customization</button>
-    </form>
+  
+    <p>This is the content of the things page.</p>
+    <script src="js/proj9.js" defer></script>
     <div id="currentPreferences"></div>
-
-    <div class="reset-colors">
-        <button id="reset-colors-button">Reset to Default Colors</button>
-    </div>
-
-    <hr> 
-    <h3>Music Settings & Controls</h3>
-    <p>Control Spotify playback below (Requires Spotify Premium).</p>
-
-    <div id="current-track" class="current-track">
-        Connecting to Spotify...
-    </div>
-
-    <div id="playback-controls" class="playback-controls">
-        <button id="previous" disabled>Previous</button>
-        <button id="play-pause" class="play-pause" disabled>Play</button> 
-        <button id="next" disabled>Next</button>
-    </div>
-
-    <div id="other-controls">
-        <label for="volume">Volume:</label>
-        <input type="range" id="volume" name="volume" min="0" max="100" value="50" disabled><br><br>
-
-        <label for="playback-mode">Playback Mode:</label>
-        <select id="playback-mode" name="playback-mode" disabled>
-            <option value="normal">Normal</option>
-            <option value="shuffle">Shuffle</option>
-            <option value="repeat_context">Repeat Playlist</option> 
-            <option value="repeat_track">Repeat Track</option>
-        </select><br><br>
-    </div>
-
-    <p class="playback-note">Playback occurs on the 'TreyCave Web Player' device created by this page.</p>
-
-    <script src="js/proj11.js" defer></script> 
 </body>
 </html>
