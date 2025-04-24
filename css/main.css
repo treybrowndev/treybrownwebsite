@@ -1,3 +1,4 @@
+/* General Styles */
 nav {
     position: relative;
     top: 0;
@@ -6,72 +7,60 @@ nav {
     display: flex;
     font-size: 70%;
     align-items: center; 
-    justify-content: space-evenly; /* Changed to space-evenly for equal spacing */
+    justify-content: space-evenly; /* Equal spacing */
     padding: 1.5rem 3.5rem;
     box-shadow: 3px 3px 8px rgba(120, 105, 105, 0.427);
 }
 
+h1, h2, h3, p, body {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: lighter;
+    color: var(--text-color, #00000096); /* Dynamic text color */
+}
+
 h1 {
     font-size: 500%;
-    color:#00000096; 
-    font-weight: lighter;
-    font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
-    /* just small styles to make it look nice */
 }
 
 h2 {
     font-size: 300%;
-    color: #00000096;
-    font-weight: lighter;
-    font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
 }
 
 h3 {
     font-size: 200%;
-    font-weight: lighter;
-    font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
 }
 
 p {
     font-size: 160%;
-    font-weight: lighter;
-    font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
 }
 
 body {
-    background-color: papayawhip;
+    background-color: var(--bg-color, papayawhip); /* Dynamic background color */
+    font-size: var(--font-size, 16px); /* Dynamic font size */
 }
 
+/* Intro Sections */
 .intro, .intropt2 {
     font-size: 80%;
-    font-weight: lighter;
-    color: #00000096;
-    font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
+    color: var(--text-color, #00000096); /* Dynamic text color */
 }
 
+/* About Me Section */
 .aboutMe {
     color: #525252; 
-    font-family: "Lucida Console", "Courier New", monospace;
-    font-weight: lighter;
     font-size: 250%;
-    flex: 1; 
     text-align: center; 
 }
 
-
-
+/* Navigation Links */
 .things, .projects, .contact, .guest {
-    font-family: "Lucida Console", "Courier New", monospace;
-    font-weight: lighter;
     font-size: 240%;
-    flex: 1; 
     text-align: center; 
-    
 }
 
 .things {
@@ -108,7 +97,6 @@ a:active {
     color: inherit;
 }
 
-
 /* Color Settings Form */
 #customization-form {
     max-width: 500px;
@@ -120,7 +108,6 @@ a:active {
 }
 
 #customization-form label {
-    font-weight: lighter;
     display: block;
     margin-bottom: 5px;
     font-size: 160%;
@@ -133,7 +120,6 @@ a:active {
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-family: "Lucida Console", "Courier New", monospace;
 }
 
 #customization-form button {
@@ -146,7 +132,6 @@ a:active {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    font-family: "Lucida Console", "Courier New", monospace;
 }
 
 #customization-form button:hover {
@@ -167,7 +152,6 @@ a:active {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    font-family: "Lucida Console", "Courier New", monospace;
 }
 
 .reset-colors button:hover {
@@ -230,7 +214,6 @@ a:active {
 }
 
 #other-controls label {
-    font-weight: lighter;
     display: block;
     margin-bottom: 5px;
     font-size: 160%;
@@ -246,7 +229,6 @@ a:active {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-family: "Lucida Console", "Courier New", monospace;
 }
 
 /* Spotify Playlist Section */
@@ -262,7 +244,6 @@ a:active {
 #spotify-integration h3 {
     text-align: center;
     color: #444;
-    font-family: "Lucida Console", "Courier New", monospace;
 }
 
 #playlist-container {
@@ -274,7 +255,6 @@ a:active {
     text-align: center;
     font-style: italic;
     color: #777;
-    font-family: "Lucida Console", "Courier New", monospace;
 }
 
 #contactForm {
@@ -284,13 +264,4 @@ a:active {
     background-color: #ffd09a4b;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-family: "Lucida Console", "Courier New", monospace;
-}
-
-#submitBtn {
-    font-family: "Lucida Console", "Courier New", monospace;
-}
-
-#clearBtn {
-    font-family: "Lucida Console", "Courier New", monospace;
 }

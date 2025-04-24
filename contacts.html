@@ -6,20 +6,12 @@
     <title>Contact Page</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script src="js/final1.js" defer></script> 
-    <script src="js/final2.js" defer></script> 
-    <script src="js/final3.js" defer></script>
-</head> 
- 
+    <script src="js/proj7.js" defer></script>
+    <script src="js/proj9.js" defer></script>
+</head>
 <body>
     <h1><a href="index.html">The Treycave</a></h1>
     <h2>Contact Me</h2>
-    <nav>
-        <div class="projects"><a href="projects.html">Projects & Skills</a></div>  
-        <div class="contact"><a href="contacts.html">Contact</a></div>
-        <div class="things"><a href="settings.html">System Settings</a></div>
-        <div class="guest"><a href="guestbook.html">Guestbook</a></div>
-    </nav>
     <form id="contactForm">
         <label>
             Select your reason for contact:
@@ -28,32 +20,24 @@
             <input type="radio" name="reason" value="Misc"> Misc
         </label>
         <br>
-        <br>
         <label>
             Enter your email:
             <input type="email" id="emailInput" required>
         </label>
-        <br>
         <br>
         <label>
             Enter your message:
             <textarea id="messageInput" required></textarea>
         </label>
         <br>
-        <br>
         <button type="button" id="submitBtn">Submit</button>
         <button type="button" id="clearBtn">Clear</button>
     </form>
-    <div id="floating-player" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 166px; z-index: 1000; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-        <iframe id="youtube-iframe" 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed?listType=playlist&list=PL3tRBEVW0hiA8SaR1o_IqK6AGp5FJt8d2&autoplay=1&loop=1&modestbranding=1&rel=0" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen>
-        </iframe>
-        <button id="close-player" style="position: absolute; top: 5px; right: 5px; background: #ff4d4d; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; cursor: pointer;">×</button>
-    </div>
+    <nav>
+        <div class="projects"><a href="projects.html">Personal Projects</a></div>  
+        <div class="contact"><a href="contact.html">Contact</a></div>
+        <div class="things"><a href="settings.html">System Settings</a></div>
+        <div class="guest"><a href="guestbook.html">Guestbook</a></div>
+    </nav>
 </body>
 </html>
