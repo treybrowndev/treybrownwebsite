@@ -107,3 +107,172 @@ a:hover {
 a:active {
     color: inherit;
 }
+
+
+/* Color Settings Form */
+#customization-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#customization-form label {
+    font-weight: lighter;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 160%;
+}
+
+#customization-form input[type="color"],
+#customization-form input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#customization-form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #bfc281; /* Matches the "projects" color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#customization-form button:hover {
+    background-color: #9fadff; /* Matches the "guest" color */
+}
+
+/* Reset Colors Button */
+.reset-colors {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.reset-colors button {
+    padding: 10px 20px;
+    background-color: #ffcf83; /* Matches the "contact" color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.reset-colors button:hover {
+    background-color: #d09b9b; /* Matches the "things" color */
+}
+
+/* Music Settings Section */
+#music-settings {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#music-settings h3 {
+    text-align: center;
+    color: #444;
+}
+
+#current-track {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Playback Controls */
+#playback-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#playback-controls button {
+    padding: 10px 20px;
+    background-color: #bfc281; /* Matches the "projects" color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#playback-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#playback-controls button:hover:not(:disabled) {
+    background-color: #9fadff; /* Matches the "guest" color */
+}
+
+/* Volume and Playback Mode Controls */
+#other-controls {
+    margin-top: 15px;
+}
+
+#other-controls label {
+    font-weight: lighter;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 160%;
+}
+
+#other-controls input[type="range"] {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#other-controls select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+/* Spotify Playlist Section */
+#spotify-integration {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#spotify-integration h3 {
+    text-align: center;
+    color: #444;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#playlist-container {
+    border: 1px dashed #ccc;
+    padding: 10px;
+    min-height: 50px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
