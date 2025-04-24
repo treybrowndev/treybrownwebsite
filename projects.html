@@ -12,7 +12,7 @@
     <h3>System Settings</h3>
     <nav>
         <div class="projects"><a href="projects.html">Personal Projects</a></div>
-        <div class="contact"><a href="contacts.html">Contact</a></div>
+        <div class="contact"><a href="contact.html">Contact</a></div>
         <div class="things"><a href="settings.html">System Settings</a></div>
         <div class="guest"><a href="guestbook.html">Guestbook</a></div>
     </nav>
@@ -33,45 +33,20 @@
     <div class="reset-colors">
         <button id="reset-colors-button">Reset to Default Colors</button>
     </div>
-    <div id="music-settings">
-        <hr> 
-        <h3>Music Settings & Controls</h3>
-        <p>Control Spotify playback below (Requires Spotify Premium).</p>
-
-        <div id="current-track" style="margin-bottom: 15px; font-weight: bold; min-height: 1.2em; color: #555;">
-            Initializing...
-        </div>
-
-        <div id="playback-controls" style="margin-bottom: 15px;">
-            <button id="previous" disabled>Previous</button>
-            <button id="play-pause" style="min-width: 80px;" disabled>Play</button>
-            <button id="next" disabled>Next</button>
-        </div>
-
-        <div id="other-controls">
-            <label for="volume">Volume:</label>
-            <input type="range" id="volume" name="volume" min="0" max="100" value="50" disabled><br><br>
-            <label for="playback-mode">Playback Mode:</label>
-            <select id="playback-mode" name="playback-mode" disabled>
-                <option value="normal">Normal</option>
-                <option value="shuffle">Shuffle</option>
-                <option value="repeat_context">Repeat Playlist</option>
-                <option value="repeat_track">Repeat Track</option>
-            </select><br><br>
-        </div>
-
-        <p style="font-size: 0.8em; margin-top: 15px;">This webplayer was made using Spotify's Web API. </p>
-
-        <hr> 
-        <div id="spotify-integration">
-            <h3>Spotify Playlist Content (Display Area)</h3>
-            <div id="playlist-container" style="border: 1px dashed #ccc; padding: 10px; min-height: 50px;">
-                Playlist track list display not implemented in this example.
-            </div>
-        </div>
-    </div>
-    </div>
     <script src="js/proj11.js" defer></script>
+
+  
+    <div id="floating-player" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 166px; z-index: 1000; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <iframe id="youtube-iframe" 
+                width="100%" 
+                height="100%" 
+                src="" 
+                frameborder="0" 
+                allow="encrypted-media" 
+                allowfullscreen>
+        </iframe>
+        <button id="close-player" style="position: absolute; top: 5px; right: 5px; background: #ff4d4d; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; cursor: pointer;" aria-label="Close Player">×</button>
+    </div>
 
 </body>
 </html>
