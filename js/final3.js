@@ -2,6 +2,7 @@
 const youtubePlaylistId = 'PL3tRBEVW0hiA8SaR1o_IqK6AGp5FJt8d2'; // YouTube playlist ID
 const youtubeApiKey = 'AIzaSyBZLzYf_Ho1Tz7Xbis2NTL_EAa1IlFJWcc'; // YouTube API key
 const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${youtubePlaylistId}&key=${youtubeApiKey}&maxResults=5`; // API endpoint
+const youtubeIframeSrc = `https://www.youtube.com/embed?listType=playlist&list=${youtubePlaylistId}&loop=1&modestbranding=1&rel=0`; // Removed autoplay
 
 // --- State Variables ---
 let player; // YouTube Player instance
@@ -20,74 +21,73 @@ function updateStatus(message, isError = false) {
     }
 }
 
-// --- Initialize YouTube Player ---
-function initializePlayer() {
-    const iframeContainer = document.getElementById('playlist-container');
+// --- Initialize Floating Player ---
+function initializeFloatingPlayer() {
+    const iframe = document.getElementById('youtube-iframe');
+    const closeButton = document.getElementById('close-player');
+    const floatingPlayer = document.getElementById('floating-player');
 
-    // Create the YouTube iframe
-    const iframe = document.createElement('div');
-    iframe.setAttribute('id', 'youtube-player');
-    iframeContainer.appendChild(iframe);
-
-    // Initialize the YouTube Player
-    player = new YT.Player('youtube-player', {
-        height: '166', // Small height for a compact player
-        width: '300', // Small width for a compact player
-        playerVars: {
-            listType: 'playlist',
-            list: youtubePlaylistId,
-            autoplay: 1,
-            loop: 1,
-            modestbranding: 1,
-            rel: 0,
-        },
-        events: {
-            onReady: onPlayerReady,
-            onStateChange: onPlayerStateChange,
-        },
-    });
-}
-
-// --- YouTube Player Event Handlers ---
-function onPlayerReady(event) {
-    console.log('YouTube Player is ready.');
-    updateStatus('Player ready. Use the controls below to play music.');
-    enableControls();
-}
-
-function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.PLAYING) {
-        console.log('Playback started.');
-        updateStatus('Now Playing...');
-    } else if (event.data === YT.PlayerState.PAUSED) {
-        console.log('Playback paused.');
-        updateStatus('Playback paused.');
-    } else if (event.data === YT.PlayerState.ENDED) {
-        console.log('Playback finished.');
-        updateStatus('Playback finished.');
-    }
-}
-
-// --- Playback Control Functions ---
-function togglePlay() {
-    const playerState = player.getPlayerState();
-    if (playerState === YT.PlayerState.PLAYING) {
-        player.pauseVideo();
+    // Restore playback state from localStorage
+    const savedState = JSON.parse(localStorage.getItem('youtubePlayerState'));
+    if (savedState && iframe) {
+        iframe.src = `${youtubeIframeSrc}&start=${savedState.currentTime}`;
     } else {
-        player.playVideo();
+        iframe.src = youtubeIframeSrc;
+    }
+
+    // Save playback state before the page unloads
+    window.addEventListener('beforeunload', () => {
+        const playerState = {
+            currentTime: getCurrentTimeFromIframe(iframe)
+        };
+        localStorage.setItem('youtubePlayerState', JSON.stringify(playerState));
+    });
+
+    // Close the player when the close button is clicked
+    closeButton.addEventListener('click', () => {
+        floatingPlayer.style.display = 'none';
+    });
+
+    // Make the player draggable
+    makePlayerDraggable(floatingPlayer);
+}
+
+// --- Helper Function: Get Current Time from Iframe ---
+function getCurrentTimeFromIframe(iframe) {
+    try {
+        const url = new URL(iframe.src);
+        const startParam = url.searchParams.get('start');
+        return startParam ? parseInt(startParam, 10) : 0;
+    } catch (error) {
+        console.error('Error getting current time from iframe:', error);
+        return 0;
     }
 }
 
-function nextTrack() {
-    player.nextVideo();
-}
+// --- Helper Function: Make Player Draggable ---
+function makePlayerDraggable(element) {
+    let isDragging = false;
+    let offsetX, offsetY;
 
-function previousTrack() {
-    player.previousVideo();
-}
+    element.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - element.getBoundingClientRect().left;
+        offsetY = e.clientY - element.getBoundingClientRect().top;
+        element.style.cursor = 'grabbing';
+    });
 
-function setVolume(volumeLevel) {
-    player.setVolume(volumeLevel * 100); // YouTube volume is 0-100
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            element.style.left = `${e.clientX - offsetX}px`;
+            element.style.top = `${e.clientY - offsetY}px`;
+            element.style.position = 'fixed';
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        element.style.cursor = 'grab';
+    });
 }
 
 // --- Fetch Example: Get Playlist Items ---
@@ -156,54 +156,24 @@ function displayPlaylistItems(items) {
     });
 }
 
-// --- UI Interaction Setup ---
-function handleMusicSettings() {
-    const volumeSlider = document.getElementById('volume');
-    const playPauseButton = document.getElementById('play-pause');
-    const prevButton = document.getElementById('previous');
-    const nextButton = document.getElementById('next');
-
-    // Volume Listener
-    volumeSlider.addEventListener('input', (event) => {
-        const volume = event.target.value / 100;
-        setVolume(volume);
-    });
-
-    // Button Listeners
-    playPauseButton.addEventListener('click', togglePlay);
-    prevButton.addEventListener('click', previousTrack);
-    nextButton.addEventListener('click', nextTrack);
-}
-
-// --- UI State Management ---
-function enableControls() {
-    document.getElementById('volume').disabled = false;
-    document.getElementById('play-pause').disabled = false;
-    document.getElementById('previous').disabled = false;
-    document.getElementById('next').disabled = false;
-}
-
-function disableControls() {
-    document.getElementById('volume').disabled = true;
-    document.getElementById('play-pause').disabled = true;
-    document.getElementById('previous').disabled = true;
-    document.getElementById('next').disabled = true;
-}
-
 // --- Global Initialization ---
-function onYouTubeIframeAPIReady() {
-    console.log('YouTube IFrame API is ready. Initializing player...');
-    updateStatus('Initializing player...');
-    handleMusicSettings();
-    disableControls();
-    initializePlayer();
-    fetchPlaylistItems(); // Fetch playlist items using fetch
-    // xhrPlaylistItems(); // Uncomment to use XMLHttpRequest instead
-}
+document.addEventListener('DOMContentLoaded', () => {
+    // Dynamically inject the floating player into the page
+    const playerHTML = `
+        <div id="floating-player" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 166px; z-index: 1000; background: #000; border: 2px solid #555; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); cursor: grab;">
+            <iframe id="youtube-iframe" 
+                    width="100%" 
+                    height="100%" 
+                    src="${youtubeIframeSrc}" 
+                    frameborder="0" 
+                    allow="encrypted-media" 
+                    allowfullscreen>
+            </iframe>
+            <button id="close-player" style="position: absolute; top: 5px; right: 5px; background: #ff4d4d; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; cursor: pointer;">×</button>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', playerHTML);
 
-// Load the YouTube IFrame API script
-(function loadYouTubeAPI() {
-    const script = document.createElement('script');
-    script.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(script);
-})();
+    // Initialize the floating player
+    initializeFloatingPlayer();
+});
