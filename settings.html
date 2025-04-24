@@ -7,7 +7,35 @@
 
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/widgets.css" />
-
+  <style>
+    /* Floating player styles */
+    #floating-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      height: 166px;
+      z-index: 1000;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: grab;
+    }
+    #close-player {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #ff4d4d;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <h1><a href="index.html">The Treycave</a></h1>
@@ -39,8 +67,9 @@
   </form>
 
   <div id="currentPreferences"></div>
-  
-  <div id="floating-player" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 166px; z-index: 1000; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+
+  <!-- Floating YouTube Player -->
+  <div id="floating-player">
     <iframe id="youtube-iframe"
             width="100%"
             height="100%"
@@ -49,9 +78,104 @@
             allow="encrypted-media"
             allowfullscreen>
     </iframe>
-    <button id="close-player" style="position: absolute; top: 5px; right: 5px; background: #ff4d4d; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; cursor: pointer;" aria-label="Close Player">×</button>
+    <button id="close-player" aria-label="Close Player">×</button>
   </div>
 
-  <script src="js/proj9.js" defer></script>
+  <script>
+    // JavaScript for customization settings
+    document.getElementById('customization-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Apply background and text color preferences
+      const bgColor = document.getElementById('bg-color').value;
+      const textColor = document.getElementById('text-color').value;
+      const fontSize = document.getElementById('font-size').value;
+
+      document.body.style.backgroundColor = bgColor;
+      document.body.style.color = textColor;
+      document.body.style.fontSize = fontSize + 'px';
+
+      // Save preferences to localStorage
+      localStorage.setItem('bgColor', bgColor);
+      localStorage.setItem('textColor', textColor);
+      localStorage.setItem('fontSize', fontSize);
+
+      // Display current preferences
+      document.getElementById('currentPreferences').innerHTML = `
+        <p><strong>Current Preferences:</strong></p>
+        <p>Background Color: ${bgColor}</p>
+        <p>Text Color: ${textColor}</p>
+        <p>Font Size: ${fontSize}px</p>
+      `;
+    });
+
+    // Reset preferences
+    document.getElementById('reset-colors-button').addEventListener('click', function () {
+      // Reset to default values
+      document.body.style.backgroundColor = '#ffffff';
+      document.body.style.color = '#000000';
+      document.body.style.fontSize = '16px';
+
+      // Clear localStorage
+      localStorage.removeItem('bgColor');
+      localStorage.removeItem('textColor');
+      localStorage.removeItem('fontSize');
+
+      // Clear displayed preferences
+      document.getElementById('currentPreferences').innerHTML = '';
+    });
+
+    // Floating player functionality
+    const floatingPlayer = document.getElementById('floating-player');
+    const closeButton = document.getElementById('close-player');
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    closeButton.addEventListener('click', function () {
+      floatingPlayer.style.display = 'none';
+    });
+
+    floatingPlayer.addEventListener('mousedown', function (e) {
+      isDragging = true;
+      offsetX = e.clientX - floatingPlayer.getBoundingClientRect().left;
+      offsetY = e.clientY - floatingPlayer.getBoundingClientRect().top;
+      floatingPlayer.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', function (e) {
+      if (isDragging) {
+        floatingPlayer.style.left = e.clientX - offsetX + 'px';
+        floatingPlayer.style.top = e.clientY - offsetY + 'px';
+        floatingPlayer.style.position = 'fixed';
+      }
+    });
+
+    document.addEventListener('mouseup', function () {
+      isDragging = false;
+      floatingPlayer.style.cursor = 'grab';
+    });
+
+    // Restore preferences from localStorage on page load
+    window.addEventListener('DOMContentLoaded', function () {
+      const savedBgColor = localStorage.getItem('bgColor');
+      const savedTextColor = localStorage.getItem('textColor');
+      const savedFontSize = localStorage.getItem('fontSize');
+
+      if (savedBgColor) document.body.style.backgroundColor = savedBgColor;
+      if (savedTextColor) document.body.style.color = savedTextColor;
+      if (savedFontSize) document.body.style.fontSize = savedFontSize + 'px';
+
+      // Display current preferences
+      if (savedBgColor || savedTextColor || savedFontSize) {
+        document.getElementById('currentPreferences').innerHTML = `
+          <p><strong>Current Preferences:</strong></p>
+          <p>Background Color: ${savedBgColor}</p>
+          <p>Text Color: ${savedTextColor}</p>
+          <p>Font Size: ${savedFontSize}px</p>
+        `;
+      }
+    });
+  </script>
+
 </body>
 </html>
