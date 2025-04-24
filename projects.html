@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Settings - The Treycave</title>
    
-    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href= "css/widgets.css">
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
@@ -36,17 +37,9 @@
     <script src="js/proj11.js" defer></script>
 
   
-    <div id="floating-player" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 166px; z-index: 1000; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-        <iframe id="youtube-iframe" 
-                width="100%" 
-                height="100%" 
-                src="" 
-                frameborder="0" 
-                allow="encrypted-media" 
-                allowfullscreen>
-        </iframe>
-        <button id="close-player" style="position: absolute; top: 5px; right: 5px; background: #ff4d4d; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; cursor: pointer;" aria-label="Close Player">×</button>
-    </div>
+    <div id="floating-player">
+        <button id="close-player" class="no-drag">&times;</button>
+        <div id="youtube-iframe"></div> </div>
 
 </body>
 </html>
