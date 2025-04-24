@@ -276,3 +276,21 @@ a:active {
     color: #777;
     font-family: "Lucida Console", "Courier New", monospace;
 }
+
+#contactForm {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffd09a4b;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#submitBtn {
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#clearBtn {
+    font-family: "Lucida Console", "Courier New", monospace;
+}

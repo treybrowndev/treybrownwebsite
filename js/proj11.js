@@ -1,6 +1,7 @@
 // --- Constants ---
-const youtubePlaylistId = 'PL3tRBEVW0hiA8SaR1o_IqK6AGp5FJt8d2'; // Replace with your YouTube playlist ID
-const youtubeApiKey = 'AIzaSyBZLzYf_Ho1Tz7Xbis2NTL_EAa1IlFJWcc'; // Replace with your YouTube API key
+const youtubePlaylistId = 'PL3tRBEVW0hiA8SaR1o_IqK6AGp5FJt8d2'; // YouTube playlist ID
+const youtubeApiKey = 'AIzaSyBZLzYf_Ho1Tz7Xbis2NTL_EAa1IlFJWcc'; // YouTube API key
+const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${youtubePlaylistId}&key=${youtubeApiKey}&maxResults=5`; // API endpoint
 
 // --- State Variables ---
 let player; // YouTube Player instance
@@ -89,6 +90,72 @@ function setVolume(volumeLevel) {
     player.setVolume(volumeLevel * 100); // YouTube volume is 0-100
 }
 
+// --- Fetch Example: Get Playlist Items ---
+function fetchPlaylistItems() {
+    fetch(youtubeApiUrl)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch playlist items');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            displayPlaylistItems(data.items);
+        })
+        .catch((error) => {
+            console.error('Error fetching playlist items:', error);
+            const container = document.getElementById('playlist-data');
+            container.textContent = 'Failed to load playlist items.';
+        });
+}
+
+// --- XMLHttpRequest Example: Get Playlist Items ---
+function xhrPlaylistItems() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', youtubeApiUrl, true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+            displayPlaylistItems(data.items);
+        } else {
+            console.error('Error fetching playlist items via XMLHttpRequest:', xhr.statusText);
+            const container = document.getElementById('playlist-data');
+            container.textContent = 'Failed to load playlist items via XMLHttpRequest.';
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error('Network error occurred while fetching playlist items.');
+        const container = document.getElementById('playlist-data');
+        container.textContent = 'Network error occurred.';
+    };
+
+    xhr.send();
+}
+
+// --- Display Playlist Items ---
+function displayPlaylistItems(items) {
+    const container = document.getElementById('playlist-data');
+    container.innerHTML = ''; // Clear existing content
+
+    items.forEach((item) => {
+        const videoTitle = item.snippet.title;
+        const videoThumbnail = item.snippet.thumbnails.default.url;
+
+        const videoElement = document.createElement('div');
+        videoElement.innerHTML = `
+            <img src="${videoThumbnail}" alt="${videoTitle}" style="width: 120px; height: 90px; margin-right: 10px;">
+            <span>${videoTitle}</span>
+        `;
+        videoElement.style.display = 'flex';
+        videoElement.style.alignItems = 'center';
+        videoElement.style.marginBottom = '10px';
+
+        container.appendChild(videoElement);
+    });
+}
+
 // --- UI Interaction Setup ---
 function handleMusicSettings() {
     const volumeSlider = document.getElementById('volume');
@@ -130,6 +197,8 @@ function onYouTubeIframeAPIReady() {
     handleMusicSettings();
     disableControls();
     initializePlayer();
+    fetchPlaylistItems(); // Fetch playlist items using fetch
+    // xhrPlaylistItems(); // Uncomment to use XMLHttpRequest instead
 }
 
 // Load the YouTube IFrame API script

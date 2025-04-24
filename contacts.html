@@ -8,10 +8,17 @@
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script src="js/proj7.js" defer></script>
     <script src="js/proj9.js" defer></script>
-</head>
+</head> 
+ 
 <body>
     <h1><a href="index.html">The Treycave</a></h1>
     <h2>Contact Me</h2>
+    <nav>
+        <div class="projects"><a href="projects.html">Personal Projects</a></div>  
+        <div class="contact"><a href="contacts.html">Contact</a></div>
+        <div class="things"><a href="settings.html">System Settings</a></div>
+        <div class="guest"><a href="guestbook.html">Guestbook</a></div>
+    </nav>
     <form id="contactForm">
         <label>
             Select your reason for contact:
@@ -20,24 +27,22 @@
             <input type="radio" name="reason" value="Misc"> Misc
         </label>
         <br>
+        <br>
         <label>
             Enter your email:
             <input type="email" id="emailInput" required>
         </label>
+        <br>
         <br>
         <label>
             Enter your message:
             <textarea id="messageInput" required></textarea>
         </label>
         <br>
+        <br>
         <button type="button" id="submitBtn">Submit</button>
         <button type="button" id="clearBtn">Clear</button>
     </form>
-    <nav>
-        <div class="projects"><a href="projects.html">Personal Projects</a></div>  
-        <div class="contact"><a href="contact.html">Contact</a></div>
-        <div class="things"><a href="settings.html">System Settings</a></div>
-        <div class="guest"><a href="guestbook.html">Guestbook</a></div>
-    </nav>
+  
 </body>
 </html>
