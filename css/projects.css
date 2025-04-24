@@ -14,7 +14,7 @@ nav {
 h1, h2, h3, p {
     font-weight: lighter;
     font-family: "Lucida Console", "Courier New", monospace;
-    
+    text-align: center;
 }
 
 h1 {
@@ -29,7 +29,6 @@ h2 {
 
 h3 {
     font-size: 200%;
-    text-align: left;
 }
 
 p {

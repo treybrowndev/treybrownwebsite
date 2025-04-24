@@ -1,4 +1,3 @@
-/* General Styles */
 nav {
     position: relative;
     top: 0;
@@ -7,60 +6,70 @@ nav {
     display: flex;
     font-size: 70%;
     align-items: center; 
-    justify-content: space-evenly; /* Equal spacing */
+    justify-content: space-evenly; /* Changed to space-evenly for equal spacing */
     padding: 1.5rem 3.5rem;
     box-shadow: 3px 3px 8px rgba(120, 105, 105, 0.427);
 }
 
-h1, h2, h3, p, body {
-    font-family: "Lucida Console", "Courier New", monospace;
-    font-weight: lighter;
-    color: var(--text-color, #00000096); /* Dynamic text color */
-}
-
 h1 {
     font-size: 500%;
+    color:#00000096; 
+    font-weight: lighter;
+    font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
+    /* just small styles to make it look nice */
 }
 
 h2 {
     font-size: 300%;
+    color: #00000096;
+    font-weight: lighter;
+    font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
 }
 
 h3 {
     font-size: 200%;
+    font-weight: lighter;
+    font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
 }
 
 p {
     font-size: 160%;
+    font-weight: lighter;
+    font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
 }
 
 body {
-    background-color: var(--bg-color, papayawhip); /* Dynamic background color */
-    font-size: var(--font-size, 16px); /* Dynamic font size */
+    background-color: papayawhip;
 }
 
-/* Intro Sections */
 .intro, .intropt2 {
     font-size: 80%;
+    font-weight: lighter;
+    color: #00000096;
+    font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
-    color: var(--text-color, #00000096); /* Dynamic text color */
 }
 
-/* About Me Section */
 .aboutMe {
     color: #525252; 
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: lighter;
     font-size: 250%;
+    flex: 1; 
     text-align: center; 
 }
 
-/* Navigation Links */
 .things, .projects, .contact, .guest {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: lighter;
     font-size: 240%;
+    flex: 1; 
     text-align: center; 
+    
 }
 
 .things {
@@ -95,173 +104,4 @@ a:hover {
 
 a:active {
     color: inherit;
-}
-
-/* Color Settings Form */
-#customization-form {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#customization-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 160%;
-}
-
-#customization-form input[type="color"],
-#customization-form input[type="number"] {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#customization-form button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #bfc281; /* Matches the "projects" color */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#customization-form button:hover {
-    background-color: #9fadff; /* Matches the "guest" color */
-}
-
-/* Reset Colors Button */
-.reset-colors {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.reset-colors button {
-    padding: 10px 20px;
-    background-color: #ffcf83; /* Matches the "contact" color */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.reset-colors button:hover {
-    background-color: #d09b9b; /* Matches the "things" color */
-}
-
-/* Music Settings Section */
-#music-settings {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#music-settings h3 {
-    text-align: center;
-    color: #444;
-}
-
-#current-track {
-    text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #555;
-}
-
-/* Playback Controls */
-#playback-controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-#playback-controls button {
-    padding: 10px 20px;
-    background-color: #bfc281; /* Matches the "projects" color */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#playback-controls button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-#playback-controls button:hover:not(:disabled) {
-    background-color: #9fadff; /* Matches the "guest" color */
-}
-
-/* Volume and Playback Mode Controls */
-#other-controls {
-    margin-top: 15px;
-}
-
-#other-controls label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 160%;
-}
-
-#other-controls input[type="range"] {
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-#other-controls select {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Spotify Playlist Section */
-#spotify-integration {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#spotify-integration h3 {
-    text-align: center;
-    color: #444;
-}
-
-#playlist-container {
-    border: 1px dashed #ccc;
-    padding: 10px;
-    min-height: 50px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    text-align: center;
-    font-style: italic;
-    color: #777;
-}
-
-#contactForm {
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffd09a4b;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
