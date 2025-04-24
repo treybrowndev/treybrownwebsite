@@ -88,7 +88,7 @@ function makePlayerDraggable(element) {
     });
 }
 
-// --- Fetch Example: Get Playlist Items ---
+// --- Fetch Playlist Items ---
 function fetchPlaylistItems() {
     fetch(youtubeApiUrl)
         .then((response) => {
@@ -103,38 +103,15 @@ function fetchPlaylistItems() {
         .catch((error) => {
             console.error('Error fetching playlist items:', error);
             const container = document.getElementById('playlist-data');
-            container.textContent = 'Failed to load playlist items.';
+            if (container) container.textContent = 'Failed to load playlist items.';
         });
-}
-
-// --- XMLHttpRequest Example: Get Playlist Items ---
-function xhrPlaylistItems() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', youtubeApiUrl, true);
-
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            const data = JSON.parse(xhr.responseText);
-            displayPlaylistItems(data.items);
-        } else {
-            console.error('Error fetching playlist items via XMLHttpRequest:', xhr.statusText);
-            const container = document.getElementById('playlist-data');
-            container.textContent = 'Failed to load playlist items via XMLHttpRequest.';
-        }
-    };
-
-    xhr.onerror = function () {
-        console.error('Network error occurred while fetching playlist items.');
-        const container = document.getElementById('playlist-data');
-        container.textContent = 'Network error occurred.';
-    };
-
-    xhr.send();
 }
 
 // --- Display Playlist Items ---
 function displayPlaylistItems(items) {
     const container = document.getElementById('playlist-data');
+    if (!container) return; // Prevents error if element doesn't exist
+
     container.innerHTML = ''; // Clear existing content
 
     items.forEach((item) => {
@@ -174,4 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize the floating player
     initializeFloatingPlayer();
+
+    // Fetch playlist items if you want to display them
+    fetchPlaylistItems();
 });
