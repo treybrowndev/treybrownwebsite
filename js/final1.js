@@ -16,6 +16,8 @@ async function fetchWeather() {
             weatherElement.innerHTML = `
                 <p><strong>Weather in ${city}:</strong> ${data.weather[0].description}, ${data.main.temp}°C</p>
             `;
+        } else {
+            console.error('Weather element not found in the DOM.');
         }
     } catch (error) {
         console.error('Error fetching weather data:', error);
@@ -32,51 +34,6 @@ function displayTime() {
         const now = new Date();
         timeElement.textContent = `Current Time: ${now.toLocaleTimeString()}`;
     }
-}
-
-// --- YouTube Player ---
-const youtubePlaylistId = 'PL3tRBEVW0hiA8SaR1o_IqK6AGp5FJt8d2';
-const youtubeIframeSrc = `https://www.youtube.com/embed?listType=playlist&list=${youtubePlaylistId}&loop=1&modestbranding=1&rel=0`;
-
-function initializeYouTubePlayer() {
-    const iframe = document.getElementById('youtube-iframe');
-    const closeButton = document.getElementById('close-player');
-    const floatingPlayer = document.getElementById('floating-player');
-
-    if (iframe) {
-        iframe.src = youtubeIframeSrc;
-    }
-
-    closeButton.addEventListener('click', () => {
-        floatingPlayer.style.display = 'none';
-    });
-
-    makePlayerDraggable(floatingPlayer);
-}
-
-function makePlayerDraggable(element) {
-    let isDragging = false;
-    let offsetX, offsetY;
-
-    element.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        offsetX = e.clientX - element.getBoundingClientRect().left;
-        offsetY = e.clientY - element.getBoundingClientRect().top;
-        element.style.cursor = 'grabbing';
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-            element.style.left = `${e.clientX - offsetX}px`;
-            element.style.top = `${e.clientY - offsetY}px`;
-            element.style.position = 'fixed';
-        }
-    });
-
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-        element.style.cursor = 'grab';
-    });
 }
 
 // --- Color Changer ---
