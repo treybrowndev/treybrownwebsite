@@ -1,4 +1,3 @@
-
 /* Color Settings Form */
 #customization-form {
     margin: 2rem auto;
@@ -14,7 +13,7 @@
     font-weight: lighter;
     display: block;
     margin-bottom: 5px;
-    font-size: 160%;
+    font-size: 1.6em;
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
@@ -36,7 +35,7 @@
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1em;
     cursor: pointer;
     font-family: "Lucida Console", "Courier New", monospace;
 }
@@ -44,8 +43,8 @@
 #customization-form button:hover {
     background-color: #181818;
 }
-/* GuestBook Form */
 
+/* GuestBook Form */
 .guestbookCONT {
     margin: 2rem auto;
     padding: 1rem;
@@ -62,9 +61,10 @@
     gap: 1rem;
 }
 
-#guestForm input, button {
+#guestForm input,
+#guestForm button {
     font-family: "Lucida Console", "Courier New", monospace;
-    font-size: 100%;
+    font-size: 1em;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -74,8 +74,7 @@
     background-color: #ffb13d;
 }
 
-/* Contact Form */ 
-
+/* Contact Form */
 #contactForm {
     margin: 2rem auto;
     padding: 1rem;
@@ -86,8 +85,7 @@
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
-/* Weather Widgets */ 
-
+/* Weather Widgets */
 #time {
     margin: 2rem auto;
     padding: 1rem;
@@ -108,34 +106,34 @@
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
-/*youtube player*/
+/* YouTube Player */
 #floating-player {
-    position: fixed; /* Use fixed position to float */
-    bottom: 20px; /* Example position */
-    right: 20px; /* Example position */
-    width: 320px; /* Example size */
-    height: 240px; /* Example size */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 320px;
+    height: 240px;
     background-color: #000;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Ensure it's above other content */
-    cursor: grab; /* Indicate it's draggable */
-    display: none; /* Initially hidden */
-    overflow: hidden; /* Hide overflow */
-    border-radius: 8px; /* Rounded corners */
-    resize: both; /* Allow resizing */
-    min-width: 200px; /* Minimum size */
+    z-index: 1000;
+    cursor: grab;
+    display: none;
+    overflow: hidden;
+    border-radius: 8px;
+    resize: both;
+    min-width: 200px;
     min-height: 150px;
 }
 
- #floating-player.is-dragging {
-    cursor: grabbing; /* Indicate currently dragging */
- }
+#floating-player.is-dragging {
+    cursor: grabbing;
+}
 
 #floating-player iframe {
     width: 100%;
-    height: calc(100% - 20px); /* Adjust height to make space for close button */
-    display: block; /* Remove extra space below iframe */
+    height: calc(100% - 20px);
+    display: block;
 }
 
 #close-player {
@@ -146,13 +144,11 @@
     color: white;
     border: none;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    font-size: 14px;
+    font-size: 1em;
     line-height: 1;
     text-align: center;
     cursor: pointer;
-    z-index: 1001; /* Ensure close button is above iframe */
+    z-index: 1001;
     padding: 0;
     display: flex;
     align-items: center;
@@ -163,20 +159,13 @@
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Add some margin to the body for demonstration */
-body {
-    margin-bottom: 300px; /* Make sure there's space for the player at the bottom */
-    font-family: sans-serif;
-}
-
-
 /* Skills Section Styles */
 #skills {
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
 #skills h2 {
-    font-size: 2rem;
+    font-size: 2em;
     font-weight: bold;
     margin-bottom: 1rem;
 }
@@ -190,7 +179,7 @@ body {
 .card-header {
     background-color: #f8f9fa;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.2em;
     text-align: center;
     padding: 1rem;
 }
@@ -200,7 +189,7 @@ body {
 }
 
 .list-group-item {
-    font-size: 1rem;
+    font-size: 1em;
     font-family: "Lucida Console", "Courier New", monospace;
     padding: 0.75rem 1rem;
 }
