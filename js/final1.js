@@ -106,13 +106,13 @@ function applyPreferences() {
     // Save preferences in cookies
     setCookie('bgColor', bgColor, 7);
     setCookie('textColor', textColor, 7);
-    setCookie('fontSize', fontSize, 7);
+  
 
     // Display current preferences to the user
     const preferencesElement = document.getElementById('currentPreferences');
     if (preferencesElement) {
         preferencesElement.innerText = 
-            `Background Color: ${bgColor}, Text Color: ${textColor}, Font Size: ${fontSize}`;
+            `Background Color: ${bgColor}, Text Color: ${textColor}`;
     }
 }
 
@@ -136,7 +136,6 @@ function setCookie(name, value, days) {
 function clearPreferences() {
     setCookie('bgColor', '', -1);
     setCookie('textColor', '', -1);
-    setCookie('fontSize', '', -1);
     window.location.href = window.location.pathname; // Reload without query string
 }
 
@@ -152,10 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Get form values
             const bgColor = document.getElementById('bg-color').value;
             const textColor = document.getElementById('text-color').value;
-            const fontSize = document.getElementById('font-size').value + 'px'; // Ensure 'px' is appended
+        
 
             // Redirect with query string
-            const queryString = `?bgColor=${encodeURIComponent(bgColor)}&textColor=${encodeURIComponent(textColor)}&fontSize=${encodeURIComponent(fontSize)}`;
+            const queryString = `?bgColor=${encodeURIComponent(bgColor)}&textColor=${encodeURIComponent(textColor)}`;
             window.location.href = window.location.pathname + queryString;
         });
     }
@@ -168,40 +167,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-// Apply preferences on page load
-function applyPreferences() {
-    const params = new URLSearchParams(window.location.search);
-
-    // Get preferences from query string or cookies
-    const bgColor = params.get('bgColor') || getCookie('bgColor') || '#ffddb3';
-    const textColor = params.get('textColor') || getCookie('textColor') || '#000000';
-    const fontSize = params.get('fontSize') || getCookie('fontSize') || '16px'; // Default to '16px'
-
-    // Create or update a <style> element
-    let styleElement = document.getElementById('dynamicStyles');
-    if (!styleElement) {
-        styleElement = document.createElement('style');
-        styleElement.id = 'dynamicStyles';
-        document.head.appendChild(styleElement);
-    }
-    styleElement.textContent = `
-        body {
-            background-color: ${bgColor} !important;
-            color: ${textColor} !important;
-            font-size: ${fontSize} !important;
-        }
-    `;
-
-    // Save preferences in cookies
-    setCookie('bgColor', bgColor, 7);
-    setCookie('textColor', textColor, 7);
-    setCookie('fontSize', fontSize, 7);
-
-    // Display current preferences to the user
-    const preferencesElement = document.getElementById('currentPreferences');
-    if (preferencesElement) {
-        preferencesElement.innerText = 
-            `Background Color: ${bgColor}, Text Color: ${textColor}, Font Size: ${fontSize}`;
-    }
-}
