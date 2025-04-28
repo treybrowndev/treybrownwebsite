@@ -81,96 +81,127 @@ function makePlayerDraggable(element) {
 
 // --- Color Changer ---
 function applyPreferences() {
-    const bgColor = localStorage.getItem('bgColor') || '#ffddb3';
-    const textColor = localStorage.getItem('textColor') || '#000000';
-    const fontSize = localStorage.getItem('fontSize') || '16px';
+    const params = new URLSearchParams(window.location.search);
 
-    document.body.style.backgroundColor = bgColor;
-    document.body.style.color = textColor;
-    document.body.style.fontSize = fontSize;
+    // Get preferences from query string or cookies
+    const bgColor = params.get('bgColor') || getCookie('bgColor') || '#ffddb3';
+    const textColor = params.get('textColor') || getCookie('textColor') || '#000000';
+    const fontSize = params.get('fontSize') || getCookie('fontSize') || '16px';
 
-    const bgColorInput = document.getElementById('bg-color');
-    const textColorInput = document.getElementById('text-color');
-    const fontSizeInput = document.getElementById('font-size');
+    // Create or update a <style> element
+    let styleElement = document.getElementById('dynamicStyles');
+    if (!styleElement) {
+        styleElement = document.createElement('style');
+        styleElement.id = 'dynamicStyles';
+        document.head.appendChild(styleElement);
+    }
+    styleElement.textContent = `
+        body {
+            background-color: ${bgColor} !important;
+            color: ${textColor} !important;
+            font-size: ${fontSize} !important;
+        }
+    `;
 
-    if (bgColorInput) bgColorInput.value = bgColor;
-    if (textColorInput) textColorInput.value = textColor;
-    if (fontSizeInput) fontSizeInput.value = fontSize.replace('px', '');
-}
+    // Save preferences in cookies
+    setCookie('bgColor', bgColor, 7);
+    setCookie('textColor', textColor, 7);
+    setCookie('fontSize', fontSize, 7);
 
-// --- Guestbook ---
-function initializeGuestbook() {
-    const guestForm = document.getElementById('guestForm');
-    const guestList = document.getElementById('guestList');
-
-    if (guestForm) {
-        guestForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const username = document.getElementById('username').value.trim();
-            const entryDate = document.getElementById('entryDate').value.trim();
-            const comment = document.getElementById('comment').value.trim();
-            const birthdate = document.getElementById('birthdate').value.trim();
-
-            if (!username || !entryDate || !comment || !birthdate) {
-                alert('⚠️ All fields are required to submit a guestbook entry.');
-                return;
-            }
-
-            // Parse birthdate and determine zodiac sign
-            const [year, month, day] = birthdate.split('-').map(Number);
-            const zodiacSign = getZodiacSign(month, day);
-
-            // Create guestbook entry
-            if (guestList) {
-                const guestEntry = document.createElement('div');
-                guestEntry.classList.add('guest-entry');
-                guestEntry.innerHTML = `
-                    <div class="guest-card">
-                        <p><strong>Username:</strong> ${username}</p>
-                        <p><strong>Entry Date:</strong> ${entryDate}</p>
-                        <p><strong>Comment:</strong> ${comment}</p>
-                        <p><strong>Birthdate:</strong> ${birthdate}</p>
-                        <p><strong>Zodiac Sign:</strong> ${zodiacSign}</p>
-                    </div>
-                `;
-                guestList.appendChild(guestEntry);
-
-                // Fade in the new entry
-                $(guestEntry).hide().fadeIn(500);
-
-                alert('🎉 Your guestbook entry has been added successfully!');
-                guestForm.reset();
-            } else {
-                console.error('Guest list container not found.');
-                alert('❌ Unable to add your entry. Please try again later.');
-            }
-        });
+    // Display current preferences to the user
+    const preferencesElement = document.getElementById('currentPreferences');
+    if (preferencesElement) {
+        preferencesElement.innerText = 
+            `Background Color: ${bgColor}, Text Color: ${textColor}, Font Size: ${fontSize}`;
     }
 }
 
-function getZodiacSign(month, day) {
-    if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return 'Aquarius';
-    if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) return 'Pisces';
-    if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return 'Aries';
-    if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return 'Taurus';
-    if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) return 'Gemini';
-    if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) return 'Cancer';
-    if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return 'Leo';
-    if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return 'Virgo';
-    if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) return 'Libra';
-    if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return 'Scorpio';
-    if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return 'Sagittarius';
-    return 'Capricorn';
+// Helper function to get a cookie value by name
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
 }
 
-// --- Initialize ---
-document.addEventListener('DOMContentLoaded', () => {
-    fetchWeather();
-    displayTime();
-    setInterval(displayTime, 1000);
+// Helper function to set a cookie
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value}; ${expires}; path=/`;
+}
 
-    initializeYouTubePlayer();
-    applyPreferences();
-    initializeGuestbook();
+// Helper function to clear cookies
+function clearPreferences() {
+    setCookie('bgColor', '', -1);
+    setCookie('textColor', '', -1);
+    setCookie('fontSize', '', -1);
+    window.location.href = window.location.pathname; // Reload without query string
+}
+
+// Attach event listener to the customization form
+document.addEventListener('DOMContentLoaded', () => {
+    applyPreferences(); // Apply preferences on page load
+
+    const form = document.getElementById('customization-form');
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form values
+            const bgColor = document.getElementById('bg-color').value;
+            const textColor = document.getElementById('text-color').value;
+            const fontSize = document.getElementById('font-size').value + 'px'; // Ensure 'px' is appended
+
+            // Redirect with query string
+            const queryString = `?bgColor=${encodeURIComponent(bgColor)}&textColor=${encodeURIComponent(textColor)}&fontSize=${encodeURIComponent(fontSize)}`;
+            window.location.href = window.location.pathname + queryString;
+        });
+    }
+
+    // Attach event listener to the reset colors button
+    const resetColorsButton = document.getElementById('reset-colors-button');
+    if (resetColorsButton) {
+        resetColorsButton.addEventListener('click', () => {
+            clearPreferences(); // Clear preferences and reload the page
+        });
+    }
 });
+
+// Apply preferences on page load
+function applyPreferences() {
+    const params = new URLSearchParams(window.location.search);
+
+    // Get preferences from query string or cookies
+    const bgColor = params.get('bgColor') || getCookie('bgColor') || '#ffddb3';
+    const textColor = params.get('textColor') || getCookie('textColor') || '#000000';
+    const fontSize = params.get('fontSize') || getCookie('fontSize') || '16px'; // Default to '16px'
+
+    // Create or update a <style> element
+    let styleElement = document.getElementById('dynamicStyles');
+    if (!styleElement) {
+        styleElement = document.createElement('style');
+        styleElement.id = 'dynamicStyles';
+        document.head.appendChild(styleElement);
+    }
+    styleElement.textContent = `
+        body {
+            background-color: ${bgColor} !important;
+            color: ${textColor} !important;
+            font-size: ${fontSize} !important;
+        }
+    `;
+
+    // Save preferences in cookies
+    setCookie('bgColor', bgColor, 7);
+    setCookie('textColor', textColor, 7);
+    setCookie('fontSize', fontSize, 7);
+
+    // Display current preferences to the user
+    const preferencesElement = document.getElementById('currentPreferences');
+    if (preferencesElement) {
+        preferencesElement.innerText = 
+            `Background Color: ${bgColor}, Text Color: ${textColor}, Font Size: ${fontSize}`;
+    }
+}
