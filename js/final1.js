@@ -43,7 +43,6 @@ function applyPreferences() {
     // Get preferences from query string or cookies
     const bgColor = params.get('bgColor') || getCookie('bgColor') || '#ffddb3';
     const textColor = params.get('textColor') || getCookie('textColor') || '#000000';
-    const fontSize = params.get('fontSize') || getCookie('fontSize') || '16px';
 
     // Create or update a <style> element
     let styleElement = document.getElementById('dynamicStyles');
@@ -56,14 +55,12 @@ function applyPreferences() {
         body {
             background-color: ${bgColor} !important;
             color: ${textColor} !important;
-            font-size: ${fontSize} !important;
         }
     `;
 
     // Save preferences in cookies
     setCookie('bgColor', bgColor, 7);
     setCookie('textColor', textColor, 7);
-  
 
     // Display current preferences to the user
     const preferencesElement = document.getElementById('currentPreferences');
@@ -96,8 +93,13 @@ function clearPreferences() {
     window.location.href = window.location.pathname; // Reload without query string
 }
 
-// Attach event listener to the customization form
+// Attach event listener to the customization form and initialize other features
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Weather and Time Display
+    fetchWeather();
+    displayTime();
+    setInterval(displayTime, 1000); // Optional: update time every second
+
     applyPreferences(); // Apply preferences on page load
 
     const form = document.getElementById('customization-form');
@@ -108,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Get form values
             const bgColor = document.getElementById('bg-color').value;
             const textColor = document.getElementById('text-color').value;
-        
 
             // Redirect with query string
             const queryString = `?bgColor=${encodeURIComponent(bgColor)}&textColor=${encodeURIComponent(textColor)}`;
