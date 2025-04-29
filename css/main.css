@@ -35,6 +35,19 @@ h3 {
     text-align: center;
 }
 
+img {
+    width: 2.0em; /* Adjust the width to make the image smaller */
+    height: auto; /* Maintain aspect ratio */
+    float: right; /* Position the image to the right of the text */
+    margin: 2rem auto 2rem 10px; /* Combine spacing into a single margin property */
+    padding: 1rem;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(167, 137, 98, 0.836);
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
 p {
     font-size: 1.6em; /* Changed from 160% */
     font-weight: lighter;
@@ -48,6 +61,7 @@ body {
     font-family: sans-serif;
     margin-bottom: 300px; /* Make sure there's space for the player at the bottom */
 }
+
 
 .intro, .intropt2 {
     font-size: 0.8em; /* Changed from 80% */
