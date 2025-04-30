@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/rivals.css">
 </head>
 <body>
     <div id="root"></div>
@@ -32,7 +33,7 @@
                 const aliasSlug = this.alias.toLowerCase().replace(/ /g, '-');
                 return [
                     `${basePath}/${aliasSlug} Signature.png`, // Signature image
-                    `${basePath}/${aliasSlug}_prestige.png`   // Prestige image
+                    `${basePath}/${aliasSlug}_prestige.png`, // Prestige image
                 ];
             }
         }
@@ -40,30 +41,36 @@
         const characters = [
             new Character("Adam Warlock", "Adam Warlock", "cosmic powers, immortality", "Cosmos", "Hero"),
             new Character("T'Challa", "Black Panther", "enhanced senses, agility, vibranium suit", "Wakanda", "Hero"),
-            new Character("Natasha Romanoff", "Black Widow", "espionage, martial arts", "Global", "Hero"),
+            new Character("Natasha Romanoff", "Black Widow", "espionage, martial arts", "Global", "Hero", [
+        "rivalimg/black-widow Signature.png",
+        "rivalimg/black-widow_prestige.png"
+    ]),
             new Character("Steve Rogers", "Captain America", "super strength, agility, vibranium shield", "Brooklyn", "Hero"),
-            new Character("Cloak and Dagger", "Cloak and Dagger", "light and dark manipulation", "New York", "Hero"),
+            new Character("Tyrone Johnson and Tandy Bowen", "Cloak and Dagger", "light and dark manipulation", "New York", "Hero"),
             new Character("Stephen Strange", "Doctor Strange", "sorcery, time manipulation", "Sanctum Sanctorum", "Hero"),
             new Character("Emma Frost", "Emma Frost", "telepathy, diamond form", "Global", "Hero"),
             new Character("Groot", "Groot", "regeneration, strength", "Cosmos", "Hero"),
             new Character("Clint Barton", "Hawkeye", "archery, marksmanship", "New York", "Hero"),
             new Character("Hela", "Hela", "death manipulation, super strength, necromancy", "Asgard", "Villain"),
-            new Character("Bruce Banner", "Hulk", "super strength, regeneration", "Global", "Hero"),
+            new Character("Bruce Banner", "Hulk", "super strength, regeneration", "The Globe", "Hero"),
             new Character("Johnny Storm", "Human Torch", "fire manipulation, flight", "New York", "Hero"),
             new Character("Sue Storm", "Invisible Woman", "invisibility, force fields", "New York", "Hero"),
             new Character("Danny Rand", "Iron Fist", "martial arts, chi manipulation", "K'un-Lun", "Hero"),
             new Character("Tony Stark", "Iron Man", "genius intellect, powered armor suit", "New York", "Hero"),
-            new Character("Jeff", "Jeff the Land Shark", "adorable, aquatic abilities", "Global", "Hero"),
+            new Character("Jeff", "Jeff the Land Shark", "healing, aquatic abilities", "The Globe", "Hero"),
             new Character("Loki Laufeyson", "Loki", "illusion, sorcery, shapeshifting", "Asgard", "Villain"),
-            new Character("Luna Snow", "Luna Snow", "ice manipulation, singing", "Global", "Hero"),
+            new Character("Luna Snow", "Luna Snow", "ice manipulation, singing", "The Globe", "Hero"),
             new Character("Illyana Rasputina", "Magik", "teleportation, sorcery", "Limbo", "Hero"),
-            new Character("Erik Lehnsherr", "Magneto", "magnetism manipulation", "Global", "Villain"),
-            new Character("Mantis", "Mantis", "empathy, martial arts", "Cosmos", "Hero"),
+            new Character("Erik Lehnsherr", "Magneto", "magnetism manipulation", "The Globe", "Villain"),
+            new Character("Mantis", "Mantis", "empathy, martial arts", "The Cosmos", "Hero"),
             new Character("Reed Richards", "Mister Fantastic", "elasticity, genius intellect", "New York", "Hero"),
             new Character("Marc Spector", "Moon Knight", "martial arts, moon-based powers", "New York", "Hero"),
             new Character("Namor", "Namor", "aquatic abilities, super strength", "Atlantis", "Hero"),
-            new Character("Peni Parker", "SP//dr", "mecha piloting", "New York", "Hero"),
-            new Character("Sai", "Psylocke", "telepathy, psychic weapons", "Global", "Hero"),
+            new Character("Peni Parker", "SP//dr", "psychic cybenetics", "Tokyo", "Hero", [
+        "rivalimg/peni-parker Signature.png",
+        "rivalimg/peni-parker_prestige.png"
+    ]),
+            new Character("Sai", "Psylocke", "telepathy, psychic weapons", "The Globe", "Hero"),
             new Character("Frank Castle", "The Punisher", "marksmanship, combat skills", "New York", "Hero"),
             new Character("Ben Grimm", "The Thing", "super strength, durability", "New York", "Hero"),
             new Character("Rocket Raccoon", "Rocket Raccoon", "marksmanship, engineering", "Cosmos", "Hero"),
@@ -86,16 +93,35 @@
                 setCharacter(characters[randomIndex]);
             };
 
-            useEffect(() => {
-                if (character) {
-                    $(".character-image").hide().fadeIn(1000);
-                }
-            }, [character]);
+            const buttonStyle = {
+                padding: '15px 30px',
+                fontSize: '18px',
+                fontWeight: 'bold',
+                color: '#fff',
+                backgroundColor: '#027BFF',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            };
+
+            const buttonHoverStyle = {
+                backgroundColor: '#0056b3',
+                transform: 'scale(1.05)',
+            };
+
+            const [hover, setHover] = useState(false);
 
             return (
                 <div style={{ textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
                     <h1>Marvel Rivals</h1>
-                    <button onClick={getRandomCharacter} style={{ padding: '10px 20px', fontSize: '16px' }}>
+                    <button
+                        onClick={getRandomCharacter}
+                        style={hover ? { ...buttonStyle, ...buttonHoverStyle } : buttonStyle}
+                        onMouseEnter={() => setHover(true)}
+                        onMouseLeave={() => setHover(false)}
+                    >
                         Get Random Character
                     </button>
                     {character && (
