@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Rivals</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        class Character {
+            constructor(name, alias, powers, city, type) {
+                this.name = name;
+                this.alias = alias;
+                this.powers = powers;
+                this.city = city;
+                this.type = type; // "Hero" or "Villain"
+            }
+
+            getDescription() {
+                return `${this.name}, also known as ${this.alias}, has the powers of ${this.powers} and ${this.type === "Hero" ? "protects" : "terrorizes"} ${this.city}.`;
+            }
+
+            getImages() {
+                const basePath = "rivalimg";
+                const aliasSlug = this.alias.toLowerCase().replace(/ /g, '-');
+                return [
+                    `${basePath}/${aliasSlug} Signature.png`, // Signature image
+                    `${basePath}/${aliasSlug}_prestige.png`   // Prestige image
+                ];
+            }
+        }
+
+        const characters = [
+            new Character("Adam Warlock", "Adam Warlock", "cosmic powers, immortality", "Cosmos", "Hero"),
+            new Character("T'Challa", "Black Panther", "enhanced senses, agility, vibranium suit", "Wakanda", "Hero"),
+            new Character("Natasha Romanoff", "Black Widow", "espionage, martial arts", "Global", "Hero"),
+            new Character("Steve Rogers", "Captain America", "super strength, agility, vibranium shield", "Brooklyn", "Hero"),
+            new Character("Cloak and Dagger", "Cloak and Dagger", "light and dark manipulation", "New York", "Hero"),
+            new Character("Stephen Strange", "Doctor Strange", "sorcery, time manipulation", "Sanctum Sanctorum", "Hero"),
+            new Character("Emma Frost", "Emma Frost", "telepathy, diamond form", "Global", "Hero"),
+            new Character("Groot", "Groot", "regeneration, strength", "Cosmos", "Hero"),
+            new Character("Clint Barton", "Hawkeye", "archery, marksmanship", "New York", "Hero"),
+            new Character("Hela", "Hela", "death manipulation, super strength, necromancy", "Asgard", "Villain"),
+            new Character("Bruce Banner", "Hulk", "super strength, regeneration", "Global", "Hero"),
+            new Character("Johnny Storm", "Human Torch", "fire manipulation, flight", "New York", "Hero"),
+            new Character("Sue Storm", "Invisible Woman", "invisibility, force fields", "New York", "Hero"),
+            new Character("Danny Rand", "Iron Fist", "martial arts, chi manipulation", "K'un-Lun", "Hero"),
+            new Character("Tony Stark", "Iron Man", "genius intellect, powered armor suit", "New York", "Hero"),
+            new Character("Jeff", "Jeff the Land Shark", "adorable, aquatic abilities", "Global", "Hero"),
+            new Character("Loki Laufeyson", "Loki", "illusion, sorcery, shapeshifting", "Asgard", "Villain"),
+            new Character("Luna Snow", "Luna Snow", "ice manipulation, singing", "Global", "Hero"),
+            new Character("Illyana Rasputina", "Magik", "teleportation, sorcery", "Limbo", "Hero"),
+            new Character("Erik Lehnsherr", "Magneto", "magnetism manipulation", "Global", "Villain"),
+            new Character("Mantis", "Mantis", "empathy, martial arts", "Cosmos", "Hero"),
+            new Character("Reed Richards", "Mister Fantastic", "elasticity, genius intellect", "New York", "Hero"),
+            new Character("Marc Spector", "Moon Knight", "martial arts, moon-based powers", "New York", "Hero"),
+            new Character("Namor", "Namor", "aquatic abilities, super strength", "Atlantis", "Hero"),
+            new Character("Peni Parker", "SP//dr", "mecha piloting", "New York", "Hero"),
+            new Character("Sai", "Psylocke", "telepathy, psychic weapons", "Global", "Hero"),
+            new Character("Frank Castle", "The Punisher", "marksmanship, combat skills", "New York", "Hero"),
+            new Character("Ben Grimm", "The Thing", "super strength, durability", "New York", "Hero"),
+            new Character("Rocket Raccoon", "Rocket Raccoon", "marksmanship, engineering", "Cosmos", "Hero"),
+            new Character("Wanda Maximoff", "Scarlet Witch", "chaos magic, reality manipulation", "Global", "Hero"),
+            new Character("Doreen Green", "Squirrel Girl", "squirrel communication, agility", "New York", "Hero"),
+            new Character("Peter Parker", "Spider-Man", "spider-like abilities, agility", "New York", "Hero"),
+            new Character("Peter Quill", "Star-Lord", "marksmanship, leadership", "Cosmos", "Hero"),
+            new Character("Ororo Munroe", "Storm", "weather manipulation", "Global", "Hero"),
+            new Character("Thor Odinson", "Thor", "thunder manipulation, super strength", "Asgard", "Hero"),
+            new Character("Eddie Brock", "Venom", "symbiote powers, super strength, agility", "New York", "Villain"),
+            new Character("Bucky Barnes", "Winter Soldier", "enhanced strength, combat skills", "Global", "Hero"),
+            new Character("Logan", "Wolverine", "regeneration, adamantium claws", "Global", "Hero"),
+        ];
+
+        const App = () => {
+            const [character, setCharacter] = useState(null);
+
+            const getRandomCharacter = () => {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                setCharacter(characters[randomIndex]);
+            };
+
+            useEffect(() => {
+                if (character) {
+                    $(".character-image").hide().fadeIn(1000);
+                }
+            }, [character]);
+
+            return (
+                <div style={{ textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
+                    <h1>Marvel Rivals</h1>
+                    <button onClick={getRandomCharacter} style={{ padding: '10px 20px', fontSize: '16px' }}>
+                        Get Random Character
+                    </button>
+                    {character && (
+                        <div style={{ marginTop: '20px' }}>
+                            <h2>{character.name}</h2>
+                            <p>{character.getDescription()}</p>
+                            <div>
+                                {character.getImages().map((src, index) => (
+                                    <img
+                                        key={index}
+                                        src={src}
+                                        alt={`${character.alias} Image ${index + 1}`}
+                                        className="character-image"
+                                        style={{ width: '200px', margin: '10px' }}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
