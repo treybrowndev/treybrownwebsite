@@ -28,7 +28,7 @@ sayCity() {
 }
 
 sayHero() {
-    return this.name + "," + this.alias + ", has the powers of " + this.powers + " and protects " + this.city;
+    return this.name + "," + this.alias + ", possess the powers of " + this.powers + " and protects " + this.city;
 }
 }
 
@@ -63,7 +63,7 @@ sayCity() {
 }
 
 sayVillain() {
-    return this.name + "," + this.alias + ", has the powers of " + this.powers + " and terrorizes " + this.city;
+    return this.name + "," + this.alias + ", possess the powers of " + this.powers + " and terrorizes " + this.city;
 }
 }
 // Heroes
@@ -71,7 +71,7 @@ const AdamWarlock = new Hero("Adam Warlock", "Adam Warlock", "cosmic energy mani
 console.log(AdamWarlock.sayHero());
 const BlackPanther = new Hero("T'Challa", "Black Panther", "enhanced senses, agility, vibranium suit", "Wakanda");
 console.log(BlackPanther.sayHero());
-const BlackWidow = new Hero("Natasha Romanoff", "Black Widow", "espionage, martial arts, marksmanship", "Global");
+const BlackWidow = new Hero("Natasha Romanoff", "Black Widow", "espionage, martial arts, marksmanship", "The Globe");
 console.log(BlackWidow.sayHero());
 const CaptainAmerica = new Hero("Steve Rogers", "Captain America", "super strength, agility, vibranium shield", "Brooklyn");
 console.log(CaptainAmerica.sayHero());
@@ -83,7 +83,7 @@ const Groot = new Hero("Groot", "Groot", "regeneration, strength, plant manipula
 console.log(Groot.sayHero());
 const Hawkeye = new Hero("Clint Barton", "Hawkeye", "archery, marksmanship, martial arts", "New York");
 console.log(Hawkeye.sayHero());
-const Hulk = new Hero("Bruce Banner", "Hulk", "super strength, durability, rage empowerment", "Global");
+const Hulk = new Hero("Bruce Banner", "Hulk", "super strength, durability, rage empowerment", "The Globe");
 console.log(Hulk.sayHero());
 const HumanTorch = new Hero("Johnny Storm", "Human Torch", "pyrokinesis, flight, heat resistance", "New York");
 console.log(HumanTorch.sayHero());
@@ -107,13 +107,13 @@ const Namor = new Hero("Namor McKenzie", "Namor", "aquatic abilities, super stre
 console.log(Namor.sayHero());
 const PeniParker = new Hero("Peni Parker", "SP//dr", "mecha piloting, intelligence", "New York");
 console.log(PeniParker.sayHero());
-const Psylocke = new Hero("Betsy Braddock", "Psylocke", "telepathy, telekinesis, martial arts", "Global");
+const Psylocke = new Hero("Betsy Braddock", "Psylocke", "telepathy, telekinesis, martial arts", "The Globe");
 console.log(Psylocke.sayHero());
 const Punisher = new Hero("Frank Castle", "The Punisher", "marksmanship, combat strategy, determination", "New York");
 console.log(Punisher.sayHero());
 const RocketRaccoon = new Hero("Rocket", "Rocket Raccoon", "marksmanship, engineering, tactics", "Space");
 console.log(RocketRaccoon.sayHero());
-const ScarletWitch = new Hero("Wanda Maximoff", "Scarlet Witch", "chaos magic, reality manipulation", "Global");
+const ScarletWitch = new Hero("Wanda Maximoff", "Scarlet Witch", "chaos magic, reality manipulation", "The Globe");
 console.log(ScarletWitch.sayHero());
 const SquirrelGirl = new Hero("Doreen Green", "Squirrel Girl", "squirrel communication, agility, strength", "New York");
 console.log(SquirrelGirl.sayHero());
@@ -121,13 +121,13 @@ const SpiderMan = new Hero("Peter Parker", "Spider-Man", "wall-crawling, spider 
 console.log(SpiderMan.sayHero());
 const StarLord = new Hero("Peter Quill", "Star-Lord", "marksmanship, gadgets, leadership", "Space");
 console.log(StarLord.sayHero());
-const Storm = new Hero("Ororo Munroe", "Storm", "weather manipulation, flight", "Global");
+const Storm = new Hero("Ororo Munroe", "Storm", "weather manipulation, flight", "The Globe");
 console.log(Storm.sayHero());
 const Thor = new Hero("Thor Odinson", "Thor", "godly strength, Mjolnir, lightning manipulation", "Asgard");
 console.log(Thor.sayHero());
-const WinterSoldier = new Hero("Bucky Barnes", "Winter Soldier", "enhanced strength, marksmanship, cybernetic arm", "Global");
+const WinterSoldier = new Hero("Bucky Barnes", "Winter Soldier", "enhanced strength, marksmanship, cybernetic arm", "The Globe");
 console.log(WinterSoldier.sayHero());
-const Wolverine = new Hero("Logan", "Wolverine", "regeneration, adamantium claws, enhanced senses", "Global");
+const Wolverine = new Hero("Logan", "Wolverine", "regeneration, adamantium claws, enhanced senses", "The Globe");
 console.log(Wolverine.sayHero());
 
 // Villains
@@ -137,7 +137,7 @@ const Loki = new Villain("Loki Laufeyson", "Loki", "illusion, sorcery, shapeshif
 console.log(Loki.sayVillain());
 const Magik = new Villain("Illyana Rasputina", "Magik", "sorcery, teleportation, Soulsword", "Limbo");
 console.log(Magik.sayVillain());
-const Magneto = new Villain("Erik Lehnsherr", "Magneto", "magnetism manipulation, genius intellect", "Global");
+const Magneto = new Villain("Erik Lehnsherr", "Magneto", "magnetism manipulation, genius intellect", "The Globe");
 console.log(Magneto.sayVillain());
 const Venom = new Villain("Eddie Brock", "Venom", "symbiote powers, super strength, agility", "New York");
 console.log(Venom.sayVillain());
