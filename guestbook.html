@@ -6,13 +6,8 @@
     <title>Guestbook</title>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/widgets.css" />
-
-    <!-- jQuery and UI -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" defer></script>
+    <link rel="stylesheet" href="css/tailwind.css" />
+    <script src="js/app.js" type="module"></script>
     
 </head>
 <body>
@@ -49,20 +44,9 @@
                     <label for="comment">Comments:</label>
                     <input type="text" id="comment" name="comment" required />
                 </div>
-                
-                <div class="form-input">
-                    <label for="birthdate">Birthday (YYYY-MM-DD):</label>
-                    <input type="date" id="birthdate" name="birthdate" required />
-                    </div>
 
                 <div class="btn">
                     <button type="submit">Add Entry</button>
-                </div>
-
-                <div class="zodiac-search">
-                    <label for="zodiacSearch">Zodiac Sign Lookup (name or MM-DD):</label>
-                    <input type="text" id="zodiacSearch" placeholder="e.g. Aries or 03-25" />
-                    <div id="zodiacInfo" style="display:none; margin-top:10px;"></div>
                 </div>
             </form>
 
@@ -71,9 +55,5 @@
 
     </main>
 
-    <!-- Custom Scripts -->
-    <script src="js/jquery.js" defer></script>
-    <script src="js/final1.js" defer></script> 
-    <script src="js/final2.js" defer></script>
 </body>
 </html>

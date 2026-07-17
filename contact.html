@@ -4,49 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Page</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href= "css/widgets.css">
+    <link rel="stylesheet" href="css/tailwind.css">
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script src="js/final1.js" defer></script>
-    <script src="js/final2.js" defer></script>
+    <script src="js/app.js" type="module"></script>
     
 
 </head>
 <body>
+    <div class="page-shell">
     <h1><a href="index.html">The Treycave</a></h1>
   
     <nav>
-        <div class="projects"><a href="projects.html">Projects & Skills</a></div>  
+        <div class="projects"><a href="projects.html">Resume</a></div>  
         <div class="contact"><a href="contact.html">Contact</a></div>
-        <div class="things"><a href="settings.html">System Settings</a></div>
-        <div class="guest"><a href="guestbook.html">Guestbook</a></div>
+        <div class="demo"><a href="demos.html">Demo</a></div>
     </nav>
-    <p>Contact Form</p>
 
-    <form id="contactForm">
-        <label>
-            Select your reason for contact:
-            <input type="radio" name="reason" value="Work"> Work
-            <input type="radio" name="reason" value="Leisure"> Leisure
-            <input type="radio" name="reason" value="Misc"> Misc
-        </label>
-        <br>
-        <label>
-            Enter your email:
-            <input type="email" id="emailInput" required>
-        </label>
-        <br>
-        <label>
-            Enter your message:
-            <textarea id="messageInput" required></textarea>
-        </label>
-        <br>
-        <button type="button" id="submitBtn">Submit</button>
-        <button type="button" id="clearBtn">Clear</button>
-    </form>
+    <main class="container">
+        <section class="my-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h3>Contact Form</h3>
+                    <form id="contactForm">
+                        <div class="contact-group reason-group">
+                            <label>Select your reason for contact:</label>
+                            <div class="reason-options">
+                                <label><input type="radio" name="reason" value="Work"> Work</label>
+                                <label><input type="radio" name="reason" value="Leisure"> Leisure</label>
+                                <label><input type="radio" name="reason" value="Misc"> Misc</label>
+                            </div>
+                        </div>
+
+                        <div class="contact-group">
+                            <label for="emailInput">Enter your email:</label>
+                            <input type="email" id="emailInput" required>
+                        </div>
+
+                        <div class="contact-group">
+                            <label for="messageInput">Enter your message:</label>
+                            <textarea id="messageInput" required></textarea>
+                        </div>
+
+                        <div class="contact-actions">
+                            <button type="button" id="submitBtn">Send</button>
+                            <button type="button" id="clearBtn">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
     
 
-    <div id="floating-player" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 166px; z-index: 1000; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    <div id="floating-player">
         <iframe id="youtube-iframe" 
                 width="100%" 
                 height="100%" 
@@ -55,7 +65,8 @@
                 allow="encrypted-media" 
                 allowfullscreen>
         </iframe>
-        <button id="close-player" style="position: absolute; top: 5px; right: 5px; background: #ff4d4d; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; cursor: pointer;" aria-label="Close Player">×</button>
+        <button id="close-player" aria-label="Close Player">×</button>
+    </div>
     </div>
 </body>
 </html>
