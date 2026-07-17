@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guestbook</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/tailwind.css" />
+    <script src="js/app.js" type="module"></script>
+    
+</head>
+<body>
+    <header>
+        <h1><a href="index.html">The Treycave</a></h1>
+      
+    </header>
+
+    <nav>
+        <div class="projects"><a href="projects.html">Projects & Skills</a></div>  
+        <div class="contact"><a href="contact.html">Contact</a></div>
+        <div class="things"><a href="settings.html">System Settings</a></div>
+        <div class="guest"><a href="guestbook.html">Guestbook</a></div>
+    </nav>
+
+    <main>
+        <h3>Sign my guestbook!</h3>
+        <p>cmon. you know you want too.</p>
+
+        <div class="guestbookCONT">
+            <form id="guestForm">
+                <div class="form-input">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required />
+                </div>
+
+                <div class="form-input">
+                    <label for="entryDate">Entry Date:</label>
+                    <input type="text" id="entryDate" name="entryDate" required />
+                    <!-- You can attach jQuery UI datepicker here -->
+                </div>
+
+                <div class="form-input">
+                    <label for="comment">Comments:</label>
+                    <input type="text" id="comment" name="comment" required />
+                </div>
+
+                <div class="btn">
+                    <button type="submit">Add Entry</button>
+                </div>
+            </form>
+
+            <div id="guestList"></div>
+        </div>
+
+    </main>
+
+    <footer class="site-license-footer">All Rights Reserved.</footer>
+
+</body>
+</html>

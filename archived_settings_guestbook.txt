@@ -1,0 +1,104 @@
+=== settings.html (archived) ===
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Disable Effects</title>
+
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/widgets.css" />
+  <script src="js/final1.js" type="module"></script>
+
+</head>
+<body>
+  <h1><a href="index.html">The Treycave</a></h1>
+
+  <nav>
+    <div class="projects"><a href="projects.html">Projects & Skills</a></div>
+    <div class="contact"><a href="contact.html">Contact</a></div>
+    <div class="things"><a href="settings.html">System Settings</a></div>
+    <div class="guest"><a href="guestbook.html">Guestbook</a></div>
+  </nav>
+
+  <p>System Settings </p>
+
+  <form id="customization-form">
+    <label for="bg-color">Background Color:</label>
+    <input type="color" id="bg-color" name="bgColor" value="#ffddb3" />
+
+    <label for="text-color">Text Color:</label>
+    <input type="color" id="text-color" name="textColor" value="#000000" />
+
+    <button type="submit">Apply Preferences</button>
+    <br>
+    <button id="reset-colors-button">Reset Preferences</button>
+  </form>
+
+  <div id="currentPreferences"></div>
+
+</body>
+</html>
+
+=== guestbook.html (archived) ===
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guestbook</title>
+
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/widgets.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1><a href="index.html">The Treycave</a></h1>
+    </header>
+
+    <nav>
+        <div class="projects"><a href="projects.html">Projects & Skills</a></div>
+        <div class="contact"><a href="contact.html">Contact</a></div>
+        <div class="things"><a href="settings.html">System Settings</a></div>
+        <div class="guest"><a href="guestbook.html">Guestbook</a></div>
+    </nav>
+
+    <main>
+        <h3>Sign my guestbook!</h3>
+        <p>cmon. you know you want too.</p>
+
+        <div class="guestbookCONT">
+            <form id="guestForm">
+                <div class="form-input">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required />
+                </div>
+
+                <div class="form-input">
+                    <label for="entryDate">Entry Date:</label>
+                    <input type="text" id="entryDate" name="entryDate" required />
+                </div>
+
+                <div class="form-input">
+                    <label for="comment">Comments:</label>
+                    <input type="text" id="comment" name="comment" required />
+                </div>
+
+                <div class="btn">
+                    <button type="submit">Add Entry</button>
+                </div>
+            </form>
+
+            <div id="guestList"></div>
+        </div>
+    </main>
+
+    <script src="js/jquery.js" defer></script>
+    <script src="js/final1.js" defer></script>
+    <script src="js/final2.js" defer></script>
+</body>
+</html>
