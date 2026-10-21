@@ -1,52 +1,762 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Demos - The Treycave</title>
+    <title>Project Pellucid Demo</title>
     <link rel="stylesheet" href="css/tailwind.css" />
     <script src="js/app.js" type="module"></script>
-</head>
-<body>
-    <div class="page-shell">
-    <h1><a href="index.html">The Treycave</a></h1>
+    <style>
+      :root {
+        --bg: #061318;
+        --panel: rgba(11, 24, 27, 0.88);
+        --card: rgba(15, 33, 38, 0.9);
+        --border: rgba(120, 196, 175, 0.35);
+        --text: #e7f7f4;
+        --muted: #9cc8c6;
+        --accent: #4ef2b5;
+        --warning: #f6d365;
+        --danger: #ff6b6b;
+      }
 
-    <nav>
+      body {
+        background-color: #fff7de;
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0 1rem;
+        overflow-x: hidden;
+      }
+
+      .pellucid-demo-shell {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 1rem 2rem;
+      }
+
+      .pellucid-demo-shell .app-shell {
+        width: min(1280px, 100%);
+        background: rgba(5, 15, 17, 0.8);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+        overflow: hidden;
+        margin-top: 1rem;
+      }
+
+      .pellucid-demo-shell .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 24px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(10, 22, 25, 0.9);
+      }
+
+      .pellucid-demo-shell .eyebrow {
+        margin: 0 0 6px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.7rem;
+      }
+
+      .pellucid-demo-shell h1 {
+        margin: 0;
+        font-size: clamp(1.5rem, 2vw, 2.2rem);
+        font-weight: 700;
+      }
+
+      .pellucid-demo-shell .status-chip {
+        border: 1px solid rgba(78, 242, 181, 0.9);
+        background: rgba(78, 242, 181, 0.15);
+        color: var(--accent);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .pellucid-demo-shell .dashboard {
+        display: grid;
+        grid-template-columns: minmax(0, 2.2fr) minmax(260px, 0.8fr) minmax(260px, 0.8fr);
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .pellucid-demo-shell .render-panel,
+      .pellucid-demo-shell .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+
+      .pellucid-demo-shell .render-panel {
+        padding: 8px;
+        min-height: 540px;
+        position: relative;
+      }
+
+      .pellucid-demo-shell #glCanvas,
+      .pellucid-demo-shell #sectorLabels {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 10px;
+      }
+
+      .pellucid-demo-shell #sectorLabels {
+        position: absolute;
+        inset: 8px;
+        pointer-events: none;
+      }
+
+      .pellucid-demo-shell #glCanvas {
+        background: radial-gradient(circle at center, rgba(20, 50, 60, 0.85), rgba(4, 11, 15, 1));
+      }
+
+      .pellucid-demo-shell .telemetry-panel {
+        display: grid;
+        gap: 18px;
+      }
+
+      .pellucid-demo-shell .card {
+        padding: 18px 18px 12px;
+      }
+
+      .pellucid-demo-shell .card h2 {
+        margin: 0 0 14px;
+        font-size: 1rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .pellucid-demo-shell .metric {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .pellucid-demo-shell .metric:last-child {
+        border-bottom: none;
+      }
+
+      .pellucid-demo-shell .metric span {
+        color: var(--muted);
+      }
+
+      .pellucid-demo-shell .metric strong {
+        font-size: 1.35rem;
+        font-weight: 700;
+      }
+
+      .pellucid-demo-shell .metric small {
+        color: var(--muted);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+      }
+
+      .pellucid-demo-shell .status-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .pellucid-demo-shell .status-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .pellucid-demo-shell .status-list li:last-child {
+        border-bottom: none;
+      }
+
+      .pellucid-demo-shell .status-list span {
+        color: var(--muted);
+      }
+
+      .pellucid-demo-shell .status-list em {
+        color: var(--accent);
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      .pellucid-demo-shell .sector-status-card .status-list li {
+        gap: 12px;
+      }
+
+      .pellucid-demo-shell .sector-status-card .status-list em {
+        text-align: right;
+      }
+
+      .pellucid-demo-shell .sector-status-card select {
+        max-width: 155px;
+        padding: 5px 8px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: rgba(4, 14, 17, 0.9);
+        color: var(--accent);
+        font: inherit;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .pellucid-demo-shell .sector-status-card select:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .pellucid-demo-shell .sector-status-card select.status-breach {
+        color: var(--danger) !important;
+      }
+
+      .pellucid-demo-shell .sector-status-card select.status-offline {
+        color: var(--warning) !important;
+      }
+
+      .pellucid-demo-shell .status-operational {
+        color: var(--accent) !important;
+      }
+
+      .pellucid-demo-shell .status-breach {
+        color: var(--danger) !important;
+      }
+
+      .pellucid-demo-shell .status-offline {
+        color: var(--warning) !important;
+      }
+
+      .pellucid-demo-shell .project-overview {
+        margin: 1rem 0 0;
+      }
+
+      .pellucid-demo-shell .project-overview .card-body {
+        padding: 26px 22px;
+      }
+
+      .pellucid-demo-shell .project-overview h2 {
+        margin-bottom: 0.85rem;
+      }
+
+      .pellucid-demo-shell .project-overview p {
+        margin: 0 0 0.9rem;
+        color: var(--text);
+        line-height: 1.6;
+        font-size: 1rem;
+      }
+
+      .pellucid-demo-shell .slider-controls {
+        display: grid;
+        gap: 14px;
+      }
+
+      .pellucid-demo-shell .slider-row {
+        display: grid;
+        gap: 8px;
+      }
+
+      .pellucid-demo-shell .slider-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .pellucid-demo-shell input[type="range"] {
+        width: 100%;
+        accent-color: var(--accent);
+      }
+
+      @media (max-width: 900px) {
+        .pellucid-demo-shell .dashboard {
+          grid-template-columns: 1fr;
+        }
+
+        .pellucid-demo-shell .render-panel {
+          min-height: 420px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <h1><a href="index.html">The Treycave</a></h1>
+      <nav>
         <div class="projects"><a href="projects.html">Resume</a></div>
         <div class="contact"><a href="contact.html">Contact</a></div>
         <div class="demo"><a href="demos.html">Demo</a></div>
-    </nav>
+      </nav>
 
-    <main class="container">
+      <main class="container">
         <section class="my-4 text-center">
-            <h2>Graphics Demos</h2>
-            <p>Hands-on graphics demos and prototypes I am actively building.</p>
+          <h2>Graphics Demos</h2>
+          <p>Hands-on graphics demos and prototypes I am actively building.</p>
         </section>
 
         <section class="my-4">
-            <div class="card mb-3 demo-bubble">
-                <div class="card-body">
-                    <h3 class="h5 mb-2 text-center">Coffee Shop 1st Person POV (Cosmeonmenon demo)</h3>
-                    <p class="mb-0">A first-person graphics demo set in a stylized coffee shop scene, focused on immersive movement, real-time rendering, and interactive environmental detail.</p>
-                </div>
+          <div class="card mb-3 demo-bubble">
+            <div class="card-body">
+              <h3 class="h5 mb-2 text-center">Coffee Shop 1st Person POV (Cosmeonmenon demo)</h3>
+              <p class="mb-2">A first-person graphics demo set in a stylized coffee shop scene, focused on immersive movement, real-time raytracing and lighting, and interactive environmental detail.</p>
+              <p class="mb-0">This prototype explores cinematic lighting, reflective surfaces, and atmospheric rendering to create a more immersive and believable interior walkthrough.</p>
             </div>
+          </div>
 
-            <div class="card mb-3 demo-bubble">
-                <div class="card-body">
-                    <h3 class="h5 mb-2 text-center">Orange Dream OS (the floating Dreamcast UI project)</h3>
-                    <p class="mb-0">A retro-inspired interface concept blending stylized UI elements with modern front-end techniques to explore layout systems, animation, and interaction design.</p>
-                </div>
+          <div class="card mb-3 demo-bubble">
+            <div class="card-body">
+              <h3 class="h5 mb-2 text-center">Orange Dream OS (the floating Dreamcast UI project)</h3>
+              <p class="mb-0">A retro-inspired interface concept blending stylized UI elements with modern front-end techniques to explore layout systems, animation, and interaction design.</p>
             </div>
+          </div>
 
-            <div class="card mb-3 demo-bubble">
-                <div class="card-body">
-                    <h3 class="h5 mb-2 text-center">Project Pellucid - Rocket Telemetry Visualizer</h3>
-                    <p class="mb-0">A live rocket telemetry visualizer featuring a continuously launching rocket whose speed and behavior change based on adjustable variables, effectively creating a make-your-own-rocket simulation experience.</p>
+          <div class="card mb-3 demo-bubble">
+            <div class="card-body">
+              <h3 class="h5 mb-2 text-center">Project Pellucid - Rocket Telemetry Visualizer</h3>
+              <div class="mb-3" style="display:flex; gap: 16px; align-items:stretch; width: min(100%, 980px); margin: 0 auto;">
+                <div style="flex: 1 1 0; height: 540px; border: 1px solid rgba(120,196,175,0.35); border-radius: 12px; overflow: hidden; background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(7, 20, 24, 0.34)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 12px 30px rgba(0,0,0,0.18); position: relative; min-width: 0;">
+                  <canvas id="glCanvas" width="960" height="540" style="display:block;width:100%;height:100%;"></canvas>
+                  <canvas id="sectorLabels" width="960" height="540" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;width:100%;height:100%;"></canvas>
                 </div>
+
+                <div style="width: 220px; display:flex; flex-direction:column; gap:12px; padding: 14px; border-radius: 12px; background: rgba(11, 24, 27, 0.74); border: 1px solid rgba(120,196,175,0.35); color: #e7f7f4; font-family: 'Segoe UI', sans-serif;">
+                  <h4 style="margin:0; font-size:0.82rem; letter-spacing:0.12em; text-transform:uppercase; color:#9cc8c6;">Flight Controls</h4>
+
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#9cc8c6;">
+                    <span>Body Length</span>
+                    <input id="lengthControl" type="range" min="1.4" max="3.4" step="0.1" value="2.2" />
+                    <strong id="lengthValue" style="color:#4ef2b5; font-size:0.8rem;">2.2</strong>
+                  </label>
+
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#9cc8c6;">
+                    <span>Wing Span</span>
+                    <input id="wingControl" type="range" min="2.0" max="6.0" step="0.1" value="3.4" />
+                    <strong id="wingValue" style="color:#4ef2b5; font-size:0.8rem;">3.4</strong>
+                  </label>
+
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#9cc8c6;">
+                    <span>Propulsion</span>
+                    <input id="propulsionControl" type="range" min="0.5" max="5.0" step="0.1" value="2.6" />
+                    <strong id="propulsionValue" style="color:#4ef2b5; font-size:0.8rem;">2.6</strong>
+                  </label>
+
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#9cc8c6;">
+                    <span>Direction</span>
+                    <input id="directionControl" type="range" min="-180" max="180" step="1" value="0" />
+                    <strong id="directionValue" style="color:#4ef2b5; font-size:0.8rem;">0°</strong>
+                  </label>
+                </div>
+              </div>
+              <p class="mb-2">Project Pellucid is a real-time telemetry visualization system built in C++ and OpenGL for monitoring aircraft fault states, dynamic system damage, and hull integrity breaches.</p>
+              <p class="mb-0"><a href="pellucid.html" style="color: #4ef2b5; text-decoration: underline;">View the full demo</a></p>
             </div>
+          </div>
         </section>
         <footer class="site-license-footer">All Rights Reserved.</footer>
-    </main>
+      </main>
     </div>
-</body>
+
+    <script>
+      const canvas = document.getElementById('glCanvas');
+      const sectorLabels = document.getElementById('sectorLabels');
+      const labelContext = sectorLabels.getContext('2d');
+      const gl = canvas.getContext('webgl', { antialias: true });
+
+      if (!gl) {
+        document.body.innerHTML = '<div style="padding:2rem;color:white;font-family:sans-serif;">WebGL is required to view Project Pellucid.</div>';
+        throw new Error('WebGL unavailable');
+      }
+
+      const lengthInput = document.getElementById('lengthControl');
+      const wingInput = document.getElementById('wingControl');
+      const propulsionInput = document.getElementById('propulsionControl');
+      const directionInput = document.getElementById('directionControl');
+      const lengthValue = document.getElementById('lengthValue');
+      const wingValue = document.getElementById('wingValue');
+      const propulsionValue = document.getElementById('propulsionValue');
+      const directionValue = document.getElementById('directionValue');
+
+      const controls = {
+        length: Number(lengthInput.value),
+        wingSpan: Number(wingInput.value),
+        propulsion: Number(propulsionInput.value),
+        direction: Number(directionInput.value)
+      };
+
+      function refreshGeometry() {
+        rocketData = createRocketGeometry(controls);
+        fireData = createFireGeometry(controls);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, rocketData, gl.STATIC_DRAW);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, fireBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, fireData, gl.STATIC_DRAW);
+      }
+
+      function updateControlLabels() {
+        lengthValue.textContent = controls.length.toFixed(1);
+        wingValue.textContent = controls.wingSpan.toFixed(1);
+        propulsionValue.textContent = controls.propulsion.toFixed(1);
+        directionValue.textContent = `${Math.round(controls.direction)}°`;
+        refreshGeometry();
+      }
+
+      [
+        ['length', lengthInput],
+        ['wingSpan', wingInput],
+        ['propulsion', propulsionInput],
+        ['direction', directionInput]
+      ].forEach(([key, input]) => {
+        input.addEventListener('input', () => {
+          controls[key] = Number(input.value);
+          updateControlLabels();
+        });
+      });
+
+      const vertexShaderSource = `
+        attribute vec3 aPosition;
+        uniform mat4 uMatrix;
+        void main() {
+          gl_Position = uMatrix * vec4(aPosition, 1.0);
+        }
+      `;
+
+      const fragmentShaderSource = `
+        precision mediump float;
+        uniform vec3 uColor;
+        void main() {
+          gl_FragColor = vec4(uColor, 1.0);
+        }
+      `;
+
+      function compileShader(type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+          console.error(gl.getShaderInfoLog(shader));
+          throw new Error('Shader compile failed');
+        }
+
+        return shader;
+      }
+
+      function createProgram() {
+        const program = gl.createProgram();
+        const vs = compileShader(gl.VERTEX_SHADER, vertexShaderSource);
+        const fs = compileShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+        gl.attachShader(program, vs);
+        gl.attachShader(program, fs);
+        gl.linkProgram(program);
+
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+          console.error(gl.getProgramInfoLog(program));
+          throw new Error('Program link failed');
+        }
+
+        return program;
+      }
+
+      function multiply(a, b) {
+        const out = new Float32Array(16);
+
+        for (let col = 0; col < 4; col++) {
+          for (let row = 0; row < 4; row++) {
+            out[col * 4 + row] =
+              a[0 * 4 + row] * b[col * 4 + 0] +
+              a[1 * 4 + row] * b[col * 4 + 1] +
+              a[2 * 4 + row] * b[col * 4 + 2] +
+              a[3 * 4 + row] * b[col * 4 + 3];
+          }
+        }
+
+        return out;
+      }
+
+      function translation(x, y, z) {
+        return new Float32Array([
+          1, 0, 0, 0,
+          0, 1, 0, 0,
+          0, 0, 1, 0,
+          x, y, z, 1
+        ]);
+      }
+
+      function perspective(fov, aspect, near, far) {
+        const f = 1 / Math.tan(fov / 2);
+        const nf = 1 / (near - far);
+
+        return new Float32Array([
+          f / aspect, 0, 0, 0,
+          0, f, 0, 0,
+          0, 0, (far + near) * nf, -1,
+          0, 0, (2 * far * near) * nf, 0
+        ]);
+      }
+
+      function normalize(v) {
+        const len = Math.hypot(v[0], v[1], v[2]) || 1;
+        return [v[0] / len, v[1] / len, v[2] / len];
+      }
+
+      function subtract(a, b) {
+        return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+      }
+
+      function cross(a, b) {
+        return [
+          a[1] * b[2] - a[2] * b[1],
+          a[2] * b[0] - a[0] * b[2],
+          a[0] * b[1] - a[1] * b[0]
+        ];
+      }
+
+      function dot(a, b) {
+        return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+      }
+
+      function lookAt(eye, center, up) {
+        const z = normalize(subtract(eye, center));
+        const x = normalize(cross(up, z));
+        const y = cross(z, x);
+
+        return new Float32Array([
+          x[0], y[0], z[0], 0,
+          x[1], y[1], z[1], 0,
+          x[2], y[2], z[2], 0,
+          -dot(x, eye), -dot(y, eye), -dot(z, eye), 1
+        ]);
+      }
+
+      function rotationY(radians) {
+        const c = Math.cos(radians);
+        const s = Math.sin(radians);
+
+        return new Float32Array([
+          c, 0, s, 0,
+          0, 1, 0, 0,
+          -s, 0, c, 0,
+          0, 0, 0, 1
+        ]);
+      }
+
+      function createRocketGeometry(config) {
+        const segments = 12;
+        const lines = [];
+        const radius = 0.42;
+        const bodyLength = config.length;
+        const coneLength = config.length * 0.7;
+        const wingHalf = config.wingSpan * 0.45;
+
+        for (let i = 0; i < segments; i++) {
+          const a0 = (i / segments) * Math.PI * 2;
+          const a1 = ((i + 1) / segments) * Math.PI * 2;
+
+          const x0 = Math.cos(a0) * radius;
+          const y0 = Math.sin(a0) * radius;
+          const x1 = Math.cos(a1) * radius;
+          const y1 = Math.sin(a1) * radius;
+
+          const p0 = [x0, y0, -bodyLength / 2];
+          const p1 = [x0, y0, bodyLength / 2];
+          const p2 = [x1, y1, -bodyLength / 2];
+          const p3 = [x1, y1, bodyLength / 2];
+
+          lines.push(...p0, ...p1);
+          lines.push(...p0, ...p2);
+          lines.push(...p2, ...p3);
+
+          const apex = [0, 0, bodyLength / 2 + coneLength];
+          lines.push(...p1, ...apex);
+          lines.push(...p3, ...apex);
+        }
+
+        const leftRoot = [-radius, 0.18, -0.25];
+        const leftTip = [-wingHalf, 0.18, -0.5];
+        const leftRear = [-radius, 0.18, -0.9];
+
+        const rightRoot = [radius, 0.18, -0.25];
+        const rightTip = [wingHalf, 0.18, -0.5];
+        const rightRear = [radius, 0.18, -0.9];
+
+        lines.push(...leftRoot, ...leftTip);
+        lines.push(...leftTip, ...leftRear);
+        lines.push(...leftRear, ...leftRoot);
+
+        lines.push(...rightRoot, ...rightTip);
+        lines.push(...rightTip, ...rightRear);
+        lines.push(...rightRear, ...rightRoot);
+
+        const capRings = [
+          { radius, z: -bodyLength / 2 },
+          { radius: 0.3, z: -bodyLength / 2 - 0.12 },
+          { radius: 0.16, z: -bodyLength / 2 - 0.24 }
+        ];
+
+        for (let ringIndex = 0; ringIndex < capRings.length; ringIndex++) {
+          const ring = capRings[ringIndex];
+          const nextRing = capRings[ringIndex + 1];
+
+          for (let i = 0; i < segments; i++) {
+            const a0 = (i / segments) * Math.PI * 2;
+            const a1 = ((i + 1) / segments) * Math.PI * 2;
+            const current0 = [Math.cos(a0) * ring.radius, Math.sin(a0) * ring.radius, ring.z];
+            const current1 = [Math.cos(a1) * ring.radius, Math.sin(a1) * ring.radius, ring.z];
+
+            lines.push(...current0, ...current1);
+
+            if (nextRing) {
+              const next = [Math.cos(a0) * nextRing.radius, Math.sin(a0) * nextRing.radius, nextRing.z];
+              lines.push(...current0, ...next);
+            } else {
+              lines.push(...current0, 0, 0, ring.z - 0.08);
+            }
+          }
+        }
+
+        return new Float32Array(lines);
+      }
+
+      function createFireGeometry(config) {
+        const segments = 12;
+        const points = [];
+        const baseZ = -config.length / 2 - 0.05;
+        const baseRadius = 0.2;
+        const flameLength = 0.55 + controls.propulsion * 0.12;
+
+        for (let i = 0; i < segments; i++) {
+          const t0 = (i / segments) * Math.PI * 2;
+          const t1 = ((i + 1) / segments) * Math.PI * 2;
+          const tipAngle = (t0 + t1) / 2;
+          const nextTipAngle = t1 + Math.PI / segments;
+          const tipRadius = baseRadius + 0.08 + (i % 2) * 0.06;
+          const nextTipRadius = baseRadius + 0.08 + ((i + 1) % 2) * 0.06;
+          const p0 = [Math.cos(t0) * baseRadius, Math.sin(t0) * baseRadius, baseZ];
+          const p1 = [Math.cos(t1) * baseRadius, Math.sin(t1) * baseRadius, baseZ];
+          const p2 = [Math.cos(tipAngle) * tipRadius, Math.sin(tipAngle) * tipRadius, baseZ - flameLength];
+          const p3 = [Math.cos(nextTipAngle) * nextTipRadius, Math.sin(nextTipAngle) * nextTipRadius, p2[2]];
+
+          points.push(...p0, ...p1, ...p0, ...p2, ...p2, ...p1, ...p2, ...p3);
+        }
+
+        return new Float32Array(points);
+      }
+
+      let rocketData = createRocketGeometry(controls);
+      let fireData = createFireGeometry(controls);
+      const program = createProgram();
+      const aPositionLocation = gl.getAttribLocation(program, 'aPosition');
+      const uMatrixLocation = gl.getUniformLocation(program, 'uMatrix');
+      const uColorLocation = gl.getUniformLocation(program, 'uColor');
+
+      const buffer = gl.createBuffer();
+      const fireBuffer = gl.createBuffer();
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, rocketData, gl.STATIC_DRAW);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, fireBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, fireData, gl.STATIC_DRAW);
+
+      updateControlLabels();
+
+      gl.enable(gl.DEPTH_TEST);
+      gl.clearColor(0.02, 0.08, 0.12, 1.0);
+      gl.lineWidth(1.75);
+
+      function renderFrame(time) {
+        const width = canvas.width;
+        const height = canvas.height;
+
+        gl.viewport(0, 0, width, height);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        const flightPhase = time * 0.0007 * (controls.propulsion * 0.75 + 0.35);
+        const directionRadians = (controls.direction * Math.PI) / 180;
+        const driftX = Math.cos(flightPhase) * 0.9;
+        const driftY = Math.sin(flightPhase * 1.4) * 0.4;
+        const forwardX = Math.cos(directionRadians) * (0.25 + controls.propulsion * 0.12);
+        const forwardZ = Math.sin(directionRadians) * (0.25 + controls.propulsion * 0.12);
+
+        const projection = perspective(Math.PI / 4, width / height, 0.1, 50);
+        const view = lookAt([0 + driftX, 1.2 + driftY, 6], [forwardX + driftX, 0 + driftY, forwardZ], [0, 1, 0]);
+        const model = multiply(rotationY(directionRadians), translation(forwardX * 0.3, 0, -0.1));
+        const finalMatrix = multiply(projection, multiply(view, model));
+
+        gl.useProgram(program);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, fireBuffer);
+        gl.vertexAttribPointer(aPositionLocation, 3, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(aPositionLocation);
+        gl.uniformMatrix4fv(uMatrixLocation, false, finalMatrix);
+        gl.uniform3f(uColorLocation, 1.0, 0.38, 0.12);
+        gl.drawArrays(gl.LINES, 0, fireData.length / 3);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.vertexAttribPointer(aPositionLocation, 3, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(aPositionLocation);
+        gl.uniformMatrix4fv(uMatrixLocation, false, finalMatrix);
+        gl.uniform3f(uColorLocation, 0.26, 0.92, 0.58);
+        gl.drawArrays(gl.LINES, 0, rocketData.length / 3);
+
+        labelContext.clearRect(0, 0, sectorLabels.width, sectorLabels.height);
+        labelContext.font = '600 16px Segoe UI, sans-serif';
+        labelContext.textAlign = 'center';
+        labelContext.textBaseline = 'middle';
+        labelContext.fillStyle = '#f6d365';
+        labelContext.strokeStyle = 'rgba(3, 11, 16, 0.9)';
+        labelContext.lineWidth = 4;
+
+        const labelPoints = [
+          [-1.1, 0.18, -0.65],
+          [1.1, 0.18, -0.65],
+          [0, 0.3, 1.5],
+          [-0.26, -0.15, 1.5],
+          [0.26, -0.15, 1.5],
+          [-0.72, 0.18, -0.65],
+          [0.72, 0.18, -0.65],
+          [0, 0, 2.3]
+        ];
+
+        for (let sector = 8; sector < 12; sector++) {
+          const angle = ((sector - 8 + 0.5) / 4) * Math.PI * 2;
+          labelPoints.push([Math.cos(angle) * 0.47, Math.sin(angle) * 0.47, 0]);
+        }
+
+        for (let sector = 0; sector < labelPoints.length; sector++) {
+          const point = labelPoints[sector];
+          const clipX = finalMatrix[0] * point[0] + finalMatrix[4] * point[1] + finalMatrix[8] * point[2] + finalMatrix[12];
+          const clipY = finalMatrix[1] * point[0] + finalMatrix[5] * point[1] + finalMatrix[9] * point[2] + finalMatrix[13];
+          const clipW = finalMatrix[3] * point[0] + finalMatrix[7] * point[1] + finalMatrix[11] * point[2] + finalMatrix[15];
+
+          if (clipW <= 0) continue;
+
+          const x = (clipX / clipW * 0.5 + 0.5) * sectorLabels.width;
+          const y = (1 - (clipY / clipW * 0.5 + 0.5)) * sectorLabels.height;
+          const label = String(sector + 1);
+          labelContext.strokeText(label, x, y);
+          labelContext.fillText(label, x, y);
+        }
+
+        requestAnimationFrame(renderFrame);
+      }
+
+      requestAnimationFrame(renderFrame);
+
+    </script>
+  </body>
 </html>
