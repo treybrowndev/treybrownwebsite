@@ -325,41 +325,41 @@
             <div class="card-body">
               <h3 class="h5 mb-2 text-center">Project Pellucid - Rocket Telemetry Visualizer</h3>
               <div class="mb-3" style="display:flex; gap: 16px; align-items:stretch; width: min(100%, 980px); margin: 0 auto;">
-                <div style="flex: 1 1 0; height: 540px; border: 1px solid rgba(120,196,175,0.35); border-radius: 12px; overflow: hidden; background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(7, 20, 24, 0.34)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 12px 30px rgba(0,0,0,0.18); position: relative; min-width: 0;">
+                <div style="flex: 1 1 0; height: 540px; border: 1px solid rgba(112,91,55,0.3); border-radius: 0; overflow: hidden; background: radial-gradient(ellipse at 50% 45%, rgba(255,255,255,0.56), transparent 58%), rgba(255,247,222,0.4); backdrop-filter: blur(16px) saturate(135%); -webkit-backdrop-filter: blur(16px) saturate(135%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 12px 30px rgba(76,61,35,0.12); position: relative; min-width: 0;">
                   <canvas id="glCanvas" width="960" height="540" style="display:block;width:100%;height:100%;"></canvas>
                   <canvas id="sectorLabels" width="960" height="540" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;width:100%;height:100%;"></canvas>
                 </div>
 
-                <div style="width: 220px; display:flex; flex-direction:column; gap:12px; padding: 14px; border-radius: 12px; background: rgba(11, 24, 27, 0.74); border: 1px solid rgba(120,196,175,0.35); color: #e7f7f4; font-family: 'Segoe UI', sans-serif;">
-                  <h4 style="margin:0; font-size:0.82rem; letter-spacing:0.12em; text-transform:uppercase; color:#9cc8c6;">Flight Controls</h4>
+                <div style="width: 220px; display:flex; flex-direction:column; gap:12px; padding: 14px; border-radius: 0; background: rgba(255,247,222,0.42); border: 1px solid rgba(112,91,55,0.3); color: #4d412d; font-family: 'Segoe UI', sans-serif; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+                  <h4 style="margin:0; font-size:0.82rem; letter-spacing:0.12em; text-transform:uppercase; color:#70502f;">Flight Controls</h4>
 
-                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#9cc8c6;">
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#70502f;">
                     <span>Body Length</span>
-                    <input id="lengthControl" type="range" min="1.4" max="3.4" step="0.1" value="2.2" />
-                    <strong id="lengthValue" style="color:#4ef2b5; font-size:0.8rem;">2.2</strong>
+                    <input id="lengthControl" type="range" min="1.4" max="3.4" step="0.1" value="2.2" style="accent-color:#684222;" />
+                    <strong id="lengthValue" style="color:#684222; font-size:0.8rem;">2.2</strong>
                   </label>
 
-                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#9cc8c6;">
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#70502f;">
                     <span>Wing Span</span>
-                    <input id="wingControl" type="range" min="2.0" max="6.0" step="0.1" value="3.4" />
-                    <strong id="wingValue" style="color:#4ef2b5; font-size:0.8rem;">3.4</strong>
+                    <input id="wingControl" type="range" min="2.0" max="6.0" step="0.1" value="3.4" style="accent-color:#684222;" />
+                    <strong id="wingValue" style="color:#684222; font-size:0.8rem;">3.4</strong>
                   </label>
 
-                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#9cc8c6;">
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#70502f;">
                     <span>Propulsion</span>
-                    <input id="propulsionControl" type="range" min="0.5" max="5.0" step="0.1" value="2.6" />
-                    <strong id="propulsionValue" style="color:#4ef2b5; font-size:0.8rem;">2.6</strong>
+                    <input id="propulsionControl" type="range" min="0.5" max="5.0" step="0.1" value="2.6" style="accent-color:#684222;" />
+                    <strong id="propulsionValue" style="color:#684222; font-size:0.8rem;">2.6</strong>
                   </label>
 
-                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#9cc8c6;">
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#70502f;">
                     <span>Direction</span>
-                    <input id="directionControl" type="range" min="-180" max="180" step="1" value="0" />
-                    <strong id="directionValue" style="color:#4ef2b5; font-size:0.8rem;">0°</strong>
+                    <input id="directionControl" type="range" min="-180" max="180" step="1" value="0" style="accent-color:#684222;" />
+                    <strong id="directionValue" style="color:#684222; font-size:0.8rem;">0°</strong>
                   </label>
                 </div>
               </div>
-              <p class="mb-2">Project Pellucid is a real-time telemetry visualization system built in C++ and OpenGL for monitoring aircraft fault states, dynamic system damage, and hull integrity breaches.</p>
-              <p class="mb-0"><a href="pellucid.html" style="color: #4ef2b5; text-decoration: underline;">View the full demo</a></p>
+              <p class="mb-2">Project Pellucid is a prototype real-time telemetry visualization tool for monitoring aircraft fault states, dynamic system damage, and hull integrity. Adjust vehicle dimensions, propulsion, and heading to explore the live model.</p>
+              <p class="mb-0"><a href="pellucid.html" style="color: #684222; text-decoration: underline;">View the full demo</a></p>
             </div>
           </div>
         </section>
@@ -675,10 +675,24 @@
       updateControlLabels();
 
       gl.enable(gl.DEPTH_TEST);
-      gl.clearColor(0.02, 0.08, 0.12, 1.0);
+      gl.clearColor(0, 0, 0, 0);
       gl.lineWidth(1.75);
 
+      function resizeCanvases() {
+        const pixelRatio = window.devicePixelRatio || 1;
+        const width = Math.max(1, Math.round(canvas.clientWidth * pixelRatio));
+        const height = Math.max(1, Math.round(canvas.clientHeight * pixelRatio));
+
+        if (canvas.width !== width || canvas.height !== height) {
+          canvas.width = width;
+          canvas.height = height;
+          sectorLabels.width = width;
+          sectorLabels.height = height;
+        }
+      }
+
       function renderFrame(time) {
+        resizeCanvases();
         const width = canvas.width;
         const height = canvas.height;
 
@@ -703,38 +717,50 @@
         gl.vertexAttribPointer(aPositionLocation, 3, gl.FLOAT, false, 0, 0);
         gl.enableVertexAttribArray(aPositionLocation);
         gl.uniformMatrix4fv(uMatrixLocation, false, finalMatrix);
-        gl.uniform3f(uColorLocation, 1.0, 0.38, 0.12);
+        gl.uniform3f(uColorLocation, 0.58, 0.4, 0.2);
         gl.drawArrays(gl.LINES, 0, fireData.length / 3);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
         gl.vertexAttribPointer(aPositionLocation, 3, gl.FLOAT, false, 0, 0);
         gl.enableVertexAttribArray(aPositionLocation);
         gl.uniformMatrix4fv(uMatrixLocation, false, finalMatrix);
-        gl.uniform3f(uColorLocation, 0.26, 0.92, 0.58);
+        gl.uniform3f(uColorLocation, 0.4, 0.25, 0.12);
         gl.drawArrays(gl.LINES, 0, rocketData.length / 3);
 
         labelContext.clearRect(0, 0, sectorLabels.width, sectorLabels.height);
-        labelContext.font = '600 16px Segoe UI, sans-serif';
+        const pixelRatio = window.devicePixelRatio || 1;
+        labelContext.font = `600 ${16 * pixelRatio}px Segoe UI, sans-serif`;
         labelContext.textAlign = 'center';
         labelContext.textBaseline = 'middle';
-        labelContext.fillStyle = '#f6d365';
-        labelContext.strokeStyle = 'rgba(3, 11, 16, 0.9)';
-        labelContext.lineWidth = 4;
+        labelContext.fillStyle = '#000000';
+        labelContext.strokeStyle = 'rgba(255, 247, 222, 0.9)';
+        labelContext.lineWidth = 4 * pixelRatio;
 
+        const bodyLength = controls.length;
+        const bodyRadius = 0.42;
+        const wingHalf = controls.wingSpan * 0.45;
+        const finRootZ = -bodyLength * 0.15;
+        const finRearZ = -bodyLength * 0.48;
+        const noseTipZ = bodyLength / 2 + bodyLength * 0.7;
+        const innerWingDepth = 0.2;
+        const innerWingSpan = 0.12;
+        const innerWingZ = finRootZ + (finRearZ - finRootZ) * innerWingDepth;
+        const wingWidth = wingHalf - bodyRadius;
+        const centerWingSpan = 0.42;
+        const centerWingX = bodyRadius + wingWidth * centerWingSpan;
+        const centerWingZ = finRootZ + (finRearZ - finRootZ) * 0.45;
+        const rightInnerWingPoint = [bodyRadius + wingWidth * innerWingSpan, 0.18, innerWingZ];
+        const leftCenterWingPoint = [-centerWingX, 0.18, centerWingZ];
+        const rightCenterWingPoint = [centerWingX, 0.18, centerWingZ];
         const labelPoints = [
-          [-1.1, 0.18, -0.65],
-          [1.1, 0.18, -0.65],
-          [0, 0.3, 1.5],
-          [-0.26, -0.15, 1.5],
-          [0.26, -0.15, 1.5],
-          [-0.72, 0.18, -0.65],
-          [0.72, 0.18, -0.65],
-          [0, 0, 2.3]
+          [-wingHalf, 0.18, finRearZ], [wingHalf, 0.18, finRearZ], [0, 0, noseTipZ],
+          [-bodyRadius, 0, bodyLength / 2], [bodyRadius, 0, bodyLength / 2],
+          leftCenterWingPoint, rightInnerWingPoint, rightCenterWingPoint
         ];
 
-        for (let sector = 8; sector < 12; sector++) {
-          const angle = ((sector - 8 + 0.5) / 4) * Math.PI * 2;
-          labelPoints.push([Math.cos(angle) * 0.47, Math.sin(angle) * 0.47, 0]);
+        for (let sector = 0; sector < 4; sector++) {
+          const angle = (sector / 4) * Math.PI * 2;
+          labelPoints.push([Math.cos(angle) * bodyRadius, Math.sin(angle) * bodyRadius, 0]);
         }
 
         for (let sector = 0; sector < labelPoints.length; sector++) {
