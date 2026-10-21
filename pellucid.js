@@ -312,7 +312,7 @@ function updateControlLabels() {
 
 refreshGeometry();
 gl.enable(gl.DEPTH_TEST);
-gl.clearColor(0.02, 0.08, 0.12, 1.0);
+gl.clearColor(0, 0, 0, 0);
 gl.lineWidth(1.75);
 
 function projectLabel(matrix, point) {
@@ -374,41 +374,56 @@ function renderFrame(time) {
   gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false, 0, 0);
   gl.enableVertexAttribArray(positionLocation);
   gl.uniformMatrix4fv(matrixLocation, false, finalMatrix);
-  gl.uniform3f(colorLocation, 1.0, 0.38, 0.12);
+  gl.uniform3f(colorLocation, 0.58, 0.4, 0.2);
   gl.drawArrays(gl.LINES, 0, fireData.length / 3);
 
   gl.bindBuffer(gl.ARRAY_BUFFER, rocketBuffer);
   gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false, 0, 0);
   gl.enableVertexAttribArray(positionLocation);
   gl.uniformMatrix4fv(matrixLocation, false, finalMatrix);
-  gl.uniform3f(colorLocation, 0.26, 0.92, 0.58);
+  gl.uniform3f(colorLocation, 0.4, 0.25, 0.12);
   gl.drawArrays(gl.LINES, 0, rocketData.length / 3);
 
   labelContext.clearRect(0, 0, sectorLabels.width, sectorLabels.height);
-  labelContext.font = `600 ${16 * (window.devicePixelRatio || 1)}px Segoe UI, sans-serif`;
+  const pixelRatio = window.devicePixelRatio || 1;
+  labelContext.font = `600 ${16 * pixelRatio}px Segoe UI, sans-serif`;
   labelContext.textAlign = 'center';
   labelContext.textBaseline = 'middle';
-  labelContext.fillStyle = '#f6d365';
-  labelContext.strokeStyle = 'rgba(3, 11, 16, 0.9)';
-  labelContext.lineWidth = 4 * (window.devicePixelRatio || 1);
+  labelContext.fillStyle = '#000000';
+  labelContext.strokeStyle = 'rgba(255, 247, 222, 0.9)';
+  labelContext.lineWidth = 4 * pixelRatio;
 
+  const bodyLength = controls.length;
+  const bodyRadius = 0.42;
+  const wingHalf = controls.wingSpan * 0.45;
+  const finRootZ = -bodyLength * 0.15;
+  const finRearZ = -bodyLength * 0.48;
+  const noseTipZ = bodyLength / 2 + bodyLength * 0.7;
+  const innerWingDepth = 0.2;
+  const innerWingSpan = 0.12;
+  const innerWingZ = finRootZ + (finRearZ - finRootZ) * innerWingDepth;
+  const wingWidth = wingHalf - bodyRadius;
+  const centerWingSpan = 0.42;
+  const centerWingX = bodyRadius + wingWidth * centerWingSpan;
+  const centerWingZ = finRootZ + (finRearZ - finRootZ) * 0.45;
+  const rightInnerWingPoint = [bodyRadius + wingWidth * innerWingSpan, 0.18, innerWingZ];
+  const leftCenterWingPoint = [-centerWingX, 0.18, centerWingZ];
+  const rightCenterWingPoint = [centerWingX, 0.18, centerWingZ];
   const labelPoints = [
-    [-1.1, 0.18, -0.65], [1.1, 0.18, -0.65], [0, 0.3, 1.5],
-    [-0.26, -0.15, 1.5], [0.26, -0.15, 1.5], [-0.72, 0.18, -0.65],
-    [0.72, 0.18, -0.65], [0, 0, 2.3]
+    [-wingHalf, 0.18, finRearZ], [wingHalf, 0.18, finRearZ], [0, 0, noseTipZ],
+    [-bodyRadius, 0, bodyLength / 2], [bodyRadius, 0, bodyLength / 2],
+    leftCenterWingPoint, rightInnerWingPoint, rightCenterWingPoint
   ];
 
-  for (let sector = 8; sector < 12; sector++) {
-    const angle = ((sector - 8 + 0.5) / 4) * Math.PI * 2;
-    labelPoints.push([Math.cos(angle) * 0.47, Math.sin(angle) * 0.47, 0]);
+  for (let sector = 0; sector < 4; sector++) {
+    const angle = (sector / 4) * Math.PI * 2;
+    labelPoints.push([Math.cos(angle) * bodyRadius, Math.sin(angle) * bodyRadius, 0]);
   }
 
   labelPoints.forEach((point, index) => {
     const screenPoint = projectLabel(finalMatrix, point);
     if (!screenPoint) return;
     const label = String(index + 1);
-    const status = sectorStatuses[index];
-    labelContext.fillStyle = status === 'Breach' ? '#ff6b6b' : status === 'Offline' ? '#f6d365' : '#4ef2b5';
     labelContext.strokeText(label, screenPoint[0], screenPoint[1]);
     labelContext.fillText(label, screenPoint[0], screenPoint[1]);
   });

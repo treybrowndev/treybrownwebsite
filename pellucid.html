@@ -7,13 +7,12 @@
     <link rel="stylesheet" href="css/tailwind.css" />
     <style>
       :root {
-        --pellucid-bg: #061318;
-        --pellucid-panel: rgba(11, 24, 27, 0.9);
-        --pellucid-border: rgba(120, 196, 175, 0.38);
-        --pellucid-text: #e7f7f4;
-        --pellucid-muted: #9cc8c6;
-        --pellucid-accent: #4ef2b5;
-        --pellucid-warn: #f6d365;
+        --pellucid-panel: rgba(255, 247, 222, 0.42);
+        --pellucid-border: rgba(112, 91, 55, 0.3);
+        --pellucid-text: #4d412d;
+        --pellucid-muted: #70502f;
+        --pellucid-accent: #684222;
+        --pellucid-warn: #84613a;
       }
 
       body {
@@ -45,10 +44,11 @@
       .pellucid-app {
         overflow: hidden;
         border: 1px solid var(--pellucid-border);
-        border-radius: 12px;
+        border-radius: 0;
         color: var(--pellucid-text);
-        background: #071316;
-        box-shadow: 0 18px 48px rgba(36, 42, 31, 0.2);
+        background: rgba(255, 247, 222, 0.24);
+        box-shadow: 0 18px 48px rgba(76, 61, 35, 0.12);
+        backdrop-filter: blur(18px) saturate(125%);
         font-family: "Segoe UI", sans-serif;
       }
 
@@ -59,7 +59,7 @@
         gap: 1rem;
         padding: 16px 20px;
         border-bottom: 1px solid var(--pellucid-border);
-        background: rgba(10, 22, 25, 0.96);
+        background: rgba(255, 247, 222, 0.38);
       }
 
       .pellucid-topbar h2 {
@@ -79,13 +79,6 @@
         text-transform: uppercase;
       }
 
-      .live-indicator {
-        color: var(--pellucid-accent);
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-      }
-
       .pellucid-dashboard {
         display: grid;
         grid-template-columns: minmax(0, 1fr) 280px;
@@ -97,11 +90,12 @@
         position: relative;
         min-height: 620px;
         overflow: hidden;
-        border: 1px solid rgba(120, 196, 175, 0.3);
-        border-radius: 8px;
+        border: 1px solid var(--pellucid-border);
+        border-radius: 0;
         background:
-          radial-gradient(ellipse at 50% 45%, rgba(34, 75, 77, 0.58), transparent 50%),
-          linear-gradient(180deg, #07191d, #030b10);
+          radial-gradient(ellipse at 50% 45%, rgba(255, 255, 255, 0.56), transparent 58%),
+          rgba(255, 247, 222, 0.4);
+        backdrop-filter: blur(16px) saturate(135%);
       }
 
       .rocket-stage canvas {
@@ -125,8 +119,8 @@
       .control-group {
         padding: 16px;
         border: 1px solid var(--pellucid-border);
-        border-radius: 8px;
         background: var(--pellucid-panel);
+        backdrop-filter: blur(12px);
       }
 
       .control-group h3 {
@@ -211,8 +205,8 @@
         min-width: 0;
         padding: 5px;
         border: 1px solid var(--pellucid-border);
-        border-radius: 4px;
-        background: #071316;
+        border-radius: 0;
+        background: rgba(255, 247, 222, 0.65);
         color: var(--pellucid-accent);
         font: inherit;
       }
@@ -277,7 +271,7 @@
 
       <header class="pellucid-heading">
         Project Pellucid
-        <span>Real-time rocket telemetry visualization and vehicle-state monitor</span>
+        <span>Prototype real-time rocket telemetry visualization and vehicle-state monitor</span>
       </header>
 
       <main>
@@ -287,7 +281,6 @@
               <p class="pellucid-kicker">Telemetry Visualization</p>
               <h2>Vehicle Flight Monitor</h2>
             </div>
-            <span class="live-indicator">● LIVE SIMULATION</span>
           </header>
 
           <div class="pellucid-dashboard">
@@ -338,7 +331,7 @@
         </section>
 
         <p id="webglMessage" hidden>WebGL is required to view the Project Pellucid demo.</p>
-        <p class="project-note">Project Pellucid is a real-time telemetry visualization system for monitoring aircraft fault states, dynamic system damage, and hull integrity. Adjust the vehicle dimensions, propulsion, and heading to explore the live model and its connected low-poly exhaust.</p>
+        <p class="project-note">Project Pellucid is a prototype real-time telemetry visualization tool for monitoring aircraft fault states, dynamic system damage, and hull integrity. Adjust the vehicle dimensions, propulsion, and heading to explore the live model and its connected low-poly exhaust.</p>
       </main>
 
       <footer class="site-license-footer">All Rights Reserved.</footer>
