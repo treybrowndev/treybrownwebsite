@@ -292,7 +292,7 @@
   </head>
   <body>
     <div class="page-shell">
-      <h1><a href="index.html">The Treycave</a></h1>
+      <h1><a href="index.html">Trey Brown</a></h1>
       <nav>
         <div class="projects"><a href="projects.html">Resume</a></div>
         <div class="contact"><a href="contact.html">Contact</a></div>
@@ -308,24 +308,9 @@
         <section class="my-4">
           <div class="card mb-3 demo-bubble">
             <div class="card-body">
-              <h3 class="h5 mb-2 text-center">Coffee Shop 1st Person POV (Cosmeonmenon demo)</h3>
-              <p class="mb-2">A first-person graphics demo set in a stylized coffee shop scene, focused on immersive movement, real-time raytracing and lighting, and interactive environmental detail.</p>
-              <p class="mb-0">This prototype explores cinematic lighting, reflective surfaces, and atmospheric rendering to create a more immersive and believable interior walkthrough.</p>
-            </div>
-          </div>
-
-          <div class="card mb-3 demo-bubble">
-            <div class="card-body">
-              <h3 class="h5 mb-2 text-center">Orange Dream OS (the floating Dreamcast UI project)</h3>
-              <p class="mb-0">A retro-inspired interface concept blending stylized UI elements with modern front-end techniques to explore layout systems, animation, and interaction design.</p>
-            </div>
-          </div>
-
-          <div class="card mb-3 demo-bubble">
-            <div class="card-body">
-              <h3 class="h5 mb-2 text-center">Project Pellucid - Rocket Telemetry Visualizer</h3>
+              <h3 class="h5 mb-2 text-center">Project Pellucid - Interactive Rocket Graphics Demo</h3>
               <div class="mb-3" style="display:flex; gap: 16px; align-items:stretch; width: min(100%, 980px); margin: 0 auto;">
-                <div style="flex: 1 1 0; height: 540px; border: 1px solid rgba(112,91,55,0.3); border-radius: 0; overflow: hidden; background: radial-gradient(ellipse at 50% 45%, rgba(255,255,255,0.56), transparent 58%), rgba(255,247,222,0.4); backdrop-filter: blur(16px) saturate(135%); -webkit-backdrop-filter: blur(16px) saturate(135%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 12px 30px rgba(76,61,35,0.12); position: relative; min-width: 0;">
+                <div style="flex: 1 1 0; min-height: 540px; border: 1px solid rgba(112,91,55,0.3); border-radius: 0; overflow: hidden; background: radial-gradient(ellipse at 50% 45%, rgba(255,255,255,0.56), transparent 58%), rgba(255,247,222,0.4); backdrop-filter: blur(16px) saturate(135%); -webkit-backdrop-filter: blur(16px) saturate(135%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 12px 30px rgba(76,61,35,0.12); position: relative; min-width: 0;">
                   <canvas id="glCanvas" width="960" height="540" style="display:block;width:100%;height:100%;"></canvas>
                   <canvas id="sectorLabels" width="960" height="540" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;width:100%;height:100%;"></canvas>
                 </div>
@@ -356,10 +341,52 @@
                     <input id="directionControl" type="range" min="-180" max="180" step="1" value="0" style="accent-color:#684222;" />
                     <strong id="directionValue" style="color:#684222; font-size:0.8rem;">0°</strong>
                   </label>
+
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#70502f;">
+                    <span>Gravity</span>
+                    <input id="gravityControl" type="range" min="-1" max="1" step="0.1" value="0" style="accent-color:#684222;" />
+                    <strong id="gravityValue" style="color:#684222; font-size:0.8rem;">0.0</strong>
+                  </label>
+
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#70502f;">
+                    <span>Angle</span>
+                    <input id="angleControl" type="range" min="-45" max="45" step="1" value="0" style="accent-color:#684222;" />
+                    <strong id="angleValue" style="color:#684222; font-size:0.8rem;">0°</strong>
+                  </label>
+
+                  <label style="display:grid; gap:6px; font-size:0.76rem; color:#70502f;">
+                    <span>Spin</span>
+                    <input id="spinControl" type="range" min="0" max="180" step="5" value="0" style="accent-color:#684222;" />
+                    <strong id="spinValue" style="color:#684222; font-size:0.8rem;">0°/s</strong>
+                  </label>
                 </div>
               </div>
-              <p class="mb-2">Project Pellucid is a prototype real-time telemetry visualization tool for monitoring aircraft fault states, dynamic system damage, and hull integrity. Adjust vehicle dimensions, propulsion, and heading to explore the live model.</p>
+              <p class="mb-2">Originally made with Liberty Rocketry in mind, Project Pellucid is now an independent interactive rocket graphics demo exploring wireframe geometry, flight motion, and simulated vehicle states.</p>
               <p class="mb-0"><a href="pellucid.html" style="color: #684222; text-decoration: underline;">View the full demo</a></p>
+
+              <div class="card mt-3 demo-bubble" style="width:fit-content; max-width:100%; margin-inline:auto;">
+                <div class="card-body" style="padding:0.5rem 1rem;">
+                  <h4 class="mb-1" style='font: lighter 1rem "Lucida Console", "Courier New", monospace; text-align:center;'>Created with;</h4>
+                  <p class="mb-0" style='font: lighter 0.9rem "Lucida Console", "Courier New", monospace; text-align:center;'>JavaScript · HTML · CSS · WebGL</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3 demo-bubble">
+            <div class="card-body">
+              <h3 class="h5 mb-2 text-center">Coffee Shop Raycaster</h3>
+              <p class="mb-2">A first-person graphics demo set in a stylized coffee shop scene, focused on immersive movement, real-time raytracing and lighting, and interactive environmental detail.</p>
+              <p class="mb-2">This prototype explores cinematic lighting, reflective surfaces, and atmospheric rendering to create a more immersive and believable interior walkthrough.</p>
+              <p class="mb-0"><strong>Demo in Progress</strong></p>
+            </div>
+          </div>
+
+          <div class="card mb-3 demo-bubble">
+            <div class="card-body">
+              <h3 class="h5 mb-2 text-center">Orange Dream OS</h3>
+              <p class="mb-2">A retro-inspired interface concept blending stylized UI elements with modern front-end techniques to explore layout systems, animation, and interaction design.</p>
+              <p class="mb-0"><strong>Demo in Progress</strong></p>
             </div>
           </div>
         </section>
@@ -382,16 +409,25 @@
       const wingInput = document.getElementById('wingControl');
       const propulsionInput = document.getElementById('propulsionControl');
       const directionInput = document.getElementById('directionControl');
+      const gravityInput = document.getElementById('gravityControl');
+      const angleInput = document.getElementById('angleControl');
+      const spinInput = document.getElementById('spinControl');
       const lengthValue = document.getElementById('lengthValue');
       const wingValue = document.getElementById('wingValue');
       const propulsionValue = document.getElementById('propulsionValue');
       const directionValue = document.getElementById('directionValue');
+      const gravityValue = document.getElementById('gravityValue');
+      const angleValue = document.getElementById('angleValue');
+      const spinValue = document.getElementById('spinValue');
 
       const controls = {
         length: Number(lengthInput.value),
         wingSpan: Number(wingInput.value),
         propulsion: Number(propulsionInput.value),
-        direction: Number(directionInput.value)
+        direction: Number(directionInput.value),
+        gravity: Number(gravityInput.value),
+        angle: Number(angleInput.value),
+        spin: Number(spinInput.value)
       };
 
       function refreshGeometry() {
@@ -410,6 +446,9 @@
         wingValue.textContent = controls.wingSpan.toFixed(1);
         propulsionValue.textContent = controls.propulsion.toFixed(1);
         directionValue.textContent = `${Math.round(controls.direction)}°`;
+        gravityValue.textContent = controls.gravity.toFixed(1);
+        angleValue.textContent = `${Math.round(controls.angle)}°`;
+        spinValue.textContent = `${Math.round(controls.spin)}°/s`;
         refreshGeometry();
       }
 
@@ -417,7 +456,10 @@
         ['length', lengthInput],
         ['wingSpan', wingInput],
         ['propulsion', propulsionInput],
-        ['direction', directionInput]
+        ['direction', directionInput],
+        ['gravity', gravityInput],
+        ['angle', angleInput],
+        ['spin', spinInput]
       ].forEach(([key, input]) => {
         input.addEventListener('input', () => {
           controls[key] = Number(input.value);
@@ -550,6 +592,30 @@
           c, 0, s, 0,
           0, 1, 0, 0,
           -s, 0, c, 0,
+          0, 0, 0, 1
+        ]);
+      }
+
+      function rotationX(radians) {
+        const c = Math.cos(radians);
+        const s = Math.sin(radians);
+
+        return new Float32Array([
+          1, 0, 0, 0,
+          0, c, s, 0,
+          0, -s, c, 0,
+          0, 0, 0, 1
+        ]);
+      }
+
+      function rotationZ(radians) {
+        const c = Math.cos(radians);
+        const s = Math.sin(radians);
+
+        return new Float32Array([
+          c, s, 0, 0,
+          -s, c, 0, 0,
+          0, 0, 1, 0,
           0, 0, 0, 1
         ]);
       }
@@ -701,14 +767,23 @@
 
         const flightPhase = time * 0.0007 * (controls.propulsion * 0.75 + 0.35);
         const directionRadians = (controls.direction * Math.PI) / 180;
-        const driftX = Math.cos(flightPhase) * 0.9;
-        const driftY = Math.sin(flightPhase * 1.4) * 0.4;
+        const angleRadians = (controls.angle * Math.PI) / 180;
+        const spinRadians = ((time * controls.spin) / 1000) * (Math.PI / 180);
+        const driftX = Math.cos(flightPhase) * 0.12;
+        const driftY = Math.sin(flightPhase * 1.4) * 0.08;
         const forwardX = Math.cos(directionRadians) * (0.25 + controls.propulsion * 0.12);
         const forwardZ = Math.sin(directionRadians) * (0.25 + controls.propulsion * 0.12);
 
         const projection = perspective(Math.PI / 4, width / height, 0.1, 50);
-        const view = lookAt([0 + driftX, 1.2 + driftY, 6], [forwardX + driftX, 0 + driftY, forwardZ], [0, 1, 0]);
-        const model = multiply(rotationY(directionRadians), translation(forwardX * 0.3, 0, -0.1));
+        const modelX = forwardX * 0.3;
+        const modelY = -controls.gravity * 0.8;
+        const modelZ = -0.1;
+        const view = lookAt([driftX, 1.2 + driftY, 6], [modelX + driftX, driftY, modelZ], [0, 1, 0]);
+        const modelRotation = multiply(
+          rotationY(directionRadians),
+          multiply(rotationX(angleRadians), rotationZ(spinRadians))
+        );
+        const model = multiply(modelRotation, translation(modelX, modelY, modelZ));
         const finalMatrix = multiply(projection, multiply(view, model));
 
         gl.useProgram(program);

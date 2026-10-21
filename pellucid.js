@@ -13,16 +13,25 @@ const lengthInput = document.getElementById('lengthControl');
 const wingInput = document.getElementById('wingControl');
 const propulsionInput = document.getElementById('propulsionControl');
 const directionInput = document.getElementById('directionControl');
+const angleInput = document.getElementById('angleControl');
+const spinInput = document.getElementById('spinControl');
+const gravityInput = document.getElementById('gravityControl');
 const lengthValue = document.getElementById('lengthValue');
 const wingValue = document.getElementById('wingValue');
 const propulsionValue = document.getElementById('propulsionValue');
 const directionValue = document.getElementById('directionValue');
+const angleValue = document.getElementById('angleValue');
+const spinValue = document.getElementById('spinValue');
+const gravityValue = document.getElementById('gravityValue');
 
 const controls = {
   length: Number(lengthInput.value),
   wingSpan: Number(wingInput.value),
   propulsion: Number(propulsionInput.value),
-  direction: Number(directionInput.value)
+  direction: Number(directionInput.value),
+  angle: Number(angleInput.value),
+  spin: Number(spinInput.value),
+  gravity: Number(gravityInput.value)
 };
 const sectorStatusList = document.getElementById('sectorStatusList');
 const sectorStatuses = Array(12).fill('Fully Operational');
@@ -187,6 +196,30 @@ function rotationY(radians) {
   ]);
 }
 
+function rotationX(radians) {
+  const c = Math.cos(radians);
+  const s = Math.sin(radians);
+
+  return new Float32Array([
+    1, 0, 0, 0,
+    0, c, s, 0,
+    0, -s, c, 0,
+    0, 0, 0, 1
+  ]);
+}
+
+function rotationZ(radians) {
+  const c = Math.cos(radians);
+  const s = Math.sin(radians);
+
+  return new Float32Array([
+    c, s, 0, 0,
+    -s, c, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1
+  ]);
+}
+
 function createRocketGeometry(config) {
   const segments = 12;
   const lines = [];
@@ -211,10 +244,8 @@ function createRocketGeometry(config) {
     lines.push(...p0, ...p1, ...p0, ...p2, ...p2, ...p3, ...p1, ...apex, ...p3, ...apex);
   }
 
-  const finRootZ = -bodyLength * 0.15;
-  const finRearZ = -bodyLength * 0.48;
-  const leftFin = [[-radius, 0.18, finRootZ], [-wingHalf, 0.18, finRearZ], [-radius, 0.18, finRearZ]];
-  const rightFin = [[radius, 0.18, finRootZ], [wingHalf, 0.18, finRearZ], [radius, 0.18, finRearZ]];
+  const leftFin = [[-radius, 0.18, -0.25], [-wingHalf, 0.18, -0.5], [-radius, 0.18, -0.9]];
+  const rightFin = [[radius, 0.18, -0.25], [wingHalf, 0.18, -0.5], [radius, 0.18, -0.9]];
 
   [leftFin, rightFin].forEach(([root, tip, rear]) => {
     lines.push(...root, ...tip, ...tip, ...rear, ...rear, ...root);
@@ -240,6 +271,8 @@ function createRocketGeometry(config) {
       if (nextRing) {
         const next = [Math.cos(a0) * nextRing.radius, Math.sin(a0) * nextRing.radius, nextRing.z];
         lines.push(...current0, ...next);
+      } else {
+        lines.push(...current0, 0, 0, ring.z - 0.08);
       }
     }
   }
@@ -295,6 +328,9 @@ function updateControlLabels() {
   wingValue.textContent = controls.wingSpan.toFixed(1);
   propulsionValue.textContent = controls.propulsion.toFixed(1);
   directionValue.textContent = `${Math.round(controls.direction)}°`;
+  angleValue.textContent = `${Math.round(controls.angle)}°`;
+  spinValue.textContent = `${Math.round(controls.spin)}°/s`;
+  gravityValue.textContent = controls.gravity.toFixed(1);
   refreshGeometry();
 }
 
@@ -302,7 +338,10 @@ function updateControlLabels() {
   ['length', lengthInput],
   ['wingSpan', wingInput],
   ['propulsion', propulsionInput],
-  ['direction', directionInput]
+  ['direction', directionInput],
+  ['angle', angleInput],
+  ['spin', spinInput],
+  ['gravity', gravityInput]
 ].forEach(([key, input]) => {
   input.addEventListener('input', () => {
     controls[key] = Number(input.value);
@@ -341,32 +380,31 @@ function resizeCanvases() {
   }
 }
 
-let lastFrameTime = null;
-let smoothedDirection = controls.direction;
-let smoothedPropulsion = controls.propulsion;
-
 function renderFrame(time) {
-  const deltaSeconds = lastFrameTime === null ? 0 : Math.min((time - lastFrameTime) / 1000, 0.05);
-  lastFrameTime = time;
-  const easing = 1 - Math.exp(-8 * deltaSeconds);
-  const directionDelta = ((controls.direction - smoothedDirection + 540) % 360) - 180;
-  smoothedDirection += directionDelta * easing;
-  smoothedPropulsion += (controls.propulsion - smoothedPropulsion) * easing;
-
   resizeCanvases();
   const width = canvas.width;
   const height = canvas.height;
   gl.viewport(0, 0, width, height);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-  const directionRadians = (smoothedDirection * Math.PI) / 180;
-  const travelPhase = time * 0.00031 * (0.5 + smoothedPropulsion * 0.35);
-  const driftX = Math.sin(travelPhase) * 0.08;
-  const driftY = Math.sin(travelPhase * 0.7) * 0.035;
-  const forwardX = Math.sin(directionRadians) * 0.25;
+  const flightPhase = time * 0.0007 * (controls.propulsion * 0.75 + 0.35);
+  const directionRadians = (controls.direction * Math.PI) / 180;
+  const angleRadians = (controls.angle * Math.PI) / 180;
+  const spinRadians = ((time * controls.spin) / 1000) * (Math.PI / 180);
+  const driftX = Math.cos(flightPhase) * 0.12;
+  const driftY = Math.sin(flightPhase * 1.4) * 0.08;
+  const forwardX = Math.cos(directionRadians) * (0.25 + controls.propulsion * 0.12);
+  const forwardZ = Math.sin(directionRadians) * (0.25 + controls.propulsion * 0.12);
   const projection = perspective(Math.PI / 4, width / height, 0.1, 50);
-  const view = lookAt([4.8, 2.2, 7], [forwardX, 0, 0], [0, 1, 0]);
-  const model = multiply(rotationY(directionRadians), translation(forwardX * 0.3 + driftX, driftY, -0.1));
+  const modelX = forwardX * 0.3;
+  const modelY = -controls.gravity * 0.8;
+  const modelZ = -0.1;
+  const view = lookAt([driftX, 1.2 + driftY, 6], [modelX + driftX, driftY, modelZ], [0, 1, 0]);
+  const modelRotation = multiply(
+    rotationY(directionRadians),
+    multiply(rotationX(angleRadians), rotationZ(spinRadians))
+  );
+  const model = multiply(modelRotation, translation(modelX, modelY, modelZ));
   const finalMatrix = multiply(projection, multiply(view, model));
 
   gl.useProgram(program);
@@ -389,30 +427,27 @@ function renderFrame(time) {
   labelContext.font = `600 ${16 * pixelRatio}px Segoe UI, sans-serif`;
   labelContext.textAlign = 'center';
   labelContext.textBaseline = 'middle';
-  labelContext.fillStyle = '#000000';
   labelContext.strokeStyle = 'rgba(255, 247, 222, 0.9)';
   labelContext.lineWidth = 4 * pixelRatio;
 
   const bodyLength = controls.length;
   const bodyRadius = 0.42;
   const wingHalf = controls.wingSpan * 0.45;
-  const finRootZ = -bodyLength * 0.15;
-  const finRearZ = -bodyLength * 0.48;
   const noseTipZ = bodyLength / 2 + bodyLength * 0.7;
-  const innerWingDepth = 0.2;
-  const innerWingSpan = 0.12;
-  const innerWingZ = finRootZ + (finRearZ - finRootZ) * innerWingDepth;
-  const wingWidth = wingHalf - bodyRadius;
-  const centerWingSpan = 0.42;
-  const centerWingX = bodyRadius + wingWidth * centerWingSpan;
-  const centerWingZ = finRootZ + (finRearZ - finRootZ) * 0.45;
-  const rightInnerWingPoint = [bodyRadius + wingWidth * innerWingSpan, 0.18, innerWingZ];
-  const leftCenterWingPoint = [-centerWingX, 0.18, centerWingZ];
-  const rightCenterWingPoint = [centerWingX, 0.18, centerWingZ];
+  const wingPoint = (side, spanFraction) => [
+    side * (bodyRadius + (wingHalf - bodyRadius) * spanFraction),
+    0.18,
+    -0.58
+  ];
+  const leftInnerWingPoint = wingPoint(-1, 0.3);
+  const rightInnerWingPoint = wingPoint(1, 0.3);
+  const leftOuterWingPoint = wingPoint(-1, 0.78);
+  const rightOuterWingPoint = wingPoint(1, 0.78);
+  const rearBeforeExhaust = [0, 0, noseTipZ - 0.35];
   const labelPoints = [
-    [-wingHalf, 0.18, finRearZ], [wingHalf, 0.18, finRearZ], [0, 0, noseTipZ],
+    leftInnerWingPoint, rightOuterWingPoint, [0, 0, noseTipZ],
     [-bodyRadius, 0, bodyLength / 2], [bodyRadius, 0, bodyLength / 2],
-    leftCenterWingPoint, rightInnerWingPoint, rightCenterWingPoint
+    leftOuterWingPoint, rearBeforeExhaust, rightInnerWingPoint
   ];
 
   for (let sector = 0; sector < 4; sector++) {
@@ -424,6 +459,8 @@ function renderFrame(time) {
     const screenPoint = projectLabel(finalMatrix, point);
     if (!screenPoint) return;
     const label = String(index + 1);
+    const status = sectorStatuses[index];
+    labelContext.fillStyle = status === 'Breach' ? '#c62828' : status === 'Offline' ? '#777777' : '#000000';
     labelContext.strokeText(label, screenPoint[0], screenPoint[1]);
     labelContext.fillText(label, screenPoint[0], screenPoint[1]);
   });
